@@ -9,14 +9,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DrivetrainCommand;
-import frc.robot.commands.elevator.ElevatorBottomPositionCommand;
-import frc.robot.commands.elevator.ElevatorMaxPositionCommand;
+import frc.robot.commands.TurnToAngle90Degrees;
 import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -40,12 +37,8 @@ public class RobotContainer {
 	private Button DriveButtonStart = new JoystickButton(DriverController, Constants.START_BUTTON);
 
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
+	private final TurnToAngle90Degrees turnToAngle90Degrees = new TurnToAngle90Degrees(90, drivetrainSubsystem);
 
-	private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-	private final ElevatorMaxPositionCommand elevatorMaxPositionCommand = new ElevatorMaxPositionCommand(
-			elevatorSubsystem);
-	private final ElevatorBottomPositionCommand elevatorBottomPositionCommand = new ElevatorBottomPositionCommand(
-			elevatorSubsystem);
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -58,15 +51,17 @@ public class RobotContainer {
 	/**
 	 * Use this method to define your button->command mappings. Buttons can be
 	 * created by instantiating a {@link GenericHID} or one of its subclasses
-	 * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
+	 * ({@link edu.wpi.first.wpilibj.Joystick} or {@link Xbox Controller}), and then
 	 * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
 	 */
 	private void configureButtonBindings() {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
-				() -> -DriverController.getRawAxis(2), () -> DriverController.getRawAxis(1)));
+			() -> -DriverController.getRawAxis(4), () -> DriverController.getRawAxis(1)));
 
-		DriveButtonY.whenPressed(elevatorMaxPositionCommand);
-		DriveButtonA.whenPressed(elevatorBottomPositionCommand);
+		DriveButtonX.whenPressed(turnToAngle90Degrees);
+		DriveButtonA.cancelWhenPressed(turnToAngle90Degrees);
+		// new JoystickButton(m_driverController, Button.kX.value)
+        // .whenPressed(new TurnToAngle(90, m_robotDrive).withTimeout(5));
 
 	}
 }
