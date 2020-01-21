@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.DrivetrainCommand;
+import frc.robot.commands.drive.DriveHighGearboxCommand;
+import frc.robot.commands.drive.DriveLowGearboxCommand;
+import frc.robot.commands.drive.DrivetrainCommand;
 import frc.robot.commands.TurnToAngle90Degrees;
-import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.drive.DrivetrainSubsystem;
+import frc.robot.subsystems.drive.GearboxSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -39,6 +42,9 @@ public class RobotContainer {
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 	private final TurnToAngle90Degrees turnToAngle90Degrees = new TurnToAngle90Degrees(90, drivetrainSubsystem);
 
+	private final GearboxSubsystem gearboxSubsystem = new GearboxSubsystem();
+	private final DriveHighGearboxCommand driveHighGearboxCommand = new DriveHighGearboxCommand(gearboxSubsystem);
+	private final DriveLowGearboxCommand driveLowGearboxCommand = new DriveLowGearboxCommand(gearboxSubsystem);
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -61,7 +67,8 @@ public class RobotContainer {
 		DriveButtonX.whenPressed(turnToAngle90Degrees);
 		DriveButtonA.cancelWhenPressed(turnToAngle90Degrees);
 		// new JoystickButton(m_driverController, Button.kX.value)
-        // .whenPressed(new TurnToAngle(90, m_robotDrive).withTimeout(5));
-
+		// .whenPressed(new TurnToAngle(90, m_robotDrive).withTimeout(5));
+		DriveButtonBack.whenPressed(driveLowGearboxCommand);
+		DriveButtonStart.whenPressed(driveHighGearboxCommand);
 	}
 }
