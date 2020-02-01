@@ -17,46 +17,46 @@ import frc.robot.Constants;
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
-  private CANSparkMax leftMaster = new CANSparkMax(Constants.DRIVE_LEFT_MASTER, MotorType.kBrushless);
-  private CANSparkMax leftSlave = new CANSparkMax(Constants.DRIVE_LEFT_SLAVE, MotorType.kBrushless);
+	private CANSparkMax leftMaster = new CANSparkMax(Constants.DRIVE_LEFT_MASTER, MotorType.kBrushless);
+	private CANSparkMax leftSlave = new CANSparkMax(Constants.DRIVE_LEFT_SLAVE, MotorType.kBrushless);
 
-  private CANSparkMax rightMaster = new CANSparkMax(Constants.DRIVE_RIGHT_MASTER, MotorType.kBrushless);
-  private CANSparkMax rightSlave = new CANSparkMax(Constants.DRIVE_RIGHT_SLAVE, MotorType.kBrushless);
+	private CANSparkMax rightMaster = new CANSparkMax(Constants.DRIVE_RIGHT_MASTER, MotorType.kBrushless);
+	private CANSparkMax rightSlave = new CANSparkMax(Constants.DRIVE_RIGHT_SLAVE, MotorType.kBrushless);
 
-  private DifferentialDrive differentialDrive;
-  
-  /**
-   * Creates a new DrivetrainSubsystem.
-   */
-  public DrivetrainSubsystem() {
+	private DifferentialDrive differentialDrive;
 
-    leftMaster.restoreFactoryDefaults();
-    leftSlave.restoreFactoryDefaults();
-    rightMaster.restoreFactoryDefaults();
-    rightSlave.restoreFactoryDefaults();
-    
-    leftMaster.setIdleMode(IdleMode.kCoast);
-    leftSlave.setIdleMode(IdleMode.kCoast);
-    rightMaster.setIdleMode(IdleMode.kCoast);
-    rightSlave.setIdleMode(IdleMode.kCoast);
-    
-    leftSlave.follow(leftMaster);
-    rightSlave.follow(rightMaster);
+	/**
+	 * Creates a new DrivetrainSubsystem.
+	 */
+	public DrivetrainSubsystem() {
 
-    differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
+		leftMaster.restoreFactoryDefaults();
+		leftSlave.restoreFactoryDefaults();
+		rightMaster.restoreFactoryDefaults();
+		rightSlave.restoreFactoryDefaults();
 
-  }
+		leftMaster.setIdleMode(IdleMode.kCoast);
+		leftSlave.setIdleMode(IdleMode.kCoast);
+		rightMaster.setIdleMode(IdleMode.kCoast);
+		rightSlave.setIdleMode(IdleMode.kCoast);
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+		leftSlave.follow(leftMaster);
+		rightSlave.follow(rightMaster);
 
-  public void arcadeDrive(double xSpeed, double zRotation){
-    SmartDashboard.putNumber("xSpeed: ", xSpeed);
-    SmartDashboard.putNumber("zRotation: ", zRotation);
+		differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
 
-    differentialDrive.arcadeDrive(xSpeed, zRotation);
-    
-  }
+	}
+
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
+
+	public void arcadeDrive(double xSpeed, double zRotation) {
+		SmartDashboard.putNumber("xSpeed: ", xSpeed);
+		SmartDashboard.putNumber("zRotation: ", zRotation);
+
+		differentialDrive.arcadeDrive(xSpeed, zRotation);
+
+	}
 }

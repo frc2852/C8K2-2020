@@ -13,38 +13,40 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 
 public class DrivetrainCommand extends CommandBase {
-   /* Creates a new DrivetrainCommand.*/
-  private final DrivetrainSubsystem drivetrainSubsystem;
-  private final DoubleSupplier xSpeed; 
-  private final DoubleSupplier zRotation; 
-   
-  public DrivetrainCommand(DrivetrainSubsystem _drivetrainSubsystem, DoubleSupplier _xSpeed, DoubleSupplier _zRotation) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    drivetrainSubsystem = _drivetrainSubsystem;
-    xSpeed = _xSpeed;
-    zRotation = _zRotation;
-    addRequirements(drivetrainSubsystem);
-  }
+	
+	/* Creates a new DrivetrainCommand. */
+	private final DrivetrainSubsystem drivetrainSubsystem;
+	private final DoubleSupplier xSpeed;
+	private final DoubleSupplier zRotation;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+	public DrivetrainCommand(DrivetrainSubsystem _drivetrainSubsystem, DoubleSupplier _xSpeed,
+			DoubleSupplier _zRotation) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		drivetrainSubsystem = _drivetrainSubsystem;
+		xSpeed = _xSpeed;
+		zRotation = _zRotation;
+		addRequirements(drivetrainSubsystem);
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    drivetrainSubsystem.arcadeDrive(xSpeed.getAsDouble(), zRotation.getAsDouble());
-  } 
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		drivetrainSubsystem.arcadeDrive(xSpeed.getAsDouble(), zRotation.getAsDouble());
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
-} 
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
+}

@@ -12,33 +12,33 @@ import frc.robot.subsystems.drive.GearboxSubsystem;
 
 public class DriveHighGearboxCommand extends CommandBase {
 
-  private final GearboxSubsystem gearboxSubsystem;
+	private final GearboxSubsystem gearboxSubsystem;
 
-  public DriveHighGearboxCommand(GearboxSubsystem _gearboxSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    gearboxSubsystem = _gearboxSubsystem;
-    addRequirements(gearboxSubsystem);
-  }
+	public DriveHighGearboxCommand(GearboxSubsystem _gearboxSubsystem) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		gearboxSubsystem = _gearboxSubsystem;
+		addRequirements(gearboxSubsystem);
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    gearboxSubsystem.driveHighGear();
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		gearboxSubsystem.driveHighGear();
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

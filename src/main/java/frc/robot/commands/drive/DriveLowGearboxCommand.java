@@ -11,34 +11,34 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.drive.GearboxSubsystem;
 
 public class DriveLowGearboxCommand extends CommandBase {
- 
-  private final GearboxSubsystem gearboxSubsystem;
 
-  public DriveLowGearboxCommand(GearboxSubsystem _gearboxSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    gearboxSubsystem = _gearboxSubsystem;
-    addRequirements(gearboxSubsystem);
-  }
+	private final GearboxSubsystem gearboxSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+	public DriveLowGearboxCommand(GearboxSubsystem _gearboxSubsystem) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		gearboxSubsystem = _gearboxSubsystem;
+		addRequirements(gearboxSubsystem);
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    gearboxSubsystem.driveLowGear();
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		gearboxSubsystem.driveLowGear();
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

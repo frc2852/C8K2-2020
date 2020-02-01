@@ -13,22 +13,24 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class GearboxSubsystem extends SubsystemBase {
-  
-  private DoubleSolenoid gearboxSolenoid = new DoubleSolenoid(Constants.DRIVE_GEAR_BOX_OPEN, Constants.DRIVE_GEAR_BOX_CLOSE);
 
-  public GearboxSubsystem() {
+	private DoubleSolenoid gearboxSolenoid = new DoubleSolenoid(Constants.DRIVE_GEAR_BOX_OPEN,
+			Constants.DRIVE_GEAR_BOX_CLOSE);
 
-  }
+	public GearboxSubsystem() {
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	}
 
-  public void driveHighGear(){
-    gearboxSolenoid.set(Value.kForward);
-  }
-  public void driveLowGear(){
-    gearboxSolenoid.set(DoubleSolenoid.Value.kReverse);
-  }
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
+
+	public void driveHighGear() {
+		gearboxSolenoid.set(Value.kForward);
+	}
+
+	public void driveLowGear() {
+		gearboxSolenoid.set(DoubleSolenoid.Value.kReverse);
+	}
 }

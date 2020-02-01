@@ -29,7 +29,7 @@ import frc.robot.subsystems.drive.GearboxSubsystem;
  * every command and every subsystem
  */
 public class RobotContainer {
- 
+
 	// Driver Controller
 	private Joystick DriverController = new Joystick(Constants.DRIVER_CONTROLLER);
 	private Button DriveButtonX = new JoystickButton(DriverController, Constants.X_BUTTON);
@@ -49,14 +49,15 @@ public class RobotContainer {
 
 	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 	private final ShooterFullSpeedCommand shooterFullSpeedCommand = new ShooterFullSpeedCommand(shooterSubsystem);
-	private final ShooterReverseFullSpeedCommand shooterReverseFullSpeedCommand = new ShooterReverseFullSpeedCommand(shooterSubsystem);
+	private final ShooterReverseFullSpeedCommand shooterReverseFullSpeedCommand = new ShooterReverseFullSpeedCommand(
+			shooterSubsystem);
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
 	public RobotContainer() {
 		// Configure the button bindings
-		configureButtonBindings();	
+		configureButtonBindings();
 		gearboxSubsystem.setDefaultCommand(driveLowGearboxCommand);
 
 	}
@@ -69,7 +70,7 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
-			() -> DriverController.getRawAxis(1), () -> -DriverController.getRawAxis(4)));
+				() -> DriverController.getRawAxis(1), () -> -DriverController.getRawAxis(4)));
 
 		DriveButtonBack.whenPressed(driveLowGearboxCommand);
 		DriveButtonStart.whenPressed(driveHighGearboxCommand);

@@ -11,34 +11,36 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterFullSpeedCommand extends CommandBase {
-  /**
-   * Creates a new ShooterFullSpeedCommand.
-   */
-  private final ShooterSubsystem shooterSubsystem;
-  public ShooterFullSpeedCommand(ShooterSubsystem _shooterSubsystem) { 
-    // Use addRequirements() here to declare subsystem dependencies.
-    shooterSubsystem = _shooterSubsystem;
-    addRequirements(shooterSubsystem);
-  }
+	
+	/**
+	 * Creates a new ShooterFullSpeedCommand.
+	 */
+	private final ShooterSubsystem shooterSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+	public ShooterFullSpeedCommand(ShooterSubsystem _shooterSubsystem) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		shooterSubsystem = _shooterSubsystem;
+		addRequirements(shooterSubsystem);
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

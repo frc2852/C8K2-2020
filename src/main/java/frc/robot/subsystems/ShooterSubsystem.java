@@ -15,37 +15,37 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  /**
-   * Creates a new ShooterSubsystem.
-   */
-  private CANSparkMax shootRightMotor = new CANSparkMax(Constants.SHOOT_RIGHT_MOTOR, MotorType.kBrushless);
-  private CANSparkMax shootLeftMotor = new CANSparkMax(Constants.SHOOT_LEFT_MOTOR, MotorType.kBrushless);
+	/**
+	 * Creates a new ShooterSubsystem.
+	 */
+	private CANSparkMax shootRightMotor = new CANSparkMax(Constants.SHOOT_RIGHT_MOTOR, MotorType.kBrushless);
+	private CANSparkMax shootLeftMotor = new CANSparkMax(Constants.SHOOT_LEFT_MOTOR, MotorType.kBrushless);
 
-  public ShooterSubsystem() {
+	public ShooterSubsystem() {
 
-    shootRightMotor.restoreFactoryDefaults(); 
-    shootLeftMotor.restoreFactoryDefaults();
+		shootRightMotor.restoreFactoryDefaults();
+		shootLeftMotor.restoreFactoryDefaults();
 
-    // shootMotorSlave.follow(shootMotorMaster);
+		// shootMotorSlave.follow(shootMotorMaster);
 
-    shootRightMotor.setIdleMode(IdleMode.kCoast);
-    shootLeftMotor.setIdleMode(IdleMode.kCoast);
-    
-  }
+		shootRightMotor.setIdleMode(IdleMode.kCoast);
+		shootLeftMotor.setIdleMode(IdleMode.kCoast);
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	}
 
-  public void shooterFullSpeed(){
-    shootRightMotor.set(-1);
-    shootLeftMotor.set(1);
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
 
-  }
+	public void shooterFullSpeed() {
+		shootRightMotor.set(-1);
+		shootLeftMotor.set(1);
 
-  public void shooterReverse(){
-    shootRightMotor.set(1);
-    shootLeftMotor.set(-1);
-  }
+	}
+
+	public void shooterReverse() {
+		shootRightMotor.set(1);
+		shootLeftMotor.set(-1);
+	}
 }
