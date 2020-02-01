@@ -65,30 +65,24 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double xSpeed, double zRotation){
-      // boolean hasReset = true;
-    //   SmartDashboard.putNumber("xSpeed: ", xSpeed);
-    //   SmartDashboard.putNumber("zRotation: ", zRotation);
-    // if(zRotation == 0){
-      // if(hasReset){
-      //   hasReset = false;
-      //   driveGyro.reset();
-      // }
+      SmartDashboard.putNumber("xSpeed: ", xSpeed);
+      SmartDashboard.putNumber("zRotation: ", zRotation);
+    if(zRotation >= -0.5 && zRotation <= 0.5){
       
-    //   zRotation = driveGyro.getAngle();
-    //   zRotation = (angleSetPoint - zRotation)/**anglekP*/;
-    //   zRotation = Math.copySign(zRotation, xSpeed);
-    //   SmartDashboard.putNumber("Rotation: ", driveGyro.getAngle());
-    // }
-    // else{
-    //   hasReset = true;
-    // }
-    differentialDrive.arcadeDrive(xSpeed, zRotation);
+      zRotation = driveGyro.getAngle();
+      zRotation = (angleSetPoint - zRotation)*anglekP;
+      zRotation = Math.copySign(zRotation, xSpeed);
+      SmartDashboard.putNumber("Rotation: ", driveGyro.getAngle());
+    }
+    else{
+      differentialDrive.arcadeDrive(xSpeed, zRotation);
+    }
     
   }
 
-  // public void zeroHeading(){
-  //   driveGyro.reset();
-  // }
+  public void zeroHeading(){
+    driveGyro.reset();
+  }
   
   public double getHeading(){
     return Math.IEEEremainder(driveGyro.getAngle(), 360) * (Constants.kGyroReversed ? -1.0 : 1.0);
@@ -98,5 +92,5 @@ public class DrivetrainSubsystem extends SubsystemBase {
     return driveGyro.getRate() * (Constants.kGyroReversed ? -1.0 : 1.0);
     // '?' is for short true/false if statement
     // ':' is the else
-  }
+  } 
 }
