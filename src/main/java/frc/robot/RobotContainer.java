@@ -16,7 +16,6 @@ import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
 import frc.robot.commands.shooter.ShooterFullSpeedCommand;
 import frc.robot.commands.shooter.ShooterReverseFullSpeedCommand;
-import frc.robot.commands.TurnToAngleDegrees;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.drive.GearboxSubsystem;
@@ -43,7 +42,6 @@ public class RobotContainer {
 	private Button DriveButtonStart = new JoystickButton(DriverController, Constants.START_BUTTON);
 
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
-	private final TurnToAngleDegrees turnToAngle90Degrees = new TurnToAngleDegrees(90, drivetrainSubsystem);
 
 	private final GearboxSubsystem gearboxSubsystem = new GearboxSubsystem();
 	private final DriveHighGearboxCommand driveHighGearboxCommand = new DriveHighGearboxCommand(gearboxSubsystem);
@@ -72,9 +70,6 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
 			() -> DriverController.getRawAxis(1), () -> -DriverController.getRawAxis(4)));
-
-		DriveButtonX.whenPressed(turnToAngle90Degrees);
-		DriveButtonA.cancelWhenPressed(turnToAngle90Degrees);
 
 		DriveButtonBack.whenPressed(driveLowGearboxCommand);
 		DriveButtonStart.whenPressed(driveHighGearboxCommand);
