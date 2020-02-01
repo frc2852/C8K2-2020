@@ -50,6 +50,14 @@ public final class Constants {
     public static final int DRIVE_RIGHT_MASTER = 3;
     public static final int DRIVE_RIGHT_SLAVE = 4;
 
+    //Gearbox
+    public static final int DRIVE_GEAR_BOX_OPEN = 0;
+    public static final int DRIVE_GEAR_BOX_CLOSE = 1;
+
+    // Shooter
+    public static final int SHOOT_RIGHT_MOTOR = 5;
+    public static final int SHOOT_LEFT_MOTOR = 6;
+
     //Gyro
     public static final boolean kGyroReversed = false;
     
@@ -71,9 +79,6 @@ public final class Constants {
     // #endregion CAN Bus
 
     // #region PCM Bus
-
-    public static final int DRIVE_GEAR_BOX_OPEN = 0;
-    public static final int DRIVE_GEAR_BOX_CLOSE = 1;
 
     // #endregion PCM Bus
 }
