@@ -12,12 +12,13 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+// import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-//this
+
 public class DrivetrainSubsystem extends SubsystemBase {
 
   private CANSparkMax leftMaster = new CANSparkMax(Constants.DRIVE_LEFT_MASTER, MotorType.kBrushless);
@@ -29,6 +30,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private DifferentialDrive differentialDrive;
 
   private final Gyro driveGyro = new ADXRS450_Gyro();
+
+  private double angleSetPoint = 0;
+  private double anglekP = 0.005;
   
   /**
    * Creates a new DrivetrainSubsystem.
@@ -44,10 +48,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     leftSlave.setIdleMode(IdleMode.kCoast);
     rightMaster.setIdleMode(IdleMode.kCoast);
     rightSlave.setIdleMode(IdleMode.kCoast);
-
-    rightMaster.setInverted(true);
-    rightSlave.setInverted(true);
-
+    
     leftSlave.follow(leftMaster);
     rightSlave.follow(rightMaster);
 
@@ -64,7 +65,25 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   public void arcadeDrive(double xSpeed, double zRotation){
+      // boolean hasReset = true;
+    //   SmartDashboard.putNumber("xSpeed: ", xSpeed);
+    //   SmartDashboard.putNumber("zRotation: ", zRotation);
+    // if(zRotation == 0){
+      // if(hasReset){
+      //   hasReset = false;
+      //   driveGyro.reset();
+      // }
+      
+    //   zRotation = driveGyro.getAngle();
+    //   zRotation = (angleSetPoint - zRotation)/**anglekP*/;
+    //   zRotation = Math.copySign(zRotation, xSpeed);
+    //   SmartDashboard.putNumber("Rotation: ", driveGyro.getAngle());
+    // }
+    // else{
+    //   hasReset = true;
+    // }
     differentialDrive.arcadeDrive(xSpeed, zRotation);
+    
   }
 
   // public void zeroHeading(){
