@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+//This is an example
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -48,6 +49,24 @@ public final class Constants {
 
     public static final int DRIVE_RIGHT_MASTER = 3;
     public static final int DRIVE_RIGHT_SLAVE = 4;
+
+    //Gyro
+    public static final boolean kGyroReversed = false;
+    
+    public static final double kStabilizationP = 1;
+    public static final double kStabilizationI = 0.5;
+    public static final double kStabilizationD = 0;
+
+    public static final double kTurnP = 1;
+    public static final double kTurnI = 0;
+    public static final double kTurnD = 0;
+
+    public static final double kMaxTurnRateDegPerS = 100;
+    public static final double kMaxTurnAccelerationDegPerSSquared = 300;
+
+    public static final double kTurnToleranceDeg = 5;
+    public static final double kTurnRateToleranceDegPerS = 10;
+
 
     // #endregion CAN Bus
 
