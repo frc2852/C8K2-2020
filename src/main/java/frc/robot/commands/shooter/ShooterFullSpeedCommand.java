@@ -5,25 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
-
-import java.util.function.DoubleSupplier;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.drive.DrivetrainSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class DrivetrainCommand extends CommandBase {
-   /* Creates a new DrivetrainCommand.*/
-  private final DrivetrainSubsystem drivetrainSubsystem;
-  private final DoubleSupplier xSpeed; 
-  private final DoubleSupplier zRotation; 
-   
-  public DrivetrainCommand(DrivetrainSubsystem _drivetrainSubsystem, DoubleSupplier _xSpeed, DoubleSupplier _zRotation) {
+public class ShooterFullSpeedCommand extends CommandBase {
+  /**
+   * Creates a new ShooterFullSpeedCommand.
+   */
+  private final ShooterSubsystem shooterSubsystem;
+  public ShooterFullSpeedCommand(ShooterSubsystem _shooterSubsystem) { 
     // Use addRequirements() here to declare subsystem dependencies.
-    drivetrainSubsystem = _drivetrainSubsystem;
-    xSpeed = _xSpeed;
-    zRotation = _zRotation;
-    addRequirements(drivetrainSubsystem);
+    shooterSubsystem = _shooterSubsystem;
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -34,8 +29,7 @@ public class DrivetrainCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrainSubsystem.arcadeDrive(xSpeed.getAsDouble(), zRotation.getAsDouble());
-  } 
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -47,4 +41,4 @@ public class DrivetrainCommand extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-} 
+}

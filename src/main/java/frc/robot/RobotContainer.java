@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
-import frc.robot.commands.TurnToAngle90Degrees;
+import frc.robot.commands.shooter.ShooterFullSpeedCommand;
+import frc.robot.commands.shooter.ShooterReverseFullSpeedCommand;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.drive.GearboxSubsystem;
 
@@ -40,18 +42,23 @@ public class RobotContainer {
 	private Button DriveButtonStart = new JoystickButton(DriverController, Constants.START_BUTTON);
 
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
-	private final TurnToAngle90Degrees turnToAngle90Degrees = new TurnToAngle90Degrees(90, drivetrainSubsystem);
 
 	private final GearboxSubsystem gearboxSubsystem = new GearboxSubsystem();
 	private final DriveHighGearboxCommand driveHighGearboxCommand = new DriveHighGearboxCommand(gearboxSubsystem);
 	private final DriveLowGearboxCommand driveLowGearboxCommand = new DriveLowGearboxCommand(gearboxSubsystem);
+
+	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+	private final ShooterFullSpeedCommand shooterFullSpeedCommand = new ShooterFullSpeedCommand(shooterSubsystem);
+	private final ShooterReverseFullSpeedCommand shooterReverseFullSpeedCommand = new ShooterReverseFullSpeedCommand(shooterSubsystem);
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
 	public RobotContainer() {
 		// Configure the button bindings
-		configureButtonBindings();
+		configureButtonBindings();	
+		gearboxSubsystem.setDefaultCommand(driveLowGearboxCommand);
+
 	}
 
 	/**
@@ -62,13 +69,12 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
-			() -> -DriverController.getRawAxis(4), () -> DriverController.getRawAxis(1)));
+			() -> DriverController.getRawAxis(1), () -> -DriverController.getRawAxis(4)));
 
-		DriveButtonX.whenPressed(turnToAngle90Degrees);
-		DriveButtonA.cancelWhenPressed(turnToAngle90Degrees);
-		// new JoystickButton(m_driverController, Button.kX.value)
-		// .whenPressed(new TurnToAngle(90, m_robotDrive).withTimeout(5));
 		DriveButtonBack.whenPressed(driveLowGearboxCommand);
 		DriveButtonStart.whenPressed(driveHighGearboxCommand);
+
+		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
+		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
 	}
 }

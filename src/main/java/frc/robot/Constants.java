@@ -50,30 +50,17 @@ public final class Constants {
     public static final int DRIVE_RIGHT_MASTER = 3;
     public static final int DRIVE_RIGHT_SLAVE = 4;
 
-    //Gyro
-    public static final boolean kGyroReversed = false;
-    
-    public static final double kStabilizationP = 1;
-    public static final double kStabilizationI = 0.5;
-    public static final double kStabilizationD = 0;
+    //Gearbox
+    public static final int DRIVE_GEAR_BOX_OPEN = 0;
+    public static final int DRIVE_GEAR_BOX_CLOSE = 1;
 
-    public static final double kTurnP = 1;
-    public static final double kTurnI = 0;
-    public static final double kTurnD = 0;
-
-    public static final double kMaxTurnRateDegPerS = 100;
-    public static final double kMaxTurnAccelerationDegPerSSquared = 300;
-
-    public static final double kTurnToleranceDeg = 5;
-    public static final double kTurnRateToleranceDegPerS = 10;
-
+    // Shooter
+    public static final int SHOOT_RIGHT_MOTOR = 5;
+    public static final int SHOOT_LEFT_MOTOR = 6;
 
     // #endregion CAN Bus
 
     // #region PCM Bus
-
-    public static final int DRIVE_GEAR_BOX_OPEN = 0;
-    public static final int DRIVE_GEAR_BOX_CLOSE = 1;
 
     // #endregion PCM Bus
 }
