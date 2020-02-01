@@ -35,7 +35,7 @@ public class DrivetrainCommand extends CommandBase {
   @Override
   public void execute() {
     drivetrainSubsystem.arcadeDrive(xSpeed.getAsDouble(), zRotation.getAsDouble());
-
+    drivetrainSubsystem.zeroHeading(); //resets gyro
   } 
 
   // Called once the command ends or is interrupted.
