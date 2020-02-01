@@ -19,7 +19,6 @@ package frc.robot;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    // #region Controllers
 
     // Controllers Mapping
     public static final int DRIVER_CONTROLLER = 0;
@@ -35,10 +34,6 @@ public final class Constants {
     public static final int BACK_BUTTON = 7;
     public static final int START_BUTTON = 8;
 
-    // #endregion Controllers
-
-    // #region CAN Bus
-
     // FRC Devices
     public static final int PDP = 0;
     public static final int PCM = 5;
@@ -50,17 +45,11 @@ public final class Constants {
     public static final int DRIVE_RIGHT_MASTER = 3;
     public static final int DRIVE_RIGHT_SLAVE = 4;
 
-    //Gearbox
-    public static final int DRIVE_GEAR_BOX_OPEN = 0;
-    public static final int DRIVE_GEAR_BOX_CLOSE = 1;
-
     // Shooter
     public static final int SHOOT_RIGHT_MOTOR = 5;
     public static final int SHOOT_LEFT_MOTOR = 6;
 
-    // #endregion CAN Bus
-
-    // #region PCM Bus
-
-    // #endregion PCM Bus
+    // Gearbox
+    public static final int DRIVE_GEAR_BOX_OPEN = 0;
+    public static final int DRIVE_GEAR_BOX_CLOSE = 1;
 }
