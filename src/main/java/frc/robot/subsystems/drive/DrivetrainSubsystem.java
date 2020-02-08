@@ -35,6 +35,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
 		rightMaster.restoreFactoryDefaults();
 		rightSlave.restoreFactoryDefaults();
 
+		rightSlave.setInverted(true);
+		leftSlave.setInverted(true);
+		//Lights: right: green = forward
+		//Lights: right: red = reverse
+		//Lights: left: red = forward
+		//Lights: left: green = reverse
+
 		leftMaster.setIdleMode(IdleMode.kCoast);
 		leftSlave.setIdleMode(IdleMode.kCoast);
 		rightMaster.setIdleMode(IdleMode.kCoast);
