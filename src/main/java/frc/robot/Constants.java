@@ -49,7 +49,16 @@ public final class Constants {
     public static final int SHOOT_RIGHT_MOTOR = 5;
     public static final int SHOOT_LEFT_MOTOR = 6;
 
+    public static final int PIGEON_IMU = 7;
+
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
     public static final int DRIVE_GEAR_BOX_CLOSE = 1;
+
+    // CTRE Can bus
+    public static final int kTimeoutMs = 30;
+
+    public static enum PigeonDrive {
+        Off, UsePigeon, SameThrottle
+    };
 }
