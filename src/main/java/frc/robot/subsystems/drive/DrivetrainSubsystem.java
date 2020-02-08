@@ -35,14 +35,15 @@ public class DrivetrainSubsystem extends SubsystemBase {
 		rightMaster.restoreFactoryDefaults();
 		rightSlave.restoreFactoryDefaults();
 
-		leftMaster.setIdleMode(IdleMode.kCoast);
-		leftSlave.setIdleMode(IdleMode.kCoast);
-		rightMaster.setIdleMode(IdleMode.kCoast);
-		rightSlave.setIdleMode(IdleMode.kCoast);
+		leftMaster.setIdleMode(IdleMode.kBrake);
+		leftSlave.setIdleMode(IdleMode.kBrake);
+		rightMaster.setIdleMode(IdleMode.kBrake);
+		rightSlave.setIdleMode(IdleMode.kBrake);
 
 		leftSlave.follow(leftMaster);
 		rightSlave.follow(rightMaster);
 
+		rightSlave.setInverted(true);
 		differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
 
 	}
