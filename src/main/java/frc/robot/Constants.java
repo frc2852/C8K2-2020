@@ -49,6 +49,19 @@ public final class Constants {
     public static final int SHOOT_RIGHT_MOTOR = 5;
     public static final int SHOOT_LEFT_MOTOR = 6;
 
+    public static final int PIGEON_IMU = 7;
+
+    // Elevators
+    public static final int OUTER_ELEVATOR = 8;
+    public static final int INNER_ELEVATOR = 9;
+
+    //Accessories
+    public static final int INTAKE = 10;
+    public static final int MAGAZINE = 11;
+    public static final int PI_WHEEL = 12;
+    public static final int AUTO_LEVEL_MASTER = 13;
+    public static final int AUTO_LEVEL_SLAVE = 14;
+
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
     public static final int DRIVE_GEAR_BOX_CLOSE = 1;
