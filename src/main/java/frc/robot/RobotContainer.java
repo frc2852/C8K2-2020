@@ -70,7 +70,7 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
-				() -> DriverController.getRawAxis(1), () -> -DriverController.getRawAxis(4)));
+				() -> DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
 
 		DriveButtonBack.whenPressed(driveLowGearboxCommand);
 		DriveButtonStart.whenPressed(driveHighGearboxCommand);
