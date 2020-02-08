@@ -61,6 +61,8 @@ public final class Constants {
     public static final int PI_WHEEL = 12;
     public static final int AUTO_LEVEL_MASTER = 13;
     public static final int AUTO_LEVEL_SLAVE = 14;
+    public static final int PIVOT_LEFT = 15;
+    public static final int PIVOT_RIGHT = 16;
 
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
