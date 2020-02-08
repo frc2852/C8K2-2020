@@ -36,7 +36,7 @@ public final class Constants {
 
     // FRC Devices
     public static final int PDP = 0;
-    public static final int PCM = 5;
+    public static final int PCM = 0;
 
     // Drive
     public static final int DRIVE_LEFT_MASTER = 1;
