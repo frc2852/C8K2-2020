@@ -34,6 +34,10 @@ public final class Constants {
     public static final int BACK_BUTTON = 7;
     public static final int START_BUTTON = 8;
 
+    // Controller Trigger Mapping
+    public static final int LEFT_TRIGGER = 2;
+    public static final int RIGHT_TRIGGER = 3;
+
     // FRC Devices
     public static final int PDP = 0;
     public static final int PCM = 5;
@@ -63,6 +67,21 @@ public final class Constants {
     public static final int AUTO_LEVEL_SLAVE = 14;
     public static final int PIVOT_LEFT = 15;
     public static final int PIVOT_RIGHT = 16;
+
+    //mag encoder stuff //TODO: fix names, and IDs
+    public static final int kTimeoutMs = 1;
+    public static final int kSlotIdx = 2;
+    public static final int kPIDLoopIdx = 3;
+    public static final double kGains_kP = 0.2;
+    public static final double kGains_kI = 0.0;
+    public static final double kGains_kD = 0.0;
+    public static final double kGains_kF = 0.2;
+    public static final double kGains_izone = 0;
+    public static final double kGains_peakOutput = 1;
+    // public static final int kGains = 4;
+    // public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
+    // Gains(kp, ki, kd, kf, izone, peak output);
+
 
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
