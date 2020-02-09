@@ -26,7 +26,6 @@ public class ShooterSubsystem extends SubsystemBase {
 		shootRightMotor.restoreFactoryDefaults();
 		shootLeftMotor.restoreFactoryDefaults();
 
-		// shootMotorSlave.follow(shootMotorMaster);
 
 		shootRightMotor.setIdleMode(IdleMode.kCoast);
 		shootLeftMotor.setIdleMode(IdleMode.kCoast);
