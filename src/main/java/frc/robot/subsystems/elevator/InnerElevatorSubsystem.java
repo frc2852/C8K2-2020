@@ -14,7 +14,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.Constants; 
 
 public class InnerElevatorSubsystem extends SubsystemBase {
   private final TalonSRX innerElevatorMotor = new TalonSRX(Constants.INNER_ELEVATOR);
@@ -24,7 +24,7 @@ public class InnerElevatorSubsystem extends SubsystemBase {
    */
   public InnerElevatorSubsystem() {
 
-    innerElevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    innerElevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
     innerElevatorMotor.configFactoryDefault();
 
@@ -51,10 +51,10 @@ public class InnerElevatorSubsystem extends SubsystemBase {
 
 		/* Set Motion Magic gains in slot0 - see documentation */
 		innerElevatorMotor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-		innerElevatorMotor.config_kF(Constants.kSlotIdx, Constants.kGains_kF, Constants.kTimeoutMs);
-		innerElevatorMotor.config_kP(Constants.kSlotIdx, Constants.kGains_kP, Constants.kTimeoutMs);
-		innerElevatorMotor.config_kI(Constants.kSlotIdx, Constants.kGains_kI, Constants.kTimeoutMs);
-		innerElevatorMotor.config_kD(Constants.kSlotIdx, Constants.kGains_kD, Constants.kTimeoutMs);
+		innerElevatorMotor.config_kF(Constants.kSlotIdx, Constants.kGains.kF, Constants.kTimeoutMs);
+		innerElevatorMotor.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
+		innerElevatorMotor.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
+		innerElevatorMotor.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
 
 		/* Set acceleration and vcruise velocity - see documentation */
 		innerElevatorMotor.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
