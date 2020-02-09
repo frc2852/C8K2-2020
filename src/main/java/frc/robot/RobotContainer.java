@@ -123,7 +123,7 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 		
-		//Driver Stick
+		// Driver Stick
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
 				() -> DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
 
@@ -136,7 +136,7 @@ public class RobotContainer {
 		DriveButtonA.whenPressed(intakeForwardCommand);
 		DriveButtonY.whenPressed(intakeReverseCommand);
 
-		//Operator Stick
+		// Operator Stick
 		OperatorButtonRightTrigger.whenActive(manualLoadCommand);
 		OperatorButtonLeftTrigger.whenActive(manualReverseLoadCommand);
 
