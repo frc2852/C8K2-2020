@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems.elevator;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
@@ -23,7 +24,7 @@ public class OuterElevatorSubsystem extends SubsystemBase {
    * Creates a new ElevatorSubsystem.
    */
   public OuterElevatorSubsystem() {
-    outerElevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    outerElevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
     outerElevatorMotor.configFactoryDefault();
 
@@ -51,10 +52,10 @@ public class OuterElevatorSubsystem extends SubsystemBase {
 
 		/* Set Motion Magic gains in slot0 - see documentation */
 		outerElevatorMotor.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-		outerElevatorMotor.config_kF(Constants.kSlotIdx, Constants.kGains_kF, Constants.kTimeoutMs);
-		outerElevatorMotor.config_kP(Constants.kSlotIdx, Constants.kGains_kP, Constants.kTimeoutMs);
-		outerElevatorMotor.config_kI(Constants.kSlotIdx, Constants.kGains_kI, Constants.kTimeoutMs);
-		outerElevatorMotor.config_kD(Constants.kSlotIdx, Constants.kGains_kD, Constants.kTimeoutMs);
+		outerElevatorMotor.config_kF(Constants.kSlotIdx, Constants.kGains.kF, Constants.kTimeoutMs);
+		outerElevatorMotor.config_kP(Constants.kSlotIdx, Constants.kGains.kP, Constants.kTimeoutMs);
+		outerElevatorMotor.config_kI(Constants.kSlotIdx, Constants.kGains.kI, Constants.kTimeoutMs);
+		outerElevatorMotor.config_kD(Constants.kSlotIdx, Constants.kGains.kD, Constants.kTimeoutMs);
 
 		/* Set acceleration and vcruise velocity - see documentation */
 		outerElevatorMotor.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
@@ -70,5 +71,12 @@ public class OuterElevatorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+  public void outerElevatorMaxPosition(){
+    outerElevatorMotor.set(ControlMode.MotionMagic, 100);
+  }
+
+  public void outerElevatorMinimumPosition(){
+    outerElevatorMotor.set(ControlMode.MotionMagic, 0);
   }
 }
