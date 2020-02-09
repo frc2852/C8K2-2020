@@ -31,6 +31,7 @@ public class ShooterFullSpeedCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		shooterSubsystem.shooterFullSpeed();
 	}
 
 	// Called once the command ends or is interrupted.

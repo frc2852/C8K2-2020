@@ -28,6 +28,7 @@ public class ManualPivotDownCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    pivotSubsystem.manualPivotDown();
   }
 
   // Called once the command ends or is interrupted.
