@@ -69,19 +69,10 @@ public final class Constants {
     public static final int PIVOT_RIGHT = 16;
 
     //mag encoder stuff //TODO: fix names, and IDs
-    public static final int kTimeoutMs = 1;
-    public static final int kSlotIdx = 2;
-    public static final int kPIDLoopIdx = 3;
-    public static final double kGains_kP = 0.2;
-    public static final double kGains_kI = 0.0;
-    public static final double kGains_kD = 0.0;
-    public static final double kGains_kF = 0.2;
-    public static final double kGains_izone = 0;
-    public static final double kGains_peakOutput = 1;
-    // public static final int kGains = 4;
-    // public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
-    // Gains(kp, ki, kd, kf, izone, peak output);
-
+	public static final int kTimeoutMs = 30;
+    public final static Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
+    public static final int kSlotIdx = 0;
+    public static final int kPIDLoopIdx = 0;
 
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
