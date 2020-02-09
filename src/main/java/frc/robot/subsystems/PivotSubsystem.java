@@ -26,7 +26,6 @@ public class PivotSubsystem extends SubsystemBase {
     pivotMotorLeft.restoreFactoryDefaults();
     pivotMotorRight.restoreFactoryDefaults();
 
-    pivotMotorLeft.setInverted(false);
     pivotMotorRight.setInverted(true);
 
     pivotMotorRight.setIdleMode(IdleMode.kBrake);
