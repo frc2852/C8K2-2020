@@ -11,34 +11,35 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.elevator.OuterElevatorSubsystem;
 
 public class MinOuterElevatorPositionCommand extends CommandBase {
-  private OuterElevatorSubsystem outerElevatorSubsystem;
-  /**
-   * Creates a new MinOuterElevatorPositionCommand.
-   */
-  public MinOuterElevatorPositionCommand(OuterElevatorSubsystem _outerElevatorSubsystem) {
-    outerElevatorSubsystem = _outerElevatorSubsystem;
-    addRequirements(outerElevatorSubsystem);
-  }
+    private OuterElevatorSubsystem outerElevatorSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+    /**
+     * Creates a new MinOuterElevatorPositionCommand.
+     */
+    public MinOuterElevatorPositionCommand(OuterElevatorSubsystem _outerElevatorSubsystem) {
+        outerElevatorSubsystem = _outerElevatorSubsystem;
+        addRequirements(outerElevatorSubsystem);
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    outerElevatorSubsystem.outerElevatorMinimumPosition();
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        outerElevatorSubsystem.outerElevatorMinimumPosition();
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
