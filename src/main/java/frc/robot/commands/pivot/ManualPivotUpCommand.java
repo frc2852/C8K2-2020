@@ -11,34 +11,35 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.PivotSubsystem;
 
 public class ManualPivotUpCommand extends CommandBase {
-  private PivotSubsystem pivotSubsystem;
-  /**
-   * Creates a new ManualPivotUpCommand.
-   */
-  public ManualPivotUpCommand(PivotSubsystem _pivotSubsystem) {
-    pivotSubsystem = _pivotSubsystem;
-    addRequirements(pivotSubsystem);
-  }
+	private PivotSubsystem pivotSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+	/**
+	 * Creates a new ManualPivotUpCommand.
+	 */
+	public ManualPivotUpCommand(PivotSubsystem _pivotSubsystem) {
+		pivotSubsystem = _pivotSubsystem;
+		addRequirements(pivotSubsystem);
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    pivotSubsystem.manualPivotUp();
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		pivotSubsystem.manualPivotUp();
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }
