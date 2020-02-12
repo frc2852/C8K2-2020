@@ -8,10 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
@@ -47,8 +48,8 @@ import frc.robot.subsystems.elevator.OuterElevatorSubsystem;
 public class RobotContainer {
 
 	// Driver Controller
-	private Joystick DriverController = new Joystick(Constants.DRIVER_CONTROLLER);
-	private Joystick OperatorController = new Joystick(Constants.OPERATOR_CONTROLLER);
+	private XboxController DriverController = new XboxController(Constants.DRIVER_CONTROLLER);
+	private XboxController OperatorController = new XboxController(Constants.OPERATOR_CONTROLLER);
 
 	private Button DriveButtonX = new JoystickButton(DriverController, Constants.X_BUTTON);
 	private Button DriveButtonA = new JoystickButton(DriverController, Constants.A_BUTTON);
@@ -71,7 +72,6 @@ public class RobotContainer {
 	private Button OperatorButtonStart = new JoystickButton(OperatorController, Constants.START_BUTTON);
 	private Trigger OperatorButtonLeftTrigger = new JoystickButton(OperatorController, Constants.LEFT_TRIGGER);
 	private Trigger OperatorButtonRightTrigger = new JoystickButton(OperatorController, Constants.RIGHT_TRIGGER);
-
 
 
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
@@ -136,9 +136,11 @@ public class RobotContainer {
 		DriveButtonA.whenPressed(intakeForwardCommand);
 		DriveButtonY.whenPressed(intakeReverseCommand);
 
+		DriveButtonB.whenPressed(manualLoadCommand);
+		DriveButtonX.whenPressed(manualReverseLoadCommand);
+
+
 		// Operator Stick
-		OperatorButtonRightTrigger.whenActive(manualLoadCommand);
-		OperatorButtonLeftTrigger.whenActive(manualReverseLoadCommand);
 
 		OperatorButtonLeftBumper.whenPressed(manualPivotDownCommand);
 		OperatorButtonRightBumper.whenPressed(manualPivotUpCommand);
