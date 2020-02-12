@@ -31,10 +31,10 @@ public class MagazineSubsystem extends SubsystemBase { // loads and stores the b
 	  }
 	  
 	public void manualLoad(){
-		magazineMotor.set(ControlMode.Velocity, 0.7);
+		magazineMotor.set(ControlMode.Velocity, 1);
 	}
 
 	public void manualReverseLoad(){ //magazine runs in reverse
-		magazineMotor.set(ControlMode.Velocity, -0.5);
+		magazineMotor.set(ControlMode.Velocity, -1);
 	}
 }
