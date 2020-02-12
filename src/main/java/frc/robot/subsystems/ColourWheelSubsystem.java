@@ -101,7 +101,42 @@ public class ColourWheelSubsystem extends SubsystemBase {
 	}
 
 	public void autoRotationColourWheel(){
-		colourWheelMotor.set(ControlMode.Velocity, 1);
+
+		if(gameData.length() > 0){
+			switch (gameData.charAt(0)){
+		    	case 'B' :
+					  //Blue case code
+					  colourWheelMotor.set(ControlMode.Velocity, 1);
+		      		break;
+				case 'G' :
+					//Green case code
+					colourWheelMotor.set(ControlMode.Velocity, 1);
+		      		break;
+		    	case 'R' :
+					  //Red case cod
+					  colourWheelMotor.set(ControlMode.Velocity, 1);
+		      		break;
+		    	case 'Y' :
+					  //Yellow case code
+					  colourWheelMotor.set(ControlMode.Velocity, 1);
+		      		break;
+		    	default :
+					  //This is corrupt data
+					  colourWheelMotor.set(ControlMode.Velocity, 0);
+		      		break;
+		  	}
+		} 
+		else {
+			//Code for no data received yet
+		}
 		
+	}
+
+	public void manualColourWheelRight(){
+		colourWheelMotor.set(ControlMode.Velocity, 1);
+	}
+
+	public void manualColourWheelLeft(){
+		colourWheelMotor.set(ControlMode.Velocity, -1);
 	}
 }
