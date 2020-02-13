@@ -34,7 +34,7 @@ public final class Constants {
     public static final int BACK_BUTTON = 7;
     public static final int START_BUTTON = 8;
 
-    //Controller Trigger Mapping
+    // Controller Trigger Mapping
     public static final int LEFT_TRIGGER = 2;
     public static final int RIGHT_TRIGGER = 3;
 
@@ -48,31 +48,6 @@ public final class Constants {
 
     public static final int DRIVE_RIGHT_MASTER = 3;
     public static final int DRIVE_RIGHT_SLAVE = 4;
-
-    // Shooter
-    public static final int SHOOT_RIGHT_MOTOR = 5;
-    public static final int SHOOT_LEFT_MOTOR = 6;
-
-    public static final int PIGEON_IMU = 7;
-
-    // Elevators
-    public static final int OUTER_ELEVATOR = 8;
-    public static final int INNER_ELEVATOR = 9;
-            
-    // Accessories
-    public static final int INTAKE = 10;
-    public static final int MAGAZINE = 11;
-    public static final int PI_WHEEL = 12;
-    public static final int AUTO_LEVEL_MASTER = 13;
-    public static final int AUTO_LEVEL_SLAVE = 14;
-    public static final int PIVOT_LEFT = 15;
-    public static final int PIVOT_RIGHT = 16;
-
-    //Mag encoder stuff
-	public static final int kTimeoutMs = 30;
-    public final static Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
-    public static final int kSlotIdx = 0;
-    public static final int kPIDLoopIdx = 0;
 
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;

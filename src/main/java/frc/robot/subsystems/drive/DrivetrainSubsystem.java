@@ -7,6 +7,10 @@
 
 package frc.robot.subsystems.drive;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -17,11 +21,18 @@ import frc.robot.Constants;
 
 public class DrivetrainSubsystem extends SubsystemBase {
 
-	private CANSparkMax leftMaster = new CANSparkMax(Constants.DRIVE_LEFT_MASTER, MotorType.kBrushless);
-	private CANSparkMax leftSlave = new CANSparkMax(Constants.DRIVE_LEFT_SLAVE, MotorType.kBrushless);
+	private WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.DRIVE_LEFT_MASTER);
+	private WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.DRIVE_LEFT_SLAVE);
 
-	private CANSparkMax rightMaster = new CANSparkMax(Constants.DRIVE_RIGHT_MASTER, MotorType.kBrushless);
-	private CANSparkMax rightSlave = new CANSparkMax(Constants.DRIVE_RIGHT_SLAVE, MotorType.kBrushless);
+	private WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.DRIVE_RIGHT_MASTER);
+	private WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.DRIVE_RIGHT_SLAVE);
+
+	
+	// private TalonSRX leftMaster = new TalonSRX(Constants.DRIVE_LEFT_MASTER);
+	// private TalonSRX leftSlave = new TalonSRX(Constants.DRIVE_LEFT_SLAVE);
+
+	// private TalonSRX rightMaster = new TalonSRX(Constants.DRIVE_RIGHT_MASTER);
+	// private TalonSRX rightSlave = new TalonSRX(Constants.DRIVE_RIGHT_SLAVE);
 
 	private DifferentialDrive differentialDrive;
 
@@ -30,16 +41,16 @@ public class DrivetrainSubsystem extends SubsystemBase {
 	 */
 	public DrivetrainSubsystem() {
 
-		leftMaster.restoreFactoryDefaults();
-		leftSlave.restoreFactoryDefaults();
-		rightMaster.restoreFactoryDefaults();
-		rightSlave.restoreFactoryDefaults();
+		leftMaster.configFactoryDefault();
+		leftSlave.configFactoryDefault();
+		rightMaster.configFactoryDefault();
+		rightSlave.configFactoryDefault();
 
 
-		leftMaster.setIdleMode(IdleMode.kCoast);
-		leftSlave.setIdleMode(IdleMode.kCoast);
-		rightMaster.setIdleMode(IdleMode.kCoast);
-		rightSlave.setIdleMode(IdleMode.kCoast);
+		leftMaster.setNeutralMode(NeutralMode.Coast);
+		leftSlave.setNeutralMode(NeutralMode.Coast);
+		rightMaster.setNeutralMode(NeutralMode.Coast);
+		rightSlave.setNeutralMode(NeutralMode.Coast);
 
 		leftSlave.follow(leftMaster);
 		rightSlave.follow(rightMaster);
@@ -66,5 +77,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
 		differentialDrive.arcadeDrive(xSpeed, zRotation);
 
+		// leftMaster.set(ControlMode.Velocity, 0.3);
+		// rightMaster.set(ControlMode.Velocity, 0.3);
+
 	}
+
 }

@@ -16,26 +16,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
-import frc.robot.commands.elevator.innerElevator.MaxInnerElevatorPositionCommand;
-import frc.robot.commands.elevator.innerElevator.MinInnerElevatorPositionCommand;
-import frc.robot.commands.elevator.outerElevator.MaxOuterElevatorPositionCommand;
-import frc.robot.commands.elevator.outerElevator.MinOuterElevatorPositionCommand;
-import frc.robot.commands.intake.IntakeForwardCommand;
-import frc.robot.commands.intake.IntakeReverseCommand;
-import frc.robot.commands.magazine.ManualLoadCommand;
-import frc.robot.commands.magazine.ManualReverseLoadCommand;
-import frc.robot.commands.pivot.ManualPivotDownCommand;
-import frc.robot.commands.pivot.ManualPivotUpCommand;
-import frc.robot.commands.shooter.ShooterFullSpeedCommand;
-import frc.robot.commands.shooter.ShooterReverseFullSpeedCommand;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.MagazineSubsystem;
-import frc.robot.subsystems.PivotSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.drive.GearboxSubsystem;
-import frc.robot.subsystems.elevator.InnerElevatorSubsystem;
-import frc.robot.subsystems.elevator.OuterElevatorSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -80,31 +62,6 @@ public class RobotContainer {
 	private final DriveHighGearboxCommand driveHighGearboxCommand = new DriveHighGearboxCommand(gearboxSubsystem);
 	private final DriveLowGearboxCommand driveLowGearboxCommand = new DriveLowGearboxCommand(gearboxSubsystem);
 
-	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-	private final ShooterFullSpeedCommand shooterFullSpeedCommand = new ShooterFullSpeedCommand(shooterSubsystem);
-	private final ShooterReverseFullSpeedCommand shooterReverseFullSpeedCommand = new ShooterReverseFullSpeedCommand (shooterSubsystem);
-
-	private final PivotSubsystem pivotSubsystem = new PivotSubsystem();
-	private final ManualPivotDownCommand manualPivotDownCommand = new ManualPivotDownCommand(pivotSubsystem);
-	private final ManualPivotUpCommand manualPivotUpCommand = new ManualPivotUpCommand(pivotSubsystem);
-
-	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-	private final IntakeForwardCommand intakeForwardCommand = new IntakeForwardCommand(intakeSubsystem);
-	private final IntakeReverseCommand intakeReverseCommand = new IntakeReverseCommand(intakeSubsystem);
-
-	private final InnerElevatorSubsystem innerElevatorSubsystem = new InnerElevatorSubsystem();
-	private final MaxInnerElevatorPositionCommand maxInnerElevatorPositionCommand = new MaxInnerElevatorPositionCommand(innerElevatorSubsystem);
-	private final MinInnerElevatorPositionCommand minInnerElevatorPositionCommand = new MinInnerElevatorPositionCommand(innerElevatorSubsystem);
-
-	private final OuterElevatorSubsystem outerElevatorSubsystem = new OuterElevatorSubsystem();
-	private final MaxOuterElevatorPositionCommand maxOuterElevatorPositionCommand = new MaxOuterElevatorPositionCommand(outerElevatorSubsystem);
-	private final MinOuterElevatorPositionCommand minOuterElevatorPositionCommand = new MinOuterElevatorPositionCommand(outerElevatorSubsystem);
-
-	private final MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
-	private final ManualLoadCommand manualLoadCommand = new ManualLoadCommand(magazineSubsystem);
-	private final ManualReverseLoadCommand manualReverseLoadCommand = new ManualReverseLoadCommand(magazineSubsystem);
-	
-
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
@@ -130,26 +87,7 @@ public class RobotContainer {
 		DriveButtonBack.whenPressed(driveLowGearboxCommand);
 		DriveButtonStart.whenPressed(driveHighGearboxCommand);
 
-		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
-		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
-
-		DriveButtonA.whenPressed(intakeForwardCommand);
-		DriveButtonY.whenPressed(intakeReverseCommand);
-
-		DriveButtonB.whenPressed(manualLoadCommand);
-		DriveButtonX.whenPressed(manualReverseLoadCommand);
-
-
 		// Operator Stick
-
-		OperatorButtonLeftBumper.whenPressed(manualPivotDownCommand);
-		OperatorButtonRightBumper.whenPressed(manualPivotUpCommand);
-
-		OperatorButtonA.whenPressed(maxInnerElevatorPositionCommand);
-		OperatorButtonX.whenPressed(maxOuterElevatorPositionCommand);
-		
-		OperatorButtonB.whenPressed(minInnerElevatorPositionCommand);
-		OperatorButtonY.whenPressed(minOuterElevatorPositionCommand);
 
 	}
 }
