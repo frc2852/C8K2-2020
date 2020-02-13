@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -25,8 +24,6 @@ public class ShooterSubsystem extends PIDSubsystem {
 	private CANSparkMax shootRightMotor = new CANSparkMax(Constants.SHOOT_RIGHT_MOTOR, MotorType.kBrushless);
 	private CANSparkMax shootLeftMotor = new CANSparkMax(Constants.SHOOT_LEFT_MOTOR, MotorType.kBrushless);
 	double extra=0.5;
-	private PigeonIMU pidgey;
-
 
 	public ShooterSubsystem() {
 		super(new PIDController(2.0, 0.0, 0.0));// The constructor passes a name for the subsystem and the P, I and D constants that are used when computing the motor output
