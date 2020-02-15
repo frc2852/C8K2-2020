@@ -131,13 +131,7 @@ public class RobotContainer {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
 				() -> DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
 
-		DriveButtonBack.whenPressed(driveLowGearboxCommand);
-		DriveButtonStart.whenPressed(driveHighGearboxCommand);
-
-		// DriveButtonRightJoystick.whenPressed(driveLowGearboxCommand);
-		DriveButtonRightJoystick.toggleWhenPressed(driveLowGearboxCommand, true);
-		DriveButtonRightJoystick.toggleWhenPressed(driveHighGearboxCommand, true);
-
+		DriveButtonLeftJoystick.toggleWhenPressed(driveHighGearboxCommand);
 
 		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
 		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
