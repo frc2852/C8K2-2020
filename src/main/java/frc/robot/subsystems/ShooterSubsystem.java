@@ -26,8 +26,6 @@ public class ShooterSubsystem extends SubsystemBase {
 		shootRightMotor.restoreFactoryDefaults();
 		shootLeftMotor.restoreFactoryDefaults();
 
-		// shootMotorSlave.follow(shootMotorMaster);
-
 		shootRightMotor.setIdleMode(IdleMode.kCoast);
 		shootLeftMotor.setIdleMode(IdleMode.kCoast);
 
@@ -39,13 +37,13 @@ public class ShooterSubsystem extends SubsystemBase {
 	}
 
 	public void shooterFullSpeed() {
-		shootRightMotor.set(-1);
-		shootLeftMotor.set(1);
+		shootRightMotor.set(-0.75);
+		shootLeftMotor.set(0.75);
 
 	}
 
 	public void shooterReverse() {
-		shootRightMotor.set(1);
-		shootLeftMotor.set(-1);
+		shootRightMotor.set(0.75);
+		shootLeftMotor.set(-0.75);
 	}
 }
