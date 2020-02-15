@@ -33,9 +33,6 @@ public final class Constants {
     public static final int BACK_BUTTON = 7;
     public static final int START_BUTTON = 8;
 
-    //Controller Trigger Mapping
-    public static final int LEFT_TRIGGER = 2;
-    public static final int RIGHT_TRIGGER = 3;
     // FRC Devices
     public static final int PDP = 0;
     public static final int PCM = 5;

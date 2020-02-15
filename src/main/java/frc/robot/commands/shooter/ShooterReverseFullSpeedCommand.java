@@ -18,7 +18,6 @@ public class ShooterReverseFullSpeedCommand extends CommandBase {
 	private final ShooterSubsystem shooterSubsystem;
 
 	public ShooterReverseFullSpeedCommand(ShooterSubsystem _ShooterSubsystem) {
-		// Use addRequirements() here to declare subsystem dependencies.
 		shooterSubsystem = _ShooterSubsystem;
 		addRequirements(shooterSubsystem);
 	}
@@ -31,6 +30,7 @@ public class ShooterReverseFullSpeedCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		shooterSubsystem.shooterReverse();
 	}
 
 	// Called once the command ends or is interrupted.

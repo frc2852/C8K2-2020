@@ -18,7 +18,6 @@ public class ShooterFullSpeedCommand extends CommandBase {
 	private final ShooterSubsystem shooterSubsystem;
 
 	public ShooterFullSpeedCommand(ShooterSubsystem _shooterSubsystem) {
-		// Use addRequirements() here to declare subsystem dependencies.
 		shooterSubsystem = _shooterSubsystem;
 		addRequirements(shooterSubsystem);
 	}
@@ -31,6 +30,7 @@ public class ShooterFullSpeedCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		shooterSubsystem.shooterFullSpeed();
 	}
 
 	// Called once the command ends or is interrupted.
