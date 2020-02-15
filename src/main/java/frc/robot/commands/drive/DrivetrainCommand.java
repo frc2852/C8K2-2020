@@ -19,9 +19,7 @@ public class DrivetrainCommand extends CommandBase {
 	private final DoubleSupplier xSpeed;
 	private final DoubleSupplier zRotation;
 
-	public DrivetrainCommand(DrivetrainSubsystem _drivetrainSubsystem, DoubleSupplier _xSpeed,
-			DoubleSupplier _zRotation) {
-		// Use addRequirements() here to declare subsystem dependencies.
+	public DrivetrainCommand(DrivetrainSubsystem _drivetrainSubsystem, DoubleSupplier _xSpeed, DoubleSupplier _zRotation) {
 		drivetrainSubsystem = _drivetrainSubsystem;
 		xSpeed = _xSpeed;
 		zRotation = _zRotation;

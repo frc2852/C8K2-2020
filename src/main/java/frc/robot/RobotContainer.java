@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
@@ -29,10 +30,14 @@ import frc.robot.subsystems.drive.GearboxSubsystem;
  */
 public class RobotContainer {
 
-	// Driver Controller
+	// Controllers
 	private XboxController DriverController = new XboxController(Constants.DRIVER_CONTROLLER);
 	private XboxController OperatorController = new XboxController(Constants.OPERATOR_CONTROLLER);
 
+	// private Joystick DriverController = new Joystick(Constants.DRIVER_CONTROLLER);
+	// private Joystick OperatorController = new Joystick(Constants.DRIVER_CONTROLLER);
+
+	// Driver Buttons
 	private Button DriveButtonX = new JoystickButton(DriverController, Constants.X_BUTTON);
 	private Button DriveButtonA = new JoystickButton(DriverController, Constants.A_BUTTON);
 	private Button DriveButtonB = new JoystickButton(DriverController, Constants.B_BUTTON);
@@ -44,6 +49,7 @@ public class RobotContainer {
 	private Trigger DriverButtonLeftTrigger = new JoystickButton(DriverController, Constants.LEFT_TRIGGER);
 	private Trigger DriverButtonRightTrigger = new JoystickButton(DriverController, Constants.RIGHT_TRIGGER);	
 
+	// Operator Buttons
 	private Button OperatorButtonX = new JoystickButton(OperatorController, Constants.X_BUTTON);
 	private Button OperatorButtonA = new JoystickButton(OperatorController, Constants.A_BUTTON);
 	private Button OperatorButtonB = new JoystickButton(OperatorController, Constants.B_BUTTON);
@@ -82,7 +88,7 @@ public class RobotContainer {
 		
 		// Driver Stick
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
-				() -> DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
+				() -> DriverController.getRawAxis(1), () -> -DriverController.getRawAxis(4)));
 
 		DriveButtonBack.whenPressed(driveLowGearboxCommand);
 		DriveButtonStart.whenPressed(driveHighGearboxCommand);

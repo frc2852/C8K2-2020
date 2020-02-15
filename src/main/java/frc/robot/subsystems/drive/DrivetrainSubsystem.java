@@ -7,13 +7,8 @@
 
 package frc.robot.subsystems.drive;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -26,7 +21,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
 	private WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.DRIVE_RIGHT_MASTER);
 	private WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.DRIVE_RIGHT_SLAVE);
-
 	
 	// private TalonSRX leftMaster = new TalonSRX(Constants.DRIVE_LEFT_MASTER);
 	// private TalonSRX leftSlave = new TalonSRX(Constants.DRIVE_LEFT_SLAVE);
@@ -55,7 +49,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
 		leftSlave.follow(leftMaster);
 		rightSlave.follow(rightMaster);
 
-		rightSlave.setInverted(true);
 		//Lights: right: green = forward
 		//Lights: right: red = reverse
 		//Lights: left: red = forward
@@ -76,9 +69,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
 		SmartDashboard.putNumber("zRotation: ", zRotation);
 
 		differentialDrive.arcadeDrive(xSpeed, zRotation);
-
-		// leftMaster.set(ControlMode.Velocity, 0.3);
-		// rightMaster.set(ControlMode.Velocity, 0.3);
 
 	}
 
