@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import frc.robot.commands.commandGroups.LoadShootFromTrenchCommandGroup;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
@@ -24,10 +24,12 @@ import frc.robot.commands.intake.IntakeForwardCommand;
 import frc.robot.commands.intake.IntakeReverseCommand;
 import frc.robot.commands.magazine.ManualLoadCommand;
 import frc.robot.commands.magazine.ManualReverseLoadCommand;
-import frc.robot.commands.pivot.ManualPivotDownCommand;
-import frc.robot.commands.pivot.ManualPivotUpCommand;
-import frc.robot.commands.shooter.ShooterFullSpeedCommand;
-import frc.robot.commands.shooter.ShooterReverseFullSpeedCommand;
+import frc.robot.commands.pivot.PivotClimbCommand;
+import frc.robot.commands.pivot.PivotColourWheelCommand;
+import frc.robot.commands.pivot.PivotPickUpCommand;
+import frc.robot.commands.pivot.PivotTrenchCommand;
+import frc.robot.commands.shooter.ShootFromColourWheelCommand;
+import frc.robot.commands.shooter.ShootFromTrenchCommand;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.MagazineSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
@@ -85,12 +87,14 @@ public class RobotContainer {
 	private final DriveLowGearboxCommand driveLowGearboxCommand = new DriveLowGearboxCommand(gearboxSubsystem);
 
 	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-	private final ShooterFullSpeedCommand shooterFullSpeedCommand = new ShooterFullSpeedCommand(shooterSubsystem);
-	private final ShooterReverseFullSpeedCommand shooterReverseFullSpeedCommand = new ShooterReverseFullSpeedCommand (shooterSubsystem);
+	private final ShootFromColourWheelCommand shootFromColourWheelCommand = new ShootFromColourWheelCommand(shooterSubsystem);
+	private final ShootFromTrenchCommand shootFromTrenchCommand = new ShootFromTrenchCommand(shooterSubsystem);
 
 	private final PivotSubsystem pivotSubsystem = new PivotSubsystem();
-	private final ManualPivotDownCommand manualPivotDownCommand = new ManualPivotDownCommand(pivotSubsystem);
-	private final ManualPivotUpCommand manualPivotUpCommand = new ManualPivotUpCommand(pivotSubsystem);
+	private final PivotClimbCommand pivotClimbCommand = new PivotClimbCommand(pivotSubsystem);
+	private final PivotTrenchCommand pivotTrenchCommand = new PivotTrenchCommand(pivotSubsystem);
+	private final PivotColourWheelCommand pivotColourWheelCommand = new PivotColourWheelCommand(pivotSubsystem);
+	private final PivotPickUpCommand pivotPickUpCommand = new PivotPickUpCommand(pivotSubsystem);
 
 	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	private final IntakeForwardCommand intakeForwardCommand = new IntakeForwardCommand(intakeSubsystem);
@@ -107,6 +111,9 @@ public class RobotContainer {
 	private final MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
 	private final ManualLoadCommand manualLoadCommand = new ManualLoadCommand(magazineSubsystem);
 	private final ManualReverseLoadCommand manualReverseLoadCommand = new ManualReverseLoadCommand(magazineSubsystem);
+
+	// Command Groups
+	private final LoadShootFromTrenchCommandGroup loadShootFromTrenchCommandGroup = new LoadShootFromTrenchCommandGroup(shootFromTrenchCommand, manualLoadCommand);
 	
 
 	/**
@@ -133,10 +140,10 @@ public class RobotContainer {
 
 		DriveButtonLeftJoystick.toggleWhenPressed(driveHighGearboxCommand);
 
-		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
-		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
+		DriveButtonRightBumper.whenPressed(shootFromColourWheelCommand);
+		DriveButtonLeftBumper.whenPressed(loadShootFromTrenchCommandGroup);
 
-		DriveButtonRightTrigger.whenActive(shooterFullSpeedCommand);
+		// DriveButtonRightTrigger.whenActive(shooterFullSpeedCommand);
 
 		DriveButtonA.whenPressed(intakeForwardCommand);
 		DriveButtonY.whenPressed(intakeReverseCommand);
@@ -147,14 +154,13 @@ public class RobotContainer {
 
 		// Operator Stick
 
-		OperatorButtonLeftBumper.whenPressed(manualPivotDownCommand);
-		OperatorButtonRightBumper.whenPressed(manualPivotUpCommand);
+		OperatorButtonA.whenPressed(pivotPickUpCommand);
+		OperatorButtonB.whenPressed(pivotColourWheelCommand);
+		OperatorButtonX.whenPressed(pivotTrenchCommand);
+		OperatorButtonY.whenPressed(pivotClimbCommand);
 
-		OperatorButtonA.whenPressed(maxInnerElevatorPositionCommand);
-		OperatorButtonX.whenPressed(maxOuterElevatorPositionCommand);
-		
-		OperatorButtonB.whenPressed(minInnerElevatorPositionCommand);
-		OperatorButtonY.whenPressed(minOuterElevatorPositionCommand);
+		OperatorButtonLeftTrigger.whenActive(intakeForwardCommand);
+		OperatorButtonRightTrigger.whenActive(intakeReverseCommand);
 
 	}
 }
