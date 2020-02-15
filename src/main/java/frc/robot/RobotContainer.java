@@ -43,9 +43,8 @@ public class RobotContainer {
 	private Button DriveButtonRightBumper = new JoystickButton(DriverController, Constants.RIGHT_BUMPER);
 	private Button DriveButtonBack = new JoystickButton(DriverController, Constants.BACK_BUTTON);
 	private Button DriveButtonStart = new JoystickButton(DriverController, Constants.START_BUTTON);
-	private Button DriveButtonLeftTrigger = new JoystickButton(DriverController, Constants.LEFT_TRIGGER);
-	private Button DriveButtonRightTrigger = new JoystickButton(DriverController, Constants.RIGHT_TRIGGER);
 
+	//Operator Controller
 	private XboxController OperatorController = new XboxController(Constants.OPERATOR_CONTROLLER);
 	private Button OperatorButtonX = new JoystickButton(OperatorController, Constants.X_BUTTON);
 	private Button OperatorButtonA = new JoystickButton(OperatorController, Constants.A_BUTTON);
@@ -55,8 +54,6 @@ public class RobotContainer {
 	private Button OperatorButtonRightBumper = new JoystickButton(OperatorController, Constants.RIGHT_BUMPER);
 	private Button OperatorButtonBack = new JoystickButton(OperatorController, Constants.BACK_BUTTON);
 	private Button OperatorButtonStart = new JoystickButton(OperatorController, Constants.START_BUTTON);
-	private Button OperatorButtonLeftTrigger = new JoystickButton(OperatorController, Constants.LEFT_TRIGGER);
-	private Button OperatorButtonRightTrigger = new JoystickButton(OperatorController, Constants.RIGHT_TRIGGER);
 
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 
@@ -100,7 +97,7 @@ public class RobotContainer {
 		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
 		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
 
-		DriveButtonRightTrigger.whileActiveContinuous(magFowardSpeedCommand);
-		DriveButtonLeftTrigger.whileActiveContinuous(magReverseSpeedCommand);
+		// DriveButtonRightTrigger.whileActiveContinuous(magFowardSpeedCommand);
+		// DriveButtonLeftTrigger.whileActiveContinuous(magReverseSpeedCommand);
 	}
 }

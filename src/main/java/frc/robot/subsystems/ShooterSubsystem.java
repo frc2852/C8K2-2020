@@ -22,12 +22,8 @@ public class ShooterSubsystem extends SubsystemBase {
 	private CANSparkMax shootLeftMotor = new CANSparkMax(Constants.SHOOT_LEFT_MOTOR, MotorType.kBrushless);
 
 	public ShooterSubsystem() {
-
 		shootRightMotor.restoreFactoryDefaults();
 		shootLeftMotor.restoreFactoryDefaults();
-
-		// shootMotorSlave.follow(shootMotorMaster);
-
 		shootRightMotor.setIdleMode(IdleMode.kCoast);
 		shootLeftMotor.setIdleMode(IdleMode.kCoast);
 
