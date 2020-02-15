@@ -16,7 +16,6 @@ public class MagFowardSpeedCommand extends CommandBase {
    */
   private final MagazineSubsystem magazineSubsystem;
   public MagFowardSpeedCommand(MagazineSubsystem _magazineSubsytem) {
-    // Use addRequirements() here to declare subsystem dependencies.
     magazineSubsystem = _magazineSubsytem;
     addRequirements(magazineSubsystem);
   }

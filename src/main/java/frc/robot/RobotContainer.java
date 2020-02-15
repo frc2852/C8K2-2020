@@ -97,7 +97,7 @@ public class RobotContainer {
 		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
 		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
 
-		// DriveButtonRightTrigger.whileActiveContinuous(magFowardSpeedCommand);
-		// DriveButtonLeftTrigger.whileActiveContinuous(magReverseSpeedCommand);
+		DriveButtonA.whenPressed(magFowardSpeedCommand);
+		DriveButtonB.whenPressed(magReverseSpeedCommand);
 	}
 }
