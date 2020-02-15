@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
@@ -31,7 +32,7 @@ import frc.robot.subsystems.drive.GearboxSubsystem;
 public class RobotContainer {
 
 	// Driver Controller
-	private Joystick DriverController = new Joystick(Constants.DRIVER_CONTROLLER);
+	private XboxController DriverController = new XboxController(Constants.DRIVER_CONTROLLER);
 	private Button DriveButtonX = new JoystickButton(DriverController, Constants.X_BUTTON);
 	private Button DriveButtonA = new JoystickButton(DriverController, Constants.A_BUTTON);
 	private Button DriveButtonB = new JoystickButton(DriverController, Constants.B_BUTTON);
