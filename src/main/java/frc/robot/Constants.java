@@ -33,13 +33,9 @@ public final class Constants {
     public static final int RIGHT_BUMPER = 6;
     public static final int BACK_BUTTON = 7;
     public static final int START_BUTTON = 8;
-<<<<<<< HEAD
     public static final int LEFT_JOYSTICK_BUTTON = 9;
     public static final int RIGHT_JOYSTICK_BUTTON = 10;
-=======
-    public static final int LEFT_THUMBSTICK_BUTTON = 9;
-    public static final int RIGHT_THUMBSTICK_BUTTON = 10;
->>>>>>> b497917bf3cdcd9bb2464bbe6119587863d44d68
+
 
     // Controller Trigger Mapping
     public static final int LEFT_TRIGGER = 2;
