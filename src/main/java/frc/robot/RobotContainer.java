@@ -1,4 +1,4 @@
-/*----------------------------------------------------------------------------*/
+/*-------------------------------------------------------on---------------------*/
 /* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
@@ -8,14 +8,17 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.MagFowardSpeedCommand;
+import frc.robot.commands.MagReverseSpeedCommand;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
 import frc.robot.commands.shooter.ShooterFullSpeedCommand;
 import frc.robot.commands.shooter.ShooterReverseFullSpeedCommand;
+import frc.robot.subsystems.MagazineSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.drive.GearboxSubsystem;
@@ -31,7 +34,7 @@ import frc.robot.subsystems.drive.GearboxSubsystem;
 public class RobotContainer {
 
 	// Driver Controller
-	private Joystick DriverController = new Joystick(Constants.DRIVER_CONTROLLER);
+	private XboxController DriverController = new XboxController(Constants.DRIVER_CONTROLLER);
 	private Button DriveButtonX = new JoystickButton(DriverController, Constants.X_BUTTON);
 	private Button DriveButtonA = new JoystickButton(DriverController, Constants.A_BUTTON);
 	private Button DriveButtonB = new JoystickButton(DriverController, Constants.B_BUTTON);
@@ -40,6 +43,20 @@ public class RobotContainer {
 	private Button DriveButtonRightBumper = new JoystickButton(DriverController, Constants.RIGHT_BUMPER);
 	private Button DriveButtonBack = new JoystickButton(DriverController, Constants.BACK_BUTTON);
 	private Button DriveButtonStart = new JoystickButton(DriverController, Constants.START_BUTTON);
+	private Button DriveButtonLeftTrigger = new JoystickButton(DriverController, Constants.LEFT_TRIGGER);
+	private Button DriveButtonRightTrigger = new JoystickButton(DriverController, Constants.RIGHT_TRIGGER);
+
+	private XboxController OperatorController = new XboxController(Constants.OPERATOR_CONTROLLER);
+	private Button OperatorButtonX = new JoystickButton(OperatorController, Constants.X_BUTTON);
+	private Button OperatorButtonA = new JoystickButton(OperatorController, Constants.A_BUTTON);
+	private Button OperatorButtonB = new JoystickButton(OperatorController, Constants.B_BUTTON);
+	private Button OperatorButtonY = new JoystickButton(OperatorController, Constants.Y_BUTTON);
+	private Button OperatorButtonLeftBumper = new JoystickButton(OperatorController, Constants.LEFT_BUMPER);
+	private Button OperatorButtonRightBumper = new JoystickButton(OperatorController, Constants.RIGHT_BUMPER);
+	private Button OperatorButtonBack = new JoystickButton(OperatorController, Constants.BACK_BUTTON);
+	private Button OperatorButtonStart = new JoystickButton(OperatorController, Constants.START_BUTTON);
+	private Button OperatorButtonLeftTrigger = new JoystickButton(OperatorController, Constants.LEFT_TRIGGER);
+	private Button OperatorButtonRightTrigger = new JoystickButton(OperatorController, Constants.RIGHT_TRIGGER);
 
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 
@@ -52,6 +69,10 @@ public class RobotContainer {
 	private final ShooterReverseFullSpeedCommand shooterReverseFullSpeedCommand = new ShooterReverseFullSpeedCommand(
 			shooterSubsystem);
 
+	private final MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
+	private final MagFowardSpeedCommand magFowardSpeedCommand = new MagFowardSpeedCommand(magazineSubsystem);
+	private final MagReverseSpeedCommand magReverseSpeedCommand = new MagReverseSpeedCommand(magazineSubsystem);
+
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
@@ -62,6 +83,7 @@ public class RobotContainer {
 
 	}
 
+	
 	/**
 	 * Use this method to define your button->command mappings. Buttons can be
 	 * created by instantiating a {@link GenericHID} or one of its subclasses
@@ -77,5 +99,8 @@ public class RobotContainer {
 
 		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
 		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
+
+		DriveButtonRightTrigger.whileActiveContinuous(magFowardSpeedCommand);
+		DriveButtonLeftTrigger.whileActiveContinuous(magReverseSpeedCommand);
 	}
 }
