@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class PivotSubsystem extends SubsystemBase {
+	//shooter is attached to elevator, pivots to shoot, go under trench
+	//and to climb
 
 	private final CANSparkMax pivotMotorLeft = new CANSparkMax(Constants.PIVOT_LEFT, MotorType.kBrushless);
 	private final CANSparkMax pivotMotorRight = new CANSparkMax(Constants.PIVOT_RIGHT, MotorType.kBrushless);
@@ -39,13 +41,20 @@ public class PivotSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
-	public void manualPivotUp() {
-		pivotMotorLeft.set(0.5);
-		pivotMotorRight.set(0.5);
+	public void pivotPickUp(){
+
 	}
 
-	public void manualPivotDown() {
-		pivotMotorLeft.set(-0.5);
-		pivotMotorRight.set(-0.5);
+	public void pivotColourWheel(){
+
 	}
+
+	public void pivotTrench(){
+
+	}
+
+	public void pivotClimb(){
+		
+	}
+
 }
