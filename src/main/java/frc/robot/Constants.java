@@ -27,12 +27,14 @@ public final class Constants {
     // Controller Button Mapping
     public static final int A_BUTTON = 1;
     public static final int B_BUTTON = 2;
-    public static final int X_BUTTON = 3;
+    public static final int X_BUTTON = 3; 
     public static final int Y_BUTTON = 4;
     public static final int LEFT_BUMPER = 5;
     public static final int RIGHT_BUMPER = 6;
     public static final int BACK_BUTTON = 7;
     public static final int START_BUTTON = 8;
+    public static final int LEFT_JOYSTICK_BUTTON = 9;
+    public static final int RIGHT_JOYSTICK_BUTTON = 10;
 
     // Controller Trigger Mapping
     public static final int LEFT_TRIGGER = 2;
@@ -40,7 +42,7 @@ public final class Constants {
 
     // FRC Devices
     public static final int PDP = 0;
-    public static final int PCM = 5;
+    public static final int PCM = 0;
 
     // Drive
     public static final int DRIVE_LEFT_MASTER = 1;
