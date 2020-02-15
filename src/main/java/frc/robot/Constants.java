@@ -14,7 +14,6 @@ package frc.robot;
  * purpose. All constants should be declared globally (i.e. public static). Do
  * not put anything functional in this class.
  *
- * <p>
  * It is advised to statically import this class (or one of its inner classes)
  * wherever the constants are needed, to reduce verbosity.
  */
@@ -34,6 +33,9 @@ public final class Constants {
     public static final int BACK_BUTTON = 7;
     public static final int START_BUTTON = 8;
 
+    //Controller Trigger Mapping
+    public static final int LEFT_TRIGGER = 2;
+    public static final int RIGHT_TRIGGER = 3;
     // FRC Devices
     public static final int PDP = 0;
     public static final int PCM = 5;
@@ -43,6 +45,7 @@ public final class Constants {
     public static final int DRIVE_LEFT_SLAVE = 2;
 
     public static final int DRIVE_RIGHT_MASTER = 3;
+    
     public static final int DRIVE_RIGHT_SLAVE = 4;
 
     // Shooter
@@ -61,6 +64,8 @@ public final class Constants {
     public static final int PI_WHEEL = 12;
     public static final int AUTO_LEVEL_MASTER = 13;
     public static final int AUTO_LEVEL_SLAVE = 14;
+
+    //Pivot
     public static final int PIVOT_LEFT = 15;
     public static final int PIVOT_RIGHT = 16;
 
