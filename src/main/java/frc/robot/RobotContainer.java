@@ -59,8 +59,10 @@ public class RobotContainer {
 	private Button DriveButtonRightBumper = new JoystickButton(DriverController, Constants.RIGHT_BUMPER);
 	private Button DriveButtonBack = new JoystickButton(DriverController, Constants.BACK_BUTTON);
 	private Button DriveButtonStart = new JoystickButton(DriverController, Constants.START_BUTTON);
-	private Trigger DriverButtonLeftTrigger = new JoystickButton(DriverController, Constants.LEFT_TRIGGER);
-	private Trigger DriverButtonRightTrigger = new JoystickButton(DriverController, Constants.RIGHT_TRIGGER);	
+	private Button DriveButtonRightJoystick = new JoystickButton(DriverController, Constants.RIGHT_JOYSTICK_BUTTON);
+	private Button DriveButtonLeftJoystick = new JoystickButton(DriverController, Constants.LEFT_JOYSTICK_BUTTON);
+	private Trigger DriveButtonLeftTrigger = new JoystickButton(DriverController, Constants.LEFT_TRIGGER);
+	private Trigger DriveButtonRightTrigger = new JoystickButton(DriverController, Constants.RIGHT_TRIGGER);	
 
 	private Button OperatorButtonX = new JoystickButton(OperatorController, Constants.X_BUTTON);
 	private Button OperatorButtonA = new JoystickButton(OperatorController, Constants.A_BUTTON);
@@ -70,6 +72,8 @@ public class RobotContainer {
 	private Button OperatorButtonRightBumper = new JoystickButton(OperatorController, Constants.RIGHT_BUMPER);
 	private Button OperatorButtonBack = new JoystickButton(OperatorController, Constants.BACK_BUTTON);
 	private Button OperatorButtonStart = new JoystickButton(OperatorController, Constants.START_BUTTON);
+	private Button OperatorButtonRightJoystick = new JoystickButton(DriverController, Constants.RIGHT_JOYSTICK_BUTTON);
+	private Button OperatorButtonLeftJoystick = new JoystickButton(DriverController, Constants.LEFT_JOYSTICK_BUTTON);
 	private Trigger OperatorButtonLeftTrigger = new JoystickButton(OperatorController, Constants.LEFT_TRIGGER);
 	private Trigger OperatorButtonRightTrigger = new JoystickButton(OperatorController, Constants.RIGHT_TRIGGER);
 
@@ -130,8 +134,15 @@ public class RobotContainer {
 		DriveButtonBack.whenPressed(driveLowGearboxCommand);
 		DriveButtonStart.whenPressed(driveHighGearboxCommand);
 
+		// DriveButtonRightJoystick.whenPressed(driveLowGearboxCommand);
+		DriveButtonRightJoystick.toggleWhenPressed(driveLowGearboxCommand, true);
+		DriveButtonRightJoystick.toggleWhenPressed(driveHighGearboxCommand, true);
+
+
 		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
 		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
+
+		DriveButtonRightTrigger.whenActive(shooterFullSpeedCommand);
 
 		DriveButtonA.whenPressed(intakeForwardCommand);
 		DriveButtonY.whenPressed(intakeReverseCommand);
