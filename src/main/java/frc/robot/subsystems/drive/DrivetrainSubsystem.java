@@ -44,6 +44,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 		leftSlave.follow(leftMaster);
 		rightSlave.follow(rightMaster);
 
+		leftSlave.setInverted(true);
+
 		rightSlave.setInverted(true);
 		//Lights: right: green = forward
 		//Lights: right: red = reverse
