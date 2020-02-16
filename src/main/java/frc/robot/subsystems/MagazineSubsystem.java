@@ -10,19 +10,22 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class MagazineSubsystem extends SubsystemBase { // loads and stores the balls
- 	private TalonSRX magazineMotor = new TalonSRX(Constants.MAGAZINE);
+ 	private CANSparkMax magazineMotor = new CANSparkMax(Constants.MAGAZINE, MotorType.kBrushless);
   	/**
    	* Creates a new MagazineSubsystem.
    	*/
 	public MagazineSubsystem() {
-		magazineMotor.configFactoryDefault();
+		magazineMotor.restoreFactoryDefaults();
 
-   		magazineMotor.setNeutralMode(NeutralMode.Brake);
+   		magazineMotor.setIdleMode(IdleMode.kBrake);
 
 	}
  	@Override
@@ -31,10 +34,14 @@ public class MagazineSubsystem extends SubsystemBase { // loads and stores the b
 	  }
 	  
 	public void manualLoad(){
-		magazineMotor.set(ControlMode.Velocity, 1);
+		magazineMotor.set(0.5);
 	}
 
 	public void manualReverseLoad(){ //magazine runs in reverse
-		magazineMotor.set(ControlMode.Velocity, -1);
+		magazineMotor.set(-0.25);
+	}
+
+	public void stopMagazine(){
+		magazineMotor.set(0);
 	}
 }
