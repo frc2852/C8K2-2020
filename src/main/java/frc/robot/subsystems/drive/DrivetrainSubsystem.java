@@ -9,8 +9,12 @@ package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.ColorSensorV3;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -22,11 +26,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
 	private WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.DRIVE_RIGHT_MASTER);
 	private WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.DRIVE_RIGHT_SLAVE);
 	
-	// private TalonSRX leftMaster = new TalonSRX(Constants.DRIVE_LEFT_MASTER);
-	// private TalonSRX leftSlave = new TalonSRX(Constants.DRIVE_LEFT_SLAVE);
+	private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
-	// private TalonSRX rightMaster = new TalonSRX(Constants.DRIVE_RIGHT_MASTER);
-	// private TalonSRX rightSlave = new TalonSRX(Constants.DRIVE_RIGHT_SLAVE);
+	private final ColorSensorV3 colourSensor = new ColorSensorV3(i2cPort);
 
 	private DifferentialDrive differentialDrive;
 
@@ -62,6 +64,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
+		Color detectColour = colourSensor.getColor();
+		double rawIR = colourSensor.getIR(); //gets binary value for infrared
+	
+		SmartDashboard.putNumber("Red", detectColour.red);
+		SmartDashboard.putNumber("Green", detectColour.green);
+		SmartDashboard.putNumber("Blue", detectColour.blue);
+		// SmartDashboard.putNumber("Yellow", detectColour.kYellow);
+		SmartDashboard.putNumber("IR", rawIR);
 	}
 
 	public void arcadeDrive(double xSpeed, double zRotation) {
