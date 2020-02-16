@@ -5,6 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+//TODO: RENAME,this is not autonomous only
+
 package frc.robot.subsystems.elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -36,7 +38,11 @@ public class AutoLevelSubsystem extends SubsystemBase {
 	  	// This method will be called once per scheduler run
 	}
 
-	public void autoLevel(){
-		//TODO: ????????????????
+	public void autoLevelManualLeft(){
+		autoLevelMasterMotor.set(ControlMode.Velocity, -1);
+	}
+
+	public void autoLevelManualRight(){
+		autoLevelMasterMotor.set(ControlMode.Velocity, 1);
 	}
 }
