@@ -28,9 +28,6 @@ public class ColourWheelSubsystem extends SubsystemBase {
 
 	private final ColorSensorV3 colourSensor = new ColorSensorV3(i2cPort);
 
-	Color detectColour = colourSensor.getColor();
-	double rawIR = colourSensor.getIR(); //gets binary value for infrared
-
 	String gameData = Robot.colourWheelData;
 
   	/**
@@ -84,14 +81,15 @@ public class ColourWheelSubsystem extends SubsystemBase {
 
   	@Override
   	public void periodic() {
-		  // This method will be called once per scheduler run
+		// This method will be called once per scheduler run		  
+		Color detectColour = colourSensor.getColor();
+		double rawIR = colourSensor.getIR(); //gets binary value for infrared
 		
-		  SmartDashboard.putNumber("hello world", 1);
-		  SmartDashboard.putNumber("Red", detectColour.red);
-		  SmartDashboard.putNumber("Green", detectColour.green);
-		  SmartDashboard.putNumber("Blue", detectColour.blue);
-		  SmartDashboard.putNumber("IR", rawIR);
-	  }
+		SmartDashboard.putNumber("Red", detectColour.red);
+		SmartDashboard.putNumber("Green", detectColour.green);
+		SmartDashboard.putNumber("Blue", detectColour.blue);
+		SmartDashboard.putNumber("IR", rawIR);
+	}
 	  
 	public void autoPositionColourWheel(){
 		if(gameData.length() > 0){
