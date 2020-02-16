@@ -96,23 +96,17 @@ public class ShooterSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
-	public void shooterFullSpeed() {
-		shootRightMotor.set(1);
-		shootLeftMotor.set(1);
-	}
-
-	public void shooterReverse() {
-		shootRightMotor.set(-1);
-		shootLeftMotor.set(-1);
-	}
-
 	public void shootFromTrench(){
-		shootLeftMotor.set(0.5);
-		shootRightMotor.set(0.5);
+		shootLeftMotor.set(-0.3);
+		shootRightMotor.set(-0.3);
 	}
 
 	public void shootFromColourWheel(){
-		shootLeftMotor.set(0.8);
-		shootRightMotor.set(0.8);
+		shootLeftMotor.set(-0.5);
+		shootRightMotor.set(-0.5);
+	}
+	public void stopShooter(){
+		shootLeftMotor.set(0);
+		shootRightMotor.set(0);
 	}
 }
