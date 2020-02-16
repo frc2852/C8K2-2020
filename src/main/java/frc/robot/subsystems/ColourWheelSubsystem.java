@@ -12,18 +12,34 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.ColorSensorV3;
+
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class ColourWheelSubsystem extends SubsystemBase {
 	private final TalonSRX colourWheelMotor = new TalonSRX(Constants.PI_WHEEL);
+
+	private final I2C.Port i2cPort = I2C.Port.kOnboard;
+
+	private final ColorSensorV3 colourSensor = new ColorSensorV3(i2cPort);
+
+	Color detectColour = colourSensor.getColor();
+	double rawIR = colourSensor.getIR(); //gets binary value for infrared
+
 	String gameData = Robot.colourWheelData;
 
   	/**
   	 * Creates a new ColourWheelSubsystem.
   	 */
-  	public ColourWheelSubsystem() {
+  	public ColourWheelSubsystem() { 
+
+
+
 		colourWheelMotor.configFactoryDefault();
 
 		colourWheelMotor.setNeutralMode(NeutralMode.Brake);
@@ -62,12 +78,19 @@ public class ColourWheelSubsystem extends SubsystemBase {
 		/* Zero the sensor */
 		colourWheelMotor.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
+
 		
   	}
 
   	@Override
   	public void periodic() {
-  		// This method will be called once per scheduler run
+		  // This method will be called once per scheduler run
+		
+		  SmartDashboard.putNumber("hello world", 1);
+		  SmartDashboard.putNumber("Red", detectColour.red);
+		  SmartDashboard.putNumber("Green", detectColour.green);
+		  SmartDashboard.putNumber("Blue", detectColour.blue);
+		  SmartDashboard.putNumber("IR", rawIR);
 	  }
 	  
 	public void autoPositionColourWheel(){
