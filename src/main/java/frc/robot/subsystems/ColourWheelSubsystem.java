@@ -88,6 +88,8 @@ public class ColourWheelSubsystem extends SubsystemBase {
 		SmartDashboard.putNumber("Red", detectColour.red);
 		SmartDashboard.putNumber("Green", detectColour.green);
 		SmartDashboard.putNumber("Blue", detectColour.blue);
+		// SmartDashboard.putNumber("Yellow", detectColour.);
+		//TODO: yellow = red/green equal (if statement?)
 		SmartDashboard.putNumber("IR", rawIR);
 	}
 	  
