@@ -13,10 +13,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
 // import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import frc.robot.commands.GetColourCommand;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
+import frc.robot.subsystems.ColourWheelSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.drive.GearboxSubsystem;
 
@@ -72,6 +73,9 @@ public class RobotContainer {
 	private final DriveHighGearboxCommand driveHighGearboxCommand = new DriveHighGearboxCommand(gearboxSubsystem);
 	private final DriveLowGearboxCommand driveLowGearboxCommand = new DriveLowGearboxCommand(gearboxSubsystem);
 
+	private final ColourWheelSubsystem colourWheelSubsystem = new ColourWheelSubsystem();
+	private final GetColourCommand getColourCommand = new GetColourCommand(colourWheelSubsystem);
+
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
@@ -95,6 +99,8 @@ public class RobotContainer {
 				() -> DriverController.getRawAxis(1), () -> -DriverController.getRawAxis(4)));
 
 		DriveButtonLeftJoystick.toggleWhenPressed(driveHighGearboxCommand);
+
+		DriveButtonA.whenPressed(getColourCommand);
 		
 		// Operator Stick
 
