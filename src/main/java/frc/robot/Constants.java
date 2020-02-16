@@ -36,7 +36,13 @@ public final class Constants {
     public static final int LEFT_JOYSTICK_BUTTON = 9;
     public static final int RIGHT_JOYSTICK_BUTTON = 10;
 
-    //Controller Trigger Mapping
+    // Controller POV Mapping
+    public final static int PovUp = 0;
+	public final static int PovRight = 90;
+	public final static int PovDown = 180;
+	public final static int PovLeft = 270;
+
+    // Controller Trigger Mapping
     public static final int LEFT_TRIGGER = 2;
     public static final int RIGHT_TRIGGER = 3;
 
