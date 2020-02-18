@@ -102,8 +102,8 @@ public class ShooterSubsystem extends SubsystemBase {
 	}
 
 	public void shootFromColourWheel(){
-		shootLeftMotor.set(-0.5);
-		shootRightMotor.set(-0.5);
+		shootLeftMotor.set(0.5);
+		shootRightMotor.set(0.5);
 	}
 	public void stopShooter(){
 		shootLeftMotor.set(0);

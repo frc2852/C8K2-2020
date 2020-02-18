@@ -7,9 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -34,7 +31,7 @@ public class MagazineSubsystem extends SubsystemBase { // loads and stores the b
 	  }
 	  
 	public void manualLoad(){
-		magazineMotor.set(0.5);
+		magazineMotor.set(0.30);
 	}
 
 	public void manualReverseLoad(){ //magazine runs in reverse

@@ -149,6 +149,7 @@ public class RobotContainer {
 		gearboxSubsystem.setDefaultCommand(driveLowGearboxCommand);
 		shooterSubsystem.setDefaultCommand(stopShooterCommand);
 		magazineSubsystem.setDefaultCommand(stopMagazineCommand);
+		pivotSubsystem.setDefaultCommand(pivotPickUpCommand);
 
 	}
 
@@ -181,6 +182,7 @@ public class RobotContainer {
 		DriveDpadRight.whenPressed(autoLevelManualRightCommand);
 		DriveDpadLeft.whenPressed(autoLevelManualRightCommand);
 
+		DriveDpadUp.toggleWhenPressed(pivotColourWheelCommand);
 
 		// Operator Stick
 

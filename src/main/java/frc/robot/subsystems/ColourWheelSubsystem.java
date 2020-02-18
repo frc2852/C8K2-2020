@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.ColorSensorV3;
+// import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,7 +26,7 @@ public class ColourWheelSubsystem extends SubsystemBase {
 
 	private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
-	private final ColorSensorV3 colourSensor = new ColorSensorV3(i2cPort);
+	// private final ColorSensorV3 colourSensor = new ColorSensorV3(i2cPort);
 
 	String gameData = Robot.colourWheelData;
 
@@ -82,15 +82,15 @@ public class ColourWheelSubsystem extends SubsystemBase {
   	@Override
   	public void periodic() {
 		// This method will be called once per scheduler run		  
-		Color detectColour = colourSensor.getColor();
-		double rawIR = colourSensor.getIR(); //gets binary value for infrared
+		// Color detectColour = colourSensor.getColor();
+		// double rawIR = colourSensor.getIR(); //gets binary value for infrared
 		
-		SmartDashboard.putNumber("Red", detectColour.red);
-		SmartDashboard.putNumber("Green", detectColour.green);
-		SmartDashboard.putNumber("Blue", detectColour.blue);
+		// SmartDashboard.putNumber("Red", detectColour.red);
+		// SmartDashboard.putNumber("Green", detectColour.green);
+		// SmartDashboard.putNumber("Blue", detectColour.blue);
 		// SmartDashboard.putNumber("Yellow", detectColour.);
 		//TODO: yellow = red/green equal (if statement?)
-		SmartDashboard.putNumber("IR", rawIR);
+		// SmartDashboard.putNumber("IR", rawIR);
 	}
 	  
 	public void autoPositionColourWheel(){

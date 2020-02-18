@@ -18,21 +18,23 @@ public class PivotSubsystem extends SubsystemBase {
 	//shooter is attached to elevator, pivots to shoot, go under trench
 	//and to climb
 
-	private final CANSparkMax pivotMotorLeft = new CANSparkMax(Constants.PIVOT_LEFT, MotorType.kBrushless);
-	private final CANSparkMax pivotMotorRight = new CANSparkMax(Constants.PIVOT_RIGHT, MotorType.kBrushless);
+	private final CANSparkMax pivotMotorMaster = new CANSparkMax(Constants.PIVOT_LEFT, MotorType.kBrushless);
+	private final CANSparkMax pivotMotorSlave = new CANSparkMax(Constants.PIVOT_RIGHT, MotorType.kBrushless);
 
 	/**
 	 * Creates a new PivotSubsystem.
 	 */
 	public PivotSubsystem() {
 
-		pivotMotorLeft.restoreFactoryDefaults();
-		pivotMotorRight.restoreFactoryDefaults();
+		pivotMotorMaster.restoreFactoryDefaults();
+		pivotMotorSlave.restoreFactoryDefaults();
 
-		pivotMotorRight.setInverted(true);
+		// pivotMotorTwo.setInverted(true);
 
-		pivotMotorRight.setIdleMode(IdleMode.kBrake);
-		pivotMotorLeft.setIdleMode(IdleMode.kBrake);
+		pivotMotorMaster.setIdleMode(IdleMode.kBrake);
+		pivotMotorSlave.setIdleMode(IdleMode.kBrake);
+
+		pivotMotorSlave.follow(pivotMotorMaster);
 
 	}
 
@@ -42,11 +44,12 @@ public class PivotSubsystem extends SubsystemBase {
 	}
 
 	public void pivotPickUp(){
-
+		pivotMotorSlave.set(0);
 	}
 
 	public void pivotColourWheel(){
-
+		//TODO: change
+		pivotMotorMaster.set(0.5);
 	}
 
 	public void pivotTrench(){
