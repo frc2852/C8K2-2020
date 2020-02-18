@@ -49,10 +49,11 @@ public class PivotSubsystem extends SubsystemBase {
 
 	public void pivotColourWheel(){
 		//TODO: change
-		pivotMotorMaster.set(0.5);
+		pivotMotorMaster.set(0.2);
 	}
 
 	public void pivotTrench(){
+		pivotMotorMaster.set(-0.2);
 
 	}
 

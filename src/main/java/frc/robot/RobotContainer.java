@@ -182,7 +182,8 @@ public class RobotContainer {
 		DriveDpadRight.whenPressed(autoLevelManualRightCommand);
 		DriveDpadLeft.whenPressed(autoLevelManualRightCommand);
 
-		DriveDpadUp.toggleWhenPressed(pivotColourWheelCommand);
+		// DriveDpadUp.toggleWhenPressed(pivotColourWheelCommand); //up manual
+		// DriveDpadDown.toggleWhenPressed(pivotTrenchCommand); //down manual
 
 		// Operator Stick
 
