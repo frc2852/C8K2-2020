@@ -174,10 +174,10 @@ public class RobotContainer {
 		DriveButtonLeftBumper.toggleWhenPressed(shootFromColourWheelCommand);
 
 		DriveButtonA.whenPressed(intakeForwardCommand);
-		DriveButtonY.whenPressed(intakeReverseCommand);
+		DriveButtonX.whenPressed(intakeReverseCommand);
 
 		DriveButtonB.toggleWhenPressed(manualLoadCommand);
-		DriveButtonX.toggleWhenPressed(manualReverseLoadCommand);
+		DriveButtonY.toggleWhenPressed(manualReverseLoadCommand);	
 
 		DriveDpadRight.whenPressed(autoLevelManualRightCommand);
 		DriveDpadLeft.whenPressed(autoLevelManualRightCommand);

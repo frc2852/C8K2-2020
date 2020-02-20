@@ -40,7 +40,7 @@ public final class Constants {
     public final static int PovUp = 0;
 	public final static int PovRight = 90;
 	public final static int PovDown = 180;
-	public final static int PovLeft = 270;
+	public final static int PovLeft = 270; 
 
     // Controller Trigger Mapping
     public static final int LEFT_TRIGGER = 2;

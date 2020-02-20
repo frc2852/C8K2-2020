@@ -94,16 +94,16 @@ public class ShooterSubsystem extends SubsystemBase {
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
+	} 
+//keep shootFromTrench speed at -0.60
+	public void shootFromTrench(){  // Right Bumper
+		shootLeftMotor.set(-0.60);
+		shootRightMotor.set(-0.60);
 	}
-
-	public void shootFromTrench(){
-		shootLeftMotor.set(-0.3);
-		shootRightMotor.set(-0.3);
-	}
-
-	public void shootFromColourWheel(){
-		shootLeftMotor.set(0.5);
-		shootRightMotor.set(0.5);
+//shootFromColourWheel speed is not yet set to proper speed because it hasn't been tested
+	public void shootFromColourWheel(){  // Left Bumper
+		shootLeftMotor.set(-0.59);
+		shootRightMotor.set(-0.59);
 	}
 	public void stopShooter(){
 		shootLeftMotor.set(0);

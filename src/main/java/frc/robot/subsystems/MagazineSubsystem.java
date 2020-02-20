@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
+ 
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
@@ -30,8 +30,8 @@ public class MagazineSubsystem extends SubsystemBase { // loads and stores the b
     	// This method will be called once per scheduler run
 	  }
 	  
-	public void manualLoad(){
-		magazineMotor.set(0.30);
+	public void manualLoad(){  // B
+		magazineMotor.set(0.40);
 	}
 
 	public void manualReverseLoad(){ //magazine runs in reverse
@@ -41,4 +41,5 @@ public class MagazineSubsystem extends SubsystemBase { // loads and stores the b
 	public void stopMagazine(){
 		magazineMotor.set(0);
 	}
+
 }
