@@ -36,10 +36,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 		rightSlave.restoreFactoryDefaults();
 
 
-		leftMaster.setIdleMode(IdleMode.kBrake);
-		leftSlave.setIdleMode(IdleMode.kBrake);
-		rightMaster.setIdleMode(IdleMode.kBrake);
-		rightSlave.setIdleMode(IdleMode.kBrake);
+		leftMaster.setIdleMode(IdleMode.kCoast);
+		leftSlave.setIdleMode(IdleMode.kCoast);
+		rightMaster.setIdleMode(IdleMode.kCoast);
+		rightSlave.setIdleMode(IdleMode.kCoast);
 
 		leftSlave.follow(leftMaster);
 		rightSlave.follow(rightMaster);

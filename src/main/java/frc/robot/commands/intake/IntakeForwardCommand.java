@@ -5,22 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-public class ShooterFullSpeedCommand extends CommandBase {
-	
+public class IntakeForwardCommand extends CommandBase {
+	private IntakeSubsystem intakeSubsystem;
+
 	/**
-	 * Creates a new ShooterFullSpeedCommand.
+	 * Creates a new IntakeForwardCommand.
 	 */
-	private final ShooterSubsystem shooterSubsystem;
-
-	public ShooterFullSpeedCommand(ShooterSubsystem _shooterSubsystem) {
-		// Use addRequirements() here to declare subsystem dependencies.
-		shooterSubsystem = _shooterSubsystem;
-		addRequirements(shooterSubsystem);
+	public IntakeForwardCommand(IntakeSubsystem _intakeSubsystem) {
+		intakeSubsystem = _intakeSubsystem;
+		addRequirements(intakeSubsystem);
 	}
 
 	// Called when the command is initially scheduled.
@@ -31,6 +29,7 @@ public class ShooterFullSpeedCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		intakeSubsystem.intakeForward();
 	}
 
 	// Called once the command ends or is interrupted.
