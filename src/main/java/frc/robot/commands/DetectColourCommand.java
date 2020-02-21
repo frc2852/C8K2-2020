@@ -10,12 +10,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ColourWheelSubsystem;
 
-public class GetColourCommand extends CommandBase {
+public class DetectColourCommand extends CommandBase {
   private ColourWheelSubsystem colourWheelSubsystem;
   /**
    * Creates a new GetColourCommand.
    */
-  public GetColourCommand(ColourWheelSubsystem _colourWheelSubsystem) {
+  public DetectColourCommand(ColourWheelSubsystem _colourWheelSubsystem) {
     colourWheelSubsystem = _colourWheelSubsystem;
     addRequirements(colourWheelSubsystem);
   }
@@ -28,7 +28,7 @@ public class GetColourCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    colourWheelSubsystem.getColour();
+    colourWheelSubsystem.detectColour();
   }
 
   // Called once the command ends or is interrupted.

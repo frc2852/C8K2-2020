@@ -8,12 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
+// import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
 // import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.GetColourCommand;
+import frc.robot.commands.DetectColourCommand;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
@@ -74,7 +74,7 @@ public class RobotContainer {
 	private final DriveLowGearboxCommand driveLowGearboxCommand = new DriveLowGearboxCommand(gearboxSubsystem);
 
 	private final ColourWheelSubsystem colourWheelSubsystem = new ColourWheelSubsystem();
-	private final GetColourCommand getColourCommand = new GetColourCommand(colourWheelSubsystem);
+	private final DetectColourCommand getColourCommand = new DetectColourCommand(colourWheelSubsystem);
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.

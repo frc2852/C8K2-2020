@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -22,89 +23,68 @@ public class ColourWheelSubsystem extends SubsystemBase {
 
 	private final ColorSensorV3 colourSensor = new ColorSensorV3(i2cPort);
 
-	private final Color kBlueTarget;
-	private final Color kGreenTarget;
-	private final Color kRedTarget;
-	private final Color kYellowTarget;
+	private Color kBlueTarget;
+	private Color kGreenTarget;
+	private Color kRedTarget;
+	private Color kYellowTarget;
 
 	private String colourString;
+
+	private ColorMatchResult match;
+
+	private ColorMatch colourMatcher = new ColorMatch();
 
 	/**
 	 * Creates a new ColourWheelSubsystem.
 	 */
 	public ColourWheelSubsystem() {
 
-		double rawIR = colourSensor.getIR(); // gets binary value for infrared
+		// double rawIR = colourSensor.getIR(); // gets binary value for infrared
+		kBlueTarget = ColorMatch.makeColor(0.12, 0.42, 0.46);
+		kGreenTarget = ColorMatch.makeColor(0.161, 0.58, 0.258);
+		kRedTarget = ColorMatch.makeColor(0.53, 0.338, 0.1318);
+		kYellowTarget = ColorMatch.makeColor(0.318, 0.559, 0.1215);
 
-		kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-		kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-		kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-		kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
-
+		colourMatcher.addColorMatch(kBlueTarget);
+		colourMatcher.addColorMatch(kGreenTarget);
+		colourMatcher.addColorMatch(kRedTarget);
+		colourMatcher.addColorMatch(kYellowTarget); 
 	}
 
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
-		Color detectColour = colourSensor.getColor();
-		double rawIR = colourSensor.getIR(); // gets binary value for infrared
+		// Color detectedColour = colourSensor.getColor();
+		// double rawIR = colourSensor.getIR(); // gets binary value for infrared
 
-		SmartDashboard.putNumber("Red", detectColour.red);
-		SmartDashboard.putNumber("Green", detectColour.green);
-		SmartDashboard.putNumber("Blue", detectColour.blue);
-		// SmartDashboard.putNumber("Yellow", detectColour.kYellow);
-		SmartDashboard.putNumber("IR", rawIR);
-	}
-
-	public void red() {
-		Color detectColour = colourSensor.getColor();
-
-		if (detectColour.red > detectColour.blue && detectColour.red > detectColour.green) {
-			SmartDashboard.putBoolean("Red", true);
+		Color detectedColour = colourSensor.getColor();
+		match = colourMatcher.matchClosestColor(detectedColour);
+		if (match.color == kBlueTarget) {
+			colourString = "Blue";
+		} else if (match.color == kRedTarget) {
+			colourString = "Red";
+		} else if (match.color == kGreenTarget) {
+			colourString = "Green";
+		} else if (match.color == kYellowTarget) {
+			colourString = "Yellow";
 		} else {
-			SmartDashboard.putBoolean("Red", false);
+			colourString = "unknown";
 		}
 
-	}
-
-	public void green() {
-		Color detectColour = colourSensor.getColor();
-
-		if (detectColour.green > detectColour.blue && detectColour.green > detectColour.red) {
-			SmartDashboard.putBoolean("Green", true);
-		} else {
-			SmartDashboard.putBoolean("Green", false);
-		}
+		SmartDashboard.putNumber("Red", detectedColour.red);
+		SmartDashboard.putNumber("Green", detectedColour.green);
+		SmartDashboard.putNumber("Blue", detectedColour.blue);
+		SmartDashboard.putNumber("Confidence", match.confidence);
+		SmartDashboard.putString("Detected Color", colourString);
 
 	}
 
-	public void blue() {
-		Color detectColour = colourSensor.getColor();
-
-		if (detectColour.blue > detectColour.red && detectColour.blue > detectColour.green) {
-			SmartDashboard.putBoolean("Blue", true);
-		} else {
-			SmartDashboard.putBoolean("Blue", false);
-		}
+	public void detectColour() {
 
 	}
 
-	public void yellow() {
-		Color detectColour = colourSensor.getColor();
-
-		if (detectColour.red > detectColour.blue && detectColour.green > detectColour.blue) {
-			SmartDashboard.putBoolean("Yellow", true);
-		} else {
-			SmartDashboard.putBoolean("Yellow", false);
-		}
-
-	}
-
-	public void getColour() {
-		Color detectColour = colourSensor.getColor();
-
-
-
-	}
+	// public void zeroColourSensor(){
+	// SmartDashboard.putNumber("red", 0);
+	// }
 
 }
