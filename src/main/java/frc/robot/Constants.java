@@ -76,7 +76,7 @@ public final class Constants {
     public static final int PIVOT_LEFT = 15;
     public static final int PIVOT_RIGHT = 16;
 
-    //Mag encoder stuff
+    //Mag encoder
 	public static final int kTimeoutMs = 30;
     public final static Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
     public static final int kSlotIdx = 0;
