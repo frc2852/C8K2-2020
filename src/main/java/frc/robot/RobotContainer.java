@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
-// import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.DetectColourCommand;
+// import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
@@ -34,9 +34,6 @@ public class RobotContainer {
 	// Controllers
 	private XboxController DriverController = new XboxController(Constants.DRIVER_CONTROLLER);
 	private XboxController OperatorController = new XboxController(Constants.OPERATOR_CONTROLLER);
-
-	// private Joystick DriverController = new Joystick(Constants.DRIVER_CONTROLLER);
-	// private Joystick OperatorController = new Joystick(Constants.DRIVER_CONTROLLER);
 
 	// Driver Buttons
 	private Button DriveButtonX = new JoystickButton(DriverController, Constants.X_BUTTON);
