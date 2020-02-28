@@ -55,4 +55,8 @@ public final class Constants {
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
     public static final int DRIVE_GEAR_BOX_CLOSE = 1;
+
+    // Encoders
+    public static final int kRIGHT_ENCODER_PORT = 0;
+    public static final int kLEFT_ENCODER_PORT = 1;
 }
