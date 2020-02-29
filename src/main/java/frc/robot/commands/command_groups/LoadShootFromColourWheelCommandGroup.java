@@ -7,7 +7,6 @@
 
 package frc.robot.commands.command_groups;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.magazine.ManualLoadCommand;
 import frc.robot.commands.shooter.ShootFromColourWheelCommand;
@@ -25,8 +24,8 @@ public class LoadShootFromColourWheelCommandGroup extends ParallelCommandGroup {
 
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    // addCommands(shootFromColourWheelCommand);
+    addCommands(shootFromColourWheelCommand);
     // Timer.delay(2);
-    // addCommands(manualLoadCommand);
+    addCommands(manualLoadCommand);
   }
 }
