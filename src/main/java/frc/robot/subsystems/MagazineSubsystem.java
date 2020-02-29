@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
- 
+
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
@@ -14,31 +14,33 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class MagazineSubsystem extends SubsystemBase { // loads and stores the balls
- 	private CANSparkMax magazineMotor = new CANSparkMax(Constants.MAGAZINE, MotorType.kBrushless);
-  	/**
-   	* Creates a new MagazineSubsystem.
-   	*/
+public class MagazineSubsystem extends SubsystemBase {
+	private CANSparkMax magazineMotor = new CANSparkMax(Constants.MAGAZINE, MotorType.kBrushless);
+
+	/**
+	 * Creates a new MagazineSubsystem.
+	 */
 	public MagazineSubsystem() {
 		magazineMotor.restoreFactoryDefaults();
-
-   		magazineMotor.setIdleMode(IdleMode.kBrake);
+		magazineMotor.setIdleMode(IdleMode.kBrake);
+		magazineMotor.burnFlash();
 
 	}
- 	@Override
-  	public void periodic() {
-    	// This method will be called once per scheduler run
-	  }
-	  
-	public void manualLoad(){  // B
+
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
+
+	public void manualLoad() {
 		magazineMotor.set(0.40);
 	}
 
-	public void manualReverseLoad(){ //magazine runs in reverse
+	public void manualReverseLoad() {
 		magazineMotor.set(-0.25);
 	}
 
-	public void stopMagazine(){
+	public void stopMagazine() {
 		magazineMotor.set(0);
 	}
 

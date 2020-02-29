@@ -29,28 +29,25 @@ public class DrivetrainSubsystem extends SubsystemBase {
 	 * Creates a new DrivetrainSubsystem.
 	 */
 	public DrivetrainSubsystem() {
-
 		leftMaster.restoreFactoryDefaults();
 		leftSlave.restoreFactoryDefaults();
 		rightMaster.restoreFactoryDefaults();
 		rightSlave.restoreFactoryDefaults();
 
-
-		leftMaster.setIdleMode(IdleMode.kCoast);
-		leftSlave.setIdleMode(IdleMode.kCoast);
-		rightMaster.setIdleMode(IdleMode.kCoast);
-		rightSlave.setIdleMode(IdleMode.kCoast);
+		leftMaster.setIdleMode(IdleMode.kBrake);
+		leftSlave.setIdleMode(IdleMode.kBrake);
+		rightMaster.setIdleMode(IdleMode.kBrake);
+		rightSlave.setIdleMode(IdleMode.kBrake);
 
 		leftSlave.follow(leftMaster);
 		rightSlave.follow(rightMaster);
 
 		rightSlave.setInverted(true);
-		//Lights: right: green = forward
-		//Lights: right: red = reverse
-		//Lights: left: red = forward
-		//Lights: left: green = reverse
-		//when trouble shooting, don't rely on lights to tell direction
 
+		leftMaster.burnFlash();
+		leftSlave.burnFlash();
+		rightMaster.burnFlash();
+		rightSlave.burnFlash();
 		differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
 
 	}
@@ -63,8 +60,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
 	public void arcadeDrive(double xSpeed, double zRotation) {
 		SmartDashboard.putNumber("xSpeed: ", xSpeed);
 		SmartDashboard.putNumber("zRotation: ", zRotation);
-
 		differentialDrive.arcadeDrive(xSpeed, zRotation);
-
 	}
-} 
+}

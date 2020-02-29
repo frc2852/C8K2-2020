@@ -110,8 +110,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 
 		colourWheelData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		
+
 	}
 
 	@Override

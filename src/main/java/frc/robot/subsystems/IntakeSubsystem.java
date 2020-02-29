@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -33,10 +32,10 @@ public class IntakeSubsystem extends SubsystemBase {
 	}
 
 	public void intakeForward() {
-		intakeMotor.set(ControlMode.Velocity, 1);
+		// intakeMotor.set(ControlMode.Velocity, 1);
 	}
 
 	public void intakeReverse() {
-		intakeMotor.set(ControlMode.Velocity, -1);
+		// intakeMotor.set(ControlMode.Velocity, -1);
 	}
 }

@@ -18,19 +18,17 @@ import frc.robot.Constants;
 
 public class ElevatorSubsystem extends SubsystemBase {
 
-  private final TalonSRX elevatorMotor = new TalonSRX(Constants.OUTER_ELEVATOR);
-  
-  /**
-   * Creates a new ElevatorSubsystem.
-   */
-  public ElevatorSubsystem() {
-    elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+	private final TalonSRX elevatorMotor = new TalonSRX(Constants.LEFT_ELEVATOR);
 
-    elevatorMotor.configFactoryDefault();
+	/**
+	 * Creates a new ElevatorSubsystem.
+	 */
+	public ElevatorSubsystem() {
+		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx,
+				Constants.kTimeoutMs);
 
-    elevatorMotor.setNeutralMode(NeutralMode.Brake);
-
-
+		elevatorMotor.configFactoryDefault();
+		elevatorMotor.setNeutralMode(NeutralMode.Brake);
 
 		/**
 		 * Configure Talon SRX Output and Sesnor direction accordingly Invert Motor to
@@ -63,20 +61,18 @@ public class ElevatorSubsystem extends SubsystemBase {
 
 		/* Zero the sensor */
 		elevatorMotor.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+	}
 
-    
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
 
-  }
+	public void elevatorMaxPosition() {
+		// elevatorMotor.set(ControlMode.MotionMagic, 100);
+	}
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-  public void elevatorMaxPosition(){
-    elevatorMotor.set(ControlMode.MotionMagic, 100);
-  }
-
-  public void elevatorMinimumPosition(){
-    elevatorMotor.set(ControlMode.MotionMagic, 0);
-  }
+	public void elevatorMinimumPosition() {
+		// elevatorMotor.set(ControlMode.MotionMagic, 0);
+	}
 }

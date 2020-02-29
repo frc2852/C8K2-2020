@@ -15,27 +15,23 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class PivotSubsystem extends SubsystemBase {
-	//shooter is attached to elevator, pivots to shoot, go under trench
-	//and to climb
-
-	private final CANSparkMax pivotMotorMaster = new CANSparkMax(Constants.PIVOT_LEFT, MotorType.kBrushless);
-	private final CANSparkMax pivotMotorSlave = new CANSparkMax(Constants.PIVOT_RIGHT, MotorType.kBrushless);
+	private final CANSparkMax pivotMotorMaster = new CANSparkMax(Constants.PIVOT_MASTER, MotorType.kBrushless);
+	private final CANSparkMax pivotMotorSlave = new CANSparkMax(Constants.PIVOT_SLAVE, MotorType.kBrushless);
 
 	/**
 	 * Creates a new PivotSubsystem.
 	 */
 	public PivotSubsystem() {
-
 		pivotMotorMaster.restoreFactoryDefaults();
 		pivotMotorSlave.restoreFactoryDefaults();
-
-		// pivotMotorTwo.setInverted(true);
 
 		pivotMotorMaster.setIdleMode(IdleMode.kBrake);
 		pivotMotorSlave.setIdleMode(IdleMode.kBrake);
 
 		pivotMotorSlave.follow(pivotMotorMaster);
 
+		pivotMotorMaster.burnFlash();
+		pivotMotorSlave.burnFlash();
 	}
 
 	@Override
@@ -43,22 +39,21 @@ public class PivotSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
-	public void pivotPickUp(){ 
-		pivotMotorSlave.set(0);
+	public void pivotPickUp() {
+		// pivotMotorSlave.set(0);
 	}
 
-	public void pivotColourWheel(){
-		//TODO: change
-		pivotMotorMaster.set(0.2);
+	public void pivotColourWheel() {
+		// pivotMotorMaster.set(0.2);
 	}
 
-	public void pivotTrench(){
-		pivotMotorMaster.set(-0.2);
+	public void pivotTrench() {
+		// pivotMotorMaster.set(-0.2);
 
 	}
 
-	public void pivotClimb(){
-		
+	public void pivotClimb() {
+
 	}
 
 }

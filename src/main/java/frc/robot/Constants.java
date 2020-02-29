@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-//This is an example
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -38,9 +37,9 @@ public final class Constants {
 
     // Controller POV Mapping
     public final static int PovUp = 0;
-	public final static int PovRight = 90;
-	public final static int PovDown = 180;
-	public final static int PovLeft = 270; 
+    public final static int PovRight = 90;
+    public final static int PovDown = 180;
+    public final static int PovLeft = 270;
 
     // Controller Trigger Mapping
     public static final int LEFT_TRIGGER = 2;
@@ -51,33 +50,30 @@ public final class Constants {
     public static final int PCM = 0;
 
     // Drive
-    public static final int DRIVE_LEFT_MASTER = 1;
-    public static final int DRIVE_LEFT_SLAVE = 2;
+    public static final int DRIVE_LEFT_MASTER = 1; // done
+    public static final int DRIVE_LEFT_SLAVE = 2; // done
 
-    public static final int DRIVE_RIGHT_MASTER = 3;
-    public static final int DRIVE_RIGHT_SLAVE = 4;
+    public static final int DRIVE_RIGHT_MASTER = 3; // done
+    public static final int DRIVE_RIGHT_SLAVE = 4; // done
 
     // Shooter
-    public static final int SHOOT_RIGHT_MOTOR = 5;
-    public static final int SHOOT_LEFT_MOTOR = 6;
+    public static final int SHOOT_RIGHT_MOTOR = 5; // done
+    public static final int SHOOT_LEFT_MOTOR = 6; // done
 
-    public static final int PIGEON_IMU = 7;
+    public static final int PIGEON_IMU = 7; // done
 
     // Elevators
-    public static final int OUTER_ELEVATOR = 8;
-    public static final int INNER_ELEVATOR = 9;
-            
-    // Accessories
-    public static final int INTAKE = 10;
-    public static final int MAGAZINE = 11;
-    public static final int PI_WHEEL = 12;
-    public static final int AUTO_LEVEL_MASTER = 13;
-    public static final int AUTO_LEVEL_SLAVE = 14;
-    public static final int PIVOT_LEFT = 15;
-    public static final int PIVOT_RIGHT = 16;
+    public static final int LEFT_ELEVATOR = 8; // done
+    public static final int RIGHT_ELEVATOR = 9; // done, has encoder
 
-    //Mag encoder
-	public static final int kTimeoutMs = 30;
+    // Accessories
+    public static final int INTAKE = 10; // done
+    public static final int MAGAZINE = 11; // done
+    public static final int PIVOT_MASTER = 15; // done
+    public static final int PIVOT_SLAVE = 16; // done
+
+    // Mag encoder
+    public static final int kTimeoutMs = 30;
     public final static Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
     public static final int kSlotIdx = 0;
     public static final int kPIDLoopIdx = 0;
