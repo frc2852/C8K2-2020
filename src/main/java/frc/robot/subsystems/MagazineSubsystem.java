@@ -4,7 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
- 
+
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
@@ -15,14 +15,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class MagazineSubsystem extends SubsystemBase { // loads and stores the balls
- 	private CANSparkMax magazineMotor = new CANSparkMax(Constants.MAGAZINE, MotorType.kBrushless);
+	 private CANSparkMax magazineMotor = new CANSparkMax(Constants.MAGAZINE, MotorType.kBrushless); 
+
   	/**
    	* Creates a new MagazineSubsystem.
    	*/
 	public MagazineSubsystem() {
 		magazineMotor.restoreFactoryDefaults();
 
-   		magazineMotor.setIdleMode(IdleMode.kBrake);
+		magazineMotor.setIdleMode(IdleMode.kBrake);
 
 	}
  	@Override
