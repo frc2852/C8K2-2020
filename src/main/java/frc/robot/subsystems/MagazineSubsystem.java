@@ -21,6 +21,8 @@ public class MagazineSubsystem extends SubsystemBase { // loads and stores the b
    	* Creates a new MagazineSubsystem.
    	*/
 	public MagazineSubsystem() {
+		magazineMotor.burnFlash();
+		
 		magazineMotor.restoreFactoryDefaults();
 
 		magazineMotor.setIdleMode(IdleMode.kBrake);

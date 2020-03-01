@@ -25,6 +25,8 @@ public class PivotSubsystem extends SubsystemBase {
 	 * Creates a new PivotSubsystem.
 	 */
 	public PivotSubsystem() {
+		pivotMotorMaster.burnFlash();
+		pivotMotorSlave.burnFlash();
 
 		pivotMotorMaster.restoreFactoryDefaults();
 		pivotMotorSlave.restoreFactoryDefaults();

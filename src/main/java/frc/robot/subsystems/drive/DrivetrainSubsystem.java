@@ -30,6 +30,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 	 */
 	public DrivetrainSubsystem() {
 
+		leftMaster.burnFlash();
+		leftSlave.burnFlash();
+		rightMaster.burnFlash();
+		rightSlave.burnFlash();
+
 		leftMaster.restoreFactoryDefaults();
 		leftSlave.restoreFactoryDefaults();
 		rightMaster.restoreFactoryDefaults();
