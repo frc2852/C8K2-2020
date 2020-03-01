@@ -16,7 +16,7 @@ public class FowardSpeedIntakeCommand extends CommandBase {
    */
   private final IntakeSubsystem intakeSubsystem;
 
-   FowardSpeedIntakeCommand(IntakeSubsystem _intakeSubsystem) {
+  public FowardSpeedIntakeCommand(IntakeSubsystem _intakeSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     intakeSubsystem = _intakeSubsystem;
     addRequirements(intakeSubsystem);

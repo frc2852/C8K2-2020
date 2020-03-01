@@ -15,16 +15,15 @@ public class PivotCommand extends CommandBase {
    * Creates a new PivotCommand.
    */ 
   private final PivotSubsystem pivotSubsystem;
-  private final Double xSpeed;
 
-  public PivotCommand(PivotSubsystem _pivotSubsystem, Double _xSpeed) {
+  public PivotCommand(PivotSubsystem _pivotSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     pivotSubsystem = _pivotSubsystem;
-    xSpeed = _xSpeed;
     addRequirements(pivotSubsystem);
   }
 
-  // Called when the command is initially scheduled.
+
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }

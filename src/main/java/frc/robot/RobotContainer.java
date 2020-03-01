@@ -11,14 +11,26 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.FowardSpeedIntakeCommand;
 import frc.robot.commands.MagFowardSpeedCommand;
 import frc.robot.commands.MagReverseSpeedCommand;
+import frc.robot.commands.MaxInnerElevatorPositionCommand;
+import frc.robot.commands.MinInnerElevatorPositionCommand;
+import frc.robot.commands.OuterElevatorMaxPositionCommand;
+import frc.robot.commands.OuterElevatorMinPositionCommand;
+import frc.robot.commands.PivotCommand;
+import frc.robot.commands.ReverseSpeedIntakeCommand;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
 import frc.robot.commands.shooter.ShooterFullSpeedCommand;
 import frc.robot.commands.shooter.ShooterReverseFullSpeedCommand;
+import frc.robot.subsystems.InnerElevatorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.MagazineSubsystem;
+import frc.robot.subsystems.OuterElevatorSubsystem;
+import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.drive.GearboxSubsystem;
@@ -43,6 +55,13 @@ public class RobotContainer {
 	private Button DriveButtonRightBumper = new JoystickButton(DriverController, Constants.RIGHT_BUMPER);
 	private Button DriveButtonBack = new JoystickButton(DriverController, Constants.BACK_BUTTON);
 	private Button DriveButtonStart = new JoystickButton(DriverController, Constants.START_BUTTON);
+	private Button DriveLeftStickButton = new JoystickButton(DriverController, Constants.LEFT_STICK_BUTTON);
+	private Button DriveRightStickButton = new JoystickButton(DriverController, Constants.RIGHT_STICK_BUTTON);
+
+	private POVButton DriveButtonDPadUp = new POVButton(DriverController, Constants.DPAD_UP);
+	private POVButton DriveButtonDPadRight = new POVButton(DriverController, Constants.DPAD_RIGHT);
+	private POVButton DriveButtonDPadDown = new POVButton(DriverController, Constants.DPAD_DOWN);
+	private POVButton DriveButtonDPadLeft = new POVButton(DriverController, Constants.DPAD_LEFT);
 
 	//Operator Controller
 	private XboxController OperatorController = new XboxController(Constants.OPERATOR_CONTROLLER);
@@ -54,6 +73,8 @@ public class RobotContainer {
 	private Button OperatorButtonRightBumper = new JoystickButton(OperatorController, Constants.RIGHT_BUMPER);
 	private Button OperatorButtonBack = new JoystickButton(OperatorController, Constants.BACK_BUTTON);
 	private Button OperatorButtonStart = new JoystickButton(OperatorController, Constants.START_BUTTON);
+	private Button OperatorLeftStickButton = new JoystickButton(OperatorController, Constants.LEFT_STICK_BUTTON);
+	private Button OperatorRightStickButton = new JoystickButton(OperatorController, Constants.RIGHT_STICK_BUTTON);
 
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 
@@ -70,6 +91,23 @@ public class RobotContainer {
 	private final MagFowardSpeedCommand magFowardSpeedCommand = new MagFowardSpeedCommand(magazineSubsystem);
 	private final MagReverseSpeedCommand magReverseSpeedCommand = new MagReverseSpeedCommand(magazineSubsystem);
 
+	private final InnerElevatorSubsystem innerElevatorSubsystem = new InnerElevatorSubsystem();
+	private final MaxInnerElevatorPositionCommand maxInnerElevatorPositionCommand = new MaxInnerElevatorPositionCommand(innerElevatorSubsystem);
+	private final MinInnerElevatorPositionCommand minInnerElevatorPositionCommand = new MinInnerElevatorPositionCommand(innerElevatorSubsystem);
+
+	private final OuterElevatorSubsystem outerElevatorSubsystem = new OuterElevatorSubsystem();
+	private final OuterElevatorMaxPositionCommand outerElevatorMaxPositionCommand = new OuterElevatorMaxPositionCommand(outerElevatorSubsystem);
+	private final OuterElevatorMinPositionCommand outerElevatorMinPositionCommand = new OuterElevatorMinPositionCommand(outerElevatorSubsystem);
+
+
+	private final PivotSubsystem pivotSubsystem = new PivotSubsystem();
+	private final PivotCommand pivotCommand = new PivotCommand(pivotSubsystem);
+
+	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+	private final FowardSpeedIntakeCommand fowardSpeedIntakeCommand  = new FowardSpeedIntakeCommand(intakeSubsystem);
+	private final ReverseSpeedIntakeCommand reverseSpeedIntakeCommand = new ReverseSpeedIntakeCommand(intakeSubsystem);
+	//TODO: foward => foRward
+	
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
@@ -91,13 +129,20 @@ public class RobotContainer {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
 				() -> DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
 
-		DriveButtonBack.whenPressed(driveLowGearboxCommand);
-		DriveButtonStart.whenPressed(driveHighGearboxCommand);
+		DriveLeftStickButton.toggleWhenPressed(driveHighGearboxCommand);
 
 		DriveButtonRightBumper.whenPressed(shooterFullSpeedCommand);
 		DriveButtonLeftBumper.whenPressed(shooterReverseFullSpeedCommand);
 
 		DriveButtonA.whenPressed(magFowardSpeedCommand);
 		DriveButtonB.whenPressed(magReverseSpeedCommand);
+
+		DriveButtonX.whenPressed(fowardSpeedIntakeCommand);
+		DriveButtonY.whenPressed(reverseSpeedIntakeCommand);
+
+		DriveButtonDPadUp.whenPressed(maxInnerElevatorPositionCommand);
+		DriveButtonDPadDown.whenPressed(minInnerElevatorPositionCommand);
+
+		DriveButtonDPadRight.whenPressed(pivotCommand);
 	}
 }
