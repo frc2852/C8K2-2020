@@ -131,7 +131,7 @@ public class PivotSubsystem extends SubsystemBase {
 		 * com.revrobotics.ControlType.kPosition com.revrobotics.ControlType.kVelocity
 		 * com.revrobotics.ControlType.kVoltage
 		 */
-		m_pidController.setReference(rotations, ControlType.kPosition);
+		// m_pidController.setReference(rotations, ControlType.kPosition);
 		SmartDashboard.putNumber("SetPoint", rotations);
 		SmartDashboard.putNumber("ProcessVariable", m_encoder.getPosition());
 	}
