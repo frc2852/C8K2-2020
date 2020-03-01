@@ -81,4 +81,8 @@ public final class Constants {
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
     public static final int DRIVE_GEAR_BOX_CLOSE = 1;
+
+    // Intake Pivot
+    public static final int INTAKE_DOWN = 2;
+    public static final int INTAKE_UP = 3;
 }
