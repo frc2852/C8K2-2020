@@ -26,7 +26,7 @@ public class PivotPickUpCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		pivotSubsystem.pivotPickUp();
+		// pivotSubsystem.pivotPickUp();
 	}
 
 	// Called once the command ends or is interrupted.
