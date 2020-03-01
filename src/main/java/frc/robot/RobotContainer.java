@@ -13,12 +13,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.IntakePivotCommandGroup;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
 import frc.robot.commands.elevator.MaxElevatorPositionCommand;
 import frc.robot.commands.elevator.MinElevatorPositionCommand;
 import frc.robot.commands.intake.IntakeForwardCommand;
+import frc.robot.commands.intake.IntakePivotHighCommand;
+import frc.robot.commands.intake.IntakePivotLowCommand;
 import frc.robot.commands.intake.IntakeReverseCommand;
 import frc.robot.commands.magazine.ManualLoadCommand;
 import frc.robot.commands.magazine.ManualReverseLoadCommand;
@@ -27,7 +30,8 @@ import frc.robot.commands.pivot.PivotClimbCommand;
 import frc.robot.commands.pivot.PivotColourWheelCommand;
 import frc.robot.commands.pivot.PivotPickUpCommand;
 import frc.robot.commands.pivot.PivotTrenchCommand;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.intake.IntakePivotSubsystem;
+import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.MagazineSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
@@ -108,6 +112,10 @@ public class RobotContainer {
 	private final IntakeForwardCommand intakeForwardCommand = new IntakeForwardCommand(intakeSubsystem);
 	private final IntakeReverseCommand intakeReverseCommand = new IntakeReverseCommand(intakeSubsystem);
 
+	private final IntakePivotSubsystem intakePivotSubsystem = new IntakePivotSubsystem();
+	private final IntakePivotHighCommand intakePivotHighCommand = new IntakePivotHighCommand(intakePivotSubsystem);
+	private final IntakePivotLowCommand intakePivotLowCommand = new IntakePivotLowCommand(intakePivotSubsystem);
+
 	private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	private final MaxElevatorPositionCommand MaxElevatorPositionCommand = new MaxElevatorPositionCommand(
 			elevatorSubsystem);
@@ -118,6 +126,9 @@ public class RobotContainer {
 	private final ManualLoadCommand manualLoadCommand = new ManualLoadCommand(magazineSubsystem);
 	private final ManualReverseLoadCommand manualReverseLoadCommand = new ManualReverseLoadCommand(magazineSubsystem);
 	private final StopMagazineCommand stopMagazineCommand = new StopMagazineCommand(magazineSubsystem);
+
+
+	private final IntakePivotCommandGroup intakePivotCommandGroup = new IntakePivotCommandGroup(intakePivotSubsystem, pivotSubsystem);
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -144,6 +155,9 @@ public class RobotContainer {
 				() -> -DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
 
 		DriveButtonLeftJoystick.toggleWhenPressed(driveHighGearboxCommand);
+
+		DriveButtonA.whenPressed(intakePivotLowCommand);
+		DriveButtonB.whenPressed(intakePivotHighCommand);
 
 		// DriveButtonRightBumper.toggleWhenPressed(shootFromTrenchCommand);
 		// DriveButtonLeftBumper.toggleWhenPressed(shootFromColourWheelCommand);
