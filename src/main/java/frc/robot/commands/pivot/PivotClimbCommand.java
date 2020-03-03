@@ -8,7 +8,7 @@
 package frc.robot.commands.pivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.PivotSubsystem;
+import frc.robot.subsystems.pivot.PivotSubsystem;
 
 public class PivotClimbCommand extends CommandBase {
 	private PivotSubsystem pivotSubsystem;
@@ -26,7 +26,7 @@ public class PivotClimbCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		// pivotSubsystem.pivotClimb();
+		pivotSubsystem.ClimbPosition();
 	}
 
 	// Called once the command ends or is interrupted.

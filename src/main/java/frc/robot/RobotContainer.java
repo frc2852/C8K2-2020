@@ -16,23 +16,26 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
-import frc.robot.commands.elevator.MaxElevatorPositionCommand;
-import frc.robot.commands.elevator.MinElevatorPositionCommand;
+import frc.robot.commands.elevator.ElevatorMovementCommand;
 import frc.robot.commands.intake.IntakeForwardCommand;
 import frc.robot.commands.intake.IntakeReverseCommand;
 import frc.robot.commands.magazine.ManualLoadCommand;
 import frc.robot.commands.magazine.ManualReverseLoadCommand;
 import frc.robot.commands.magazine.StopMagazineCommand;
+import frc.robot.commands.pivot.PivotBrakeDisenageCommand;
+import frc.robot.commands.pivot.PivotBrakeEnageCommand;
 import frc.robot.commands.pivot.PivotClimbCommand;
 import frc.robot.commands.pivot.PivotColourWheelCommand;
 import frc.robot.commands.pivot.PivotPickUpCommand;
 import frc.robot.commands.pivot.PivotTrenchCommand;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.commands.pivot.groups.PivotClimbBrakeCommandGroup;
+import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.MagazineSubsystem;
-import frc.robot.subsystems.PivotSubsystem;
+import frc.robot.subsystems.pivot.PivotSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.drive.GearboxSubsystem;
 import frc.robot.subsystems.elevator.ElevatorSubsystem;
+import frc.robot.subsystems.pivot.PivotBrakeSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -99,24 +102,26 @@ public class RobotContainer {
 	private final DriveLowGearboxCommand driveLowGearboxCommand = new DriveLowGearboxCommand(gearboxSubsystem);
 
 	private final PivotSubsystem pivotSubsystem = new PivotSubsystem();
-	private final PivotClimbCommand pivotClimbCommand = new PivotClimbCommand(pivotSubsystem);
-	private final PivotTrenchCommand pivotTrenchCommand = new PivotTrenchCommand(pivotSubsystem);
-	private final PivotColourWheelCommand pivotColourWheelCommand = new PivotColourWheelCommand(pivotSubsystem);
+	// private final PivotClimbCommand pivotClimbCommand = new PivotClimbCommand(pivotSubsystem);
+	// private final PivotTrenchCommand pivotTrenchCommand = new PivotTrenchCommand(pivotSubsystem);
+	// private final PivotColourWheelCommand pivotColourWheelCommand = new PivotColourWheelCommand(pivotSubsystem);
 	private final PivotPickUpCommand pivotPickUpCommand = new PivotPickUpCommand(pivotSubsystem);
 
+	private final PivotBrakeSubsystem pivotBrakeSubsystem = new PivotBrakeSubsystem();
+	private final PivotBrakeDisenageCommand pivotBrakeDisenageCommand = new PivotBrakeDisenageCommand(
+			pivotBrakeSubsystem);
+	private final PivotBrakeEnageCommand pivotBrakeEnageCommand = new PivotBrakeEnageCommand(pivotBrakeSubsystem);
+	private final PivotClimbBrakeCommandGroup pivotClimbBrakeCommandGroup = new PivotClimbBrakeCommandGroup(pivotSubsystem, pivotBrakeSubsystem);
+
 	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-	private final IntakeForwardCommand intakeForwardCommand = new IntakeForwardCommand(intakeSubsystem);
-	private final IntakeReverseCommand intakeReverseCommand = new IntakeReverseCommand(intakeSubsystem);
+	// private final IntakeForwardCommand intakeForwardCommand = new IntakeForwardCommand(intakeSubsystem);
+	// private final IntakeReverseCommand intakeReverseCommand = new IntakeReverseCommand(intakeSubsystem);
 
 	private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-	private final MaxElevatorPositionCommand MaxElevatorPositionCommand = new MaxElevatorPositionCommand(
-			elevatorSubsystem);
-	private final MinElevatorPositionCommand MinElevatorPositionCommand = new MinElevatorPositionCommand(
-			elevatorSubsystem);
 
 	private final MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
-	private final ManualLoadCommand manualLoadCommand = new ManualLoadCommand(magazineSubsystem);
-	private final ManualReverseLoadCommand manualReverseLoadCommand = new ManualReverseLoadCommand(magazineSubsystem);
+	// private final ManualLoadCommand manualLoadCommand = new ManualLoadCommand(magazineSubsystem);
+	// private final ManualReverseLoadCommand manualReverseLoadCommand = new ManualReverseLoadCommand(magazineSubsystem);
 	private final StopMagazineCommand stopMagazineCommand = new StopMagazineCommand(magazineSubsystem);
 
 	/**
@@ -128,7 +133,7 @@ public class RobotContainer {
 		gearboxSubsystem.setDefaultCommand(driveLowGearboxCommand);
 		magazineSubsystem.setDefaultCommand(stopMagazineCommand);
 		pivotSubsystem.setDefaultCommand(pivotPickUpCommand);
-
+		pivotBrakeSubsystem.setDefaultCommand(pivotBrakeDisenageCommand);
 	}
 
 	/**
@@ -139,7 +144,7 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 
-		// Driver Stick
+		// Driver
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
 				() -> -DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
 
@@ -147,14 +152,16 @@ public class RobotContainer {
 
 		// DriveButtonRightBumper.toggleWhenPressed(shootFromTrenchCommand);
 		// DriveButtonLeftBumper.toggleWhenPressed(shootFromColourWheelCommand);
- 
-		// DriveButtonA.whenPressed(intakeForwardCommand);
-		// DriveButtonX.whenPressed(intakeReverseCommand);
 
+		// Operator
+		elevatorSubsystem.setDefaultCommand(
+				new ElevatorMovementCommand(elevatorSubsystem, () -> OperatorController.getRawAxis(1)));
+		OperatorButtonA.whenPressed(pivotBrakeEnageCommand);
+		OperatorButtonB.whenPressed(pivotBrakeDisenageCommand);
+		OperatorButtonX.whenPressed(pivotClimbBrakeCommandGroup);
 		// DriveButtonB.toggleWhenPressed(manualLoadCommand);
 		// DriveButtonY.toggleWhenPressed(manualReverseLoadCommand);
 
-		// // Operator Stick
 		// OperatorButtonA.whenPressed(pivotPickUpCommand);
 		// OperatorButtonB.whenPressed(pivotColourWheelCommand);
 		// OperatorButtonX.whenPressed(pivotTrenchCommand);

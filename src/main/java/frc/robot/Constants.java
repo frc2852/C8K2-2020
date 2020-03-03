@@ -63,8 +63,8 @@ public final class Constants {
     public static final int PIGEON_IMU = 7; // done
 
     // Elevators
-    public static final int LEFT_ELEVATOR = 8; // done
-    public static final int RIGHT_ELEVATOR = 9; // done, has encoder
+    public static final int SLAVE_ELEVATOR = 8; // done
+    public static final int MAIN_ELEVATOR = 9; // done, has encoder
 
     // Accessories
     public static final int INTAKE = 10; // done
@@ -81,4 +81,8 @@ public final class Constants {
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
     public static final int DRIVE_GEAR_BOX_CLOSE = 1;
+    public static final int INTAKE_PIVOT_FORWARD = 2;
+    public static final int INTAKE_PIVOT_REVERSE = 3;
+    public static final int PIVOT_BRAKE_ENGAGE = 4;
+    public static final int PIVOT_BRAKE_DISENGAGE = 5;
 }

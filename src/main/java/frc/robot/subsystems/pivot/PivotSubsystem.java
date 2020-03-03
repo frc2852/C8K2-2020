@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.pivot;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
@@ -48,14 +48,14 @@ public class PivotSubsystem extends SubsystemBase {
 		m_encoder.setPosition(0);
 
 		// PID coefficients
-		kP = 0.100000; 
+		kP = 0.100000;
 		kI = 0.000100;
-		kD = 1; 
-		kIz = 0.000100; 
-		kFF = 0; 
-		kMaxOutput = 1; 
+		kD = 1.200000;
+		kIz = 0.000100;
+		kFF = 0;
+		kMaxOutput = 0.4;
 		kMinOutput = -1;
-		
+
 		// set PID coefficients
 		m_pidController.setP(kP);
 		m_pidController.setI(kI);
@@ -64,9 +64,11 @@ public class PivotSubsystem extends SubsystemBase {
 		m_pidController.setFF(kFF);
 		m_pidController.setOutputRange(kMinOutput, kMaxOutput);
 
-		//BURN
+		// BURN
 		pivotMotorMaster.burnFlash();
 		pivotMotorSlave.burnFlash();
+
+		m_pidController.setReference(0, ControlType.kPosition);
 
 		// display PID coefficients on SmartDashboard
 		SmartDashboard.putNumber("P Gain", kP);
@@ -131,8 +133,29 @@ public class PivotSubsystem extends SubsystemBase {
 		 * com.revrobotics.ControlType.kPosition com.revrobotics.ControlType.kVelocity
 		 * com.revrobotics.ControlType.kVoltage
 		 */
-		// m_pidController.setReference(rotations, ControlType.kPosition);
+		m_pidController.setReference(rotations, ControlType.kPosition);
 		SmartDashboard.putNumber("SetPoint", rotations);
 		SmartDashboard.putNumber("ProcessVariable", m_encoder.getPosition());
+	}
+
+	public void PickUpPosition() {
+		m_pidController.setReference(26, ControlType.kPosition);
+	}
+
+	public void ClimbPosition() {
+		m_pidController.setReference(-20, ControlType.kPosition);
+	}
+
+	public void RaiseThatPosterior() {
+		m_pidController.setReference(-10, ControlType.kPosition);
+	}
+
+	public boolean RaiseThatPosteriorFinished(){
+		double currentPosition = m_encoder.getPosition();
+		return(currentPosition < -11 && currentPosition > -9);
+	}
+
+	public void PivotTrench() {
+		m_pidController.setReference(0, ControlType.kPosition);
 	}
 }

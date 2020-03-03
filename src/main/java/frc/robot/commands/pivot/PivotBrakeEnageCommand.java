@@ -8,14 +8,15 @@
 package frc.robot.commands.pivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.pivot.PivotSubsystem;
+import frc.robot.subsystems.pivot.PivotBrakeSubsystem;
 
-public class PivotPickUpCommand extends CommandBase {
-	private PivotSubsystem pivotSubsystem;
+public class PivotBrakeEnageCommand extends CommandBase {
 
-	public PivotPickUpCommand(PivotSubsystem _pivotSubsystem) {
-		pivotSubsystem = _pivotSubsystem;
-		addRequirements(pivotSubsystem);
+	private PivotBrakeSubsystem pivotBrakeSubsystem;
+
+	public PivotBrakeEnageCommand(PivotBrakeSubsystem _pivotBrakeSubsystem) {
+		pivotBrakeSubsystem = _pivotBrakeSubsystem;
+		addRequirements(pivotBrakeSubsystem);
 	}
 
 	// Called when the command is initially scheduled.
@@ -26,7 +27,7 @@ public class PivotPickUpCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		pivotSubsystem.PickUpPosition();
+		pivotBrakeSubsystem.EngageBrake();
 	}
 
 	// Called once the command ends or is interrupted.

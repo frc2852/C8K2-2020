@@ -8,7 +8,7 @@
 package frc.robot.commands.pivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.PivotSubsystem;
+import frc.robot.subsystems.pivot.PivotSubsystem;
 
 public class PivotColourWheelCommand extends CommandBase {
 	private PivotSubsystem pivotSubsystem;

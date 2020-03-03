@@ -5,17 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.pivot;
+package frc.robot.commands.elevator;
+
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.pivot.PivotSubsystem;
+import frc.robot.subsystems.elevator.ElevatorSubsystem;
 
-public class PivotPickUpCommand extends CommandBase {
-	private PivotSubsystem pivotSubsystem;
+public class ElevatorMovementCommand extends CommandBase {
 
-	public PivotPickUpCommand(PivotSubsystem _pivotSubsystem) {
-		pivotSubsystem = _pivotSubsystem;
-		addRequirements(pivotSubsystem);
+	/* Creates a new DrivetrainCommand. */
+	private final ElevatorSubsystem elevatorSubsystem;
+	private final DoubleSupplier xSpeed;
+
+	public ElevatorMovementCommand(ElevatorSubsystem _elevatorSubsystem, DoubleSupplier _xSpeed) {
+		elevatorSubsystem = _elevatorSubsystem;
+		xSpeed = _xSpeed;
+		addRequirements(elevatorSubsystem);
 	}
 
 	// Called when the command is initially scheduled.
@@ -26,7 +32,7 @@ public class PivotPickUpCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		pivotSubsystem.PickUpPosition();
+		elevatorSubsystem.elevatorDrive(xSpeed.getAsDouble());
 	}
 
 	// Called once the command ends or is interrupted.
