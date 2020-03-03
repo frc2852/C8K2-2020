@@ -7,18 +7,22 @@
 
 package frc.robot.commands.pivot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.pivot.PivotBrakeSubsystem;
 import frc.robot.subsystems.pivot.PivotSubsystem;
 
 public class RaiseThatPosteriorCommand extends CommandBase {
 
 	PivotSubsystem pivotSubsystem;
-
+	PivotBrakeSubsystem pivotBrakeSubsystem;
+	private boolean isBrakeEngaged = false;
 	/**
 	 * Creates a new RaiseThatPosteriorCommand.
 	 */
-	public RaiseThatPosteriorCommand(PivotSubsystem _pivotSubsystem) {
+	public RaiseThatPosteriorCommand(PivotSubsystem _pivotSubsystem, PivotBrakeSubsystem _pivotBrakeSubsystem) {
 		pivotSubsystem = _pivotSubsystem;
+		pivotBrakeSubsystem = _pivotBrakeSubsystem;
 	}
 
 	// Called when the command is initially scheduled.
@@ -40,6 +44,10 @@ public class RaiseThatPosteriorCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		return pivotSubsystem.RaiseThatPosteriorFinished();
+		if(pivotSubsystem.RaiseThatPosteriorFinished() && !isBrakeEngaged){
+			isBrakeEngaged = false;
+			pivotBrakeSubsystem.EngageBrake();
+		}
+		return false;
 	}
 }

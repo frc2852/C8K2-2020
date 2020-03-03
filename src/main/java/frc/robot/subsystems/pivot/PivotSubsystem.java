@@ -54,7 +54,7 @@ public class PivotSubsystem extends SubsystemBase {
 		kIz = 0.000100;
 		kFF = 0;
 		kMaxOutput = 0.4;
-		kMinOutput = -1;
+		kMinOutput = -0.4;
 
 		// set PID coefficients
 		m_pidController.setP(kP);
@@ -152,7 +152,8 @@ public class PivotSubsystem extends SubsystemBase {
 
 	public boolean RaiseThatPosteriorFinished(){
 		double currentPosition = m_encoder.getPosition();
-		return(currentPosition < -11 && currentPosition > -9);
+		currentPosition = Math.abs(currentPosition);
+		return(currentPosition < 11 && currentPosition > 9);
 	}
 
 	public void PivotTrench() {

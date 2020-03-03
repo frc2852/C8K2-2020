@@ -28,7 +28,7 @@ import frc.robot.commands.pivot.PivotClimbCommand;
 import frc.robot.commands.pivot.PivotColourWheelCommand;
 import frc.robot.commands.pivot.PivotPickUpCommand;
 import frc.robot.commands.pivot.PivotTrenchCommand;
-import frc.robot.commands.pivot.groups.PivotClimbBrakeCommandGroup;
+import frc.robot.commands.pivot.RaiseThatPosteriorCommand;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.MagazineSubsystem;
 import frc.robot.subsystems.pivot.PivotSubsystem;
@@ -111,7 +111,7 @@ public class RobotContainer {
 	private final PivotBrakeDisenageCommand pivotBrakeDisenageCommand = new PivotBrakeDisenageCommand(
 			pivotBrakeSubsystem);
 	private final PivotBrakeEnageCommand pivotBrakeEnageCommand = new PivotBrakeEnageCommand(pivotBrakeSubsystem);
-	private final PivotClimbBrakeCommandGroup pivotClimbBrakeCommandGroup = new PivotClimbBrakeCommandGroup(pivotSubsystem, pivotBrakeSubsystem);
+	private final RaiseThatPosteriorCommand raiseThatPosteriorCommand = new RaiseThatPosteriorCommand(pivotSubsystem, pivotBrakeSubsystem);
 
 	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	// private final IntakeForwardCommand intakeForwardCommand = new IntakeForwardCommand(intakeSubsystem);
@@ -132,7 +132,6 @@ public class RobotContainer {
 		configureButtonBindings();
 		gearboxSubsystem.setDefaultCommand(driveLowGearboxCommand);
 		magazineSubsystem.setDefaultCommand(stopMagazineCommand);
-		pivotSubsystem.setDefaultCommand(pivotPickUpCommand);
 		pivotBrakeSubsystem.setDefaultCommand(pivotBrakeDisenageCommand);
 	}
 
@@ -155,10 +154,11 @@ public class RobotContainer {
 
 		// Operator
 		elevatorSubsystem.setDefaultCommand(
-				new ElevatorMovementCommand(elevatorSubsystem, () -> OperatorController.getRawAxis(1)));
-		OperatorButtonA.whenPressed(pivotBrakeEnageCommand);
-		OperatorButtonB.whenPressed(pivotBrakeDisenageCommand);
-		OperatorButtonX.whenPressed(pivotClimbBrakeCommandGroup);
+				new ElevatorMovementCommand(elevatorSubsystem, () -> -OperatorController.getRawAxis(1)));
+		OperatorDpadUp.whenPressed(pivotBrakeEnageCommand);
+		OperatorButtonLeftBumper.whenPressed(pivotBrakeDisenageCommand);
+		OperatorButtonRightBumper.whenPressed(raiseThatPosteriorCommand);
+		
 		// DriveButtonB.toggleWhenPressed(manualLoadCommand);
 		// DriveButtonY.toggleWhenPressed(manualReverseLoadCommand);
 
