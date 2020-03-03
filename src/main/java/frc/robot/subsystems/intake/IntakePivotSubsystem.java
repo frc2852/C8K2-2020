@@ -24,11 +24,11 @@ public class IntakePivotSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
-	public void intakePivotStartingConfig() {
+	public void intakePivotPickUp() {
 		intakePivotSolenoid.set(DoubleSolenoid.Value.kReverse);
 	}
 
-	public void intakePivotPickUp() {
+	public void intakePivotStartingConfig() {
 		intakePivotSolenoid.set(DoubleSolenoid.Value.kForward);
 	}
 }

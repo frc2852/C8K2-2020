@@ -17,6 +17,7 @@ import frc.robot.commands.IntakePivotCommandGroup;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
+import frc.robot.commands.elevator.ElevatorStopCommand;
 import frc.robot.commands.elevator.MaxElevatorPositionCommand;
 import frc.robot.commands.elevator.MinElevatorPositionCommand;
 import frc.robot.commands.intake.IntakeForwardCommand;
@@ -117,10 +118,11 @@ public class RobotContainer {
 	private final IntakePivotLowCommand intakePivotLowCommand = new IntakePivotLowCommand(intakePivotSubsystem);
 
 	private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-	private final MaxElevatorPositionCommand MaxElevatorPositionCommand = new MaxElevatorPositionCommand(
+	private final MaxElevatorPositionCommand maxElevatorPositionCommand = new MaxElevatorPositionCommand(
 			elevatorSubsystem);
-	private final MinElevatorPositionCommand MinElevatorPositionCommand = new MinElevatorPositionCommand(
+	private final MinElevatorPositionCommand minElevatorPositionCommand = new MinElevatorPositionCommand(
 			elevatorSubsystem);
+	private final ElevatorStopCommand elevatorStopCommand = new ElevatorStopCommand(elevatorSubsystem);
 
 	private final MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
 	private final ManualLoadCommand manualLoadCommand = new ManualLoadCommand(magazineSubsystem);
@@ -139,6 +141,7 @@ public class RobotContainer {
 		gearboxSubsystem.setDefaultCommand(driveLowGearboxCommand);
 		magazineSubsystem.setDefaultCommand(stopMagazineCommand);
 		pivotSubsystem.setDefaultCommand(pivotPickUpCommand);
+		elevatorSubsystem.setDefaultCommand(elevatorStopCommand);
 
 	}
 
@@ -158,6 +161,9 @@ public class RobotContainer {
 
 		DriveButtonA.whenPressed(intakePivotLowCommand);
 		DriveButtonB.whenPressed(intakePivotHighCommand);
+
+		DriveButtonRightBumper.whenHeld(maxElevatorPositionCommand);
+		DriveButtonLeftBumper.whenHeld(minElevatorPositionCommand);
 
 		// DriveButtonRightBumper.toggleWhenPressed(shootFromTrenchCommand);
 		// DriveButtonLeftBumper.toggleWhenPressed(shootFromColourWheelCommand);
