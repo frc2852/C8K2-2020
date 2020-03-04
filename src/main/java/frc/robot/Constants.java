@@ -72,17 +72,17 @@ public final class Constants {
     public static final int PIVOT_MASTER = 15; // done
     public static final int PIVOT_SLAVE = 16; // done
 
-    // Mag encoder
-    public static final int kTimeoutMs = 30;
-    public final static Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
-    public static final int kSlotIdx = 0;
-    public static final int kPIDLoopIdx = 0;
-
     // Gearbox
     public static final int DRIVE_GEAR_BOX_OPEN = 0;
     public static final int DRIVE_GEAR_BOX_CLOSE = 1;
 
     // Intake Pivot
     public static final int INTAKE_DOWN = 2;
-    public static final int INTAKE_UP = 3;
+    public static final int INTAKE_UP = 3;   
+    
+    // Mag encoder
+    public static final int kTimeoutMs = 30;
+    public final static Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
+    public static final int kSlotIdx = 0;
+    public static final int kPIDLoopIdx = 0;
 }
