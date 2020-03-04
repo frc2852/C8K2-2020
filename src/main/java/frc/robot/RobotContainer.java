@@ -23,6 +23,7 @@ import frc.robot.commands.intake.IntakeForwardCommand;
 import frc.robot.commands.intake.IntakePivotDownCommand;
 import frc.robot.commands.intake.IntakePivotUpCommand;
 import frc.robot.commands.intake.IntakeReverseCommand;
+import frc.robot.commands.intake.IntakeStopCommand;
 import frc.robot.commands.magazine.StopMagazineCommand;
 import frc.robot.commands.pivot.PivotBrakeDisenageCommand;
 import frc.robot.commands.pivot.PivotBrakeEnageCommand;
@@ -121,6 +122,7 @@ public class RobotContainer {
 	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	private final IntakeForwardCommand intakeForwardCommand = new IntakeForwardCommand(intakeSubsystem);
 	private final IntakeReverseCommand intakeReverseCommand = new IntakeReverseCommand(intakeSubsystem);
+	private final IntakeStopCommand intakeStopCommand = new IntakeStopCommand(intakeSubsystem);
 
 	private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 
@@ -138,6 +140,8 @@ public class RobotContainer {
 		gearboxSubsystem.setDefaultCommand(driveLowGearboxCommand);
 		magazineSubsystem.setDefaultCommand(stopMagazineCommand);
 		pivotBrakeSubsystem.setDefaultCommand(pivotBrakeDisenageCommand);
+		intakeSubsystem.setDefaultCommand(intakeStopCommand);
+		intakePivotSubsystem.setDefaultCommand(intakePivotUpCommand);
 	}
 
 	/**
@@ -171,7 +175,7 @@ public class RobotContainer {
 		OperatorButtonX.whenPressed(pivotTrenchCommand);
 		OperatorButtonY.whenPressed(pivotClimbCommand);
 
-		OperatorButtonLeftTrigger.whenPressed(intakeForwardCommand);
-		OperatorButtonRightBumper.whenPressed(intakeReverseCommand);
+		OperatorButtonLeftTrigger.whenHeld(intakeForwardCommand);
+		OperatorButtonRightTrigger.whenHeld(intakeReverseCommand);
 	}
 }

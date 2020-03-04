@@ -7,23 +7,22 @@
 
 package frc.robot.subsystems.intake;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-	private final VictorSPX intakeMotor = new VictorSPX(Constants.INTAKE);
+
+	private final TalonSRX intakeMotor = new TalonSRX(Constants.INTAKE);
 
 	/**
 	 * Creates a new IntakeSubsystem.
 	 */
 	public IntakeSubsystem() {
 		intakeMotor.configFactoryDefault();
-
 		intakeMotor.setNeutralMode(NeutralMode.Coast);
-
 	}
 
 	@Override
@@ -31,11 +30,15 @@ public class IntakeSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
+	public void intakeStop() {
+		intakeMotor.set(ControlMode.PercentOutput, 0);
+	}
+
 	public void intakeForward() {
-		// intakeMotor.set(ControlMode.Velocity, 1);
+		intakeMotor.set(ControlMode.PercentOutput, 1);
 	}
 
 	public void intakeReverse() {
-		// intakeMotor.set(ControlMode.Velocity, -1);
+		intakeMotor.set(ControlMode.PercentOutput, -0.3);
 	}
 }
