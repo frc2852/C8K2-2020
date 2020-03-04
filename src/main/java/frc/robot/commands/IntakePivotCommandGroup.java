@@ -17,19 +17,13 @@ import frc.robot.subsystems.intake.IntakePivotSubsystem;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class IntakePivotCommandGroup extends SequentialCommandGroup {
-  private IntakePivotSubsystem intakePivotSubsystem;
+	/**
+	 * Creates a new IntakePivotCommandGroup.
+	 */
+	public IntakePivotCommandGroup(IntakePivotSubsystem _intakePivotSubsystem, PivotSubsystem _pivotSubsystem) {
+		// Add your commands in the super() call, e.g.
 
-  private PivotSubsystem pivotSubsystem;
-  /**
-   * Creates a new IntakePivotCommandGroup.
-   */
-  public IntakePivotCommandGroup(IntakePivotSubsystem _intakePivotSubsystem, PivotSubsystem _pivotSubsystem) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
-    intakePivotSubsystem = _intakePivotSubsystem;
-    pivotSubsystem = _pivotSubsystem;
+		super(new IntakePivotLowCommand(_intakePivotSubsystem), new PivotPickUpCommand(_pivotSubsystem));
 
-    addCommands(new IntakePivotLowCommand(intakePivotSubsystem), new PivotPickUpCommand(pivotSubsystem));
-
-  }
+	}
 }
