@@ -24,6 +24,8 @@ import frc.robot.commands.intake.IntakeForwardCommand;
 import frc.robot.commands.intake.IntakePivotHighCommand;
 import frc.robot.commands.intake.IntakePivotLowCommand;
 import frc.robot.commands.intake.IntakeReverseCommand;
+import frc.robot.commands.limelight.LimelightLedOnCommand;
+import frc.robot.commands.limelight.LedDefaultCommand;
 import frc.robot.commands.magazine.ManualLoadCommand;
 import frc.robot.commands.magazine.ManualReverseLoadCommand;
 import frc.robot.commands.magazine.StopMagazineCommand;
@@ -33,6 +35,7 @@ import frc.robot.commands.pivot.PivotPickUpCommand;
 import frc.robot.commands.pivot.PivotTrenchCommand;
 import frc.robot.subsystems.intake.IntakePivotSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
+import frc.robot.subsystems.LimeLightSubsystem;
 import frc.robot.subsystems.MagazineSubsystem;
 import frc.robot.subsystems.PivotSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
@@ -129,6 +132,10 @@ public class RobotContainer {
 	private final ManualReverseLoadCommand manualReverseLoadCommand = new ManualReverseLoadCommand(magazineSubsystem);
 	private final StopMagazineCommand stopMagazineCommand = new StopMagazineCommand(magazineSubsystem);
 
+	private final LimeLightSubsystem limeLightSubsystem = new LimeLightSubsystem();
+	private final LedDefaultCommand ledDefaultCommand = new LedDefaultCommand(limeLightSubsystem);
+	private final LimelightLedOnCommand limelightLedOnCommand = new LimelightLedOnCommand(limeLightSubsystem);
+
 
 	private final IntakePivotCommandGroup intakePivotCommandGroup = new IntakePivotCommandGroup(intakePivotSubsystem, pivotSubsystem);
 
@@ -142,6 +149,7 @@ public class RobotContainer {
 		magazineSubsystem.setDefaultCommand(stopMagazineCommand);
 		pivotSubsystem.setDefaultCommand(pivotPickUpCommand);
 		elevatorSubsystem.setDefaultCommand(elevatorStopCommand);
+		limeLightSubsystem.setDefaultCommand(ledDefaultCommand);
 
 	}
 
@@ -164,6 +172,8 @@ public class RobotContainer {
 
 		DriveButtonRightBumper.whenHeld(maxElevatorPositionCommand);
 		DriveButtonLeftBumper.whenHeld(minElevatorPositionCommand);
+
+		DriveButtonY.whenPressed(limelightLedOnCommand.withTimeout(5));
 
 		// DriveButtonRightBumper.toggleWhenPressed(shootFromTrenchCommand);
 		// DriveButtonLeftBumper.toggleWhenPressed(shootFromColourWheelCommand);
