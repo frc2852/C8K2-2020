@@ -8,14 +8,17 @@
 package frc.robot.commands.pivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.intake.IntakePivotSubsystem;
 import frc.robot.subsystems.pivot.PivotSubsystem;
 
 public class PivotColourWheelCommand extends CommandBase {
 	private PivotSubsystem pivotSubsystem;
+	private IntakePivotSubsystem intakePivotSubsystem;
 
-	public PivotColourWheelCommand(PivotSubsystem _pivotSubsystem) {
+	public PivotColourWheelCommand(PivotSubsystem _pivotSubsystem, IntakePivotSubsystem _intakePivotSubsystem) {
 		pivotSubsystem = _pivotSubsystem;
-		addRequirements(pivotSubsystem);
+		intakePivotSubsystem = _intakePivotSubsystem;
+		addRequirements(pivotSubsystem, intakePivotSubsystem);
 	}
 
 	// Called when the command is initially scheduled.
@@ -26,7 +29,8 @@ public class PivotColourWheelCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		// pivotSubsystem.pivotColourWheel();
+		intakePivotSubsystem.IntakeUp();
+		pivotSubsystem.PivotColourWheel();
 	}
 
 	// Called once the command ends or is interrupted.

@@ -150,13 +150,17 @@ public class PivotSubsystem extends SubsystemBase {
 		m_pidController.setReference(-10, ControlType.kPosition);
 	}
 
-	public boolean RaiseThatPosteriorFinished(){
+	public boolean RaiseThatPosteriorFinished() {
 		double currentPosition = m_encoder.getPosition();
 		currentPosition = Math.abs(currentPosition);
-		return(currentPosition < 11 && currentPosition > 9);
+		return (currentPosition < 11 && currentPosition > 9);
 	}
 
 	public void PivotTrench() {
+		m_pidController.setReference(0, ControlType.kPosition);
+	}
+
+	public void PivotColourWheel() {
 		m_pidController.setReference(0, ControlType.kPosition);
 	}
 }

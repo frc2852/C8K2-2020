@@ -8,14 +8,17 @@
 package frc.robot.commands.pivot;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.intake.IntakePivotSubsystem;
 import frc.robot.subsystems.pivot.PivotSubsystem;
 
 public class PivotClimbCommand extends CommandBase {
 	private PivotSubsystem pivotSubsystem;
+	private IntakePivotSubsystem intakePivotSubsystem;
 
-	public PivotClimbCommand(PivotSubsystem _pivotSubsystem) {
+	public PivotClimbCommand(PivotSubsystem _pivotSubsystem, IntakePivotSubsystem _intakePivotSubsystem) {
 		pivotSubsystem = _pivotSubsystem;
-		addRequirements(pivotSubsystem);
+		intakePivotSubsystem = _intakePivotSubsystem;
+		addRequirements(pivotSubsystem, intakePivotSubsystem);
 	}
 
 	// Called when the command is initially scheduled.
@@ -26,6 +29,7 @@ public class PivotClimbCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		intakePivotSubsystem.IntakeUp();
 		pivotSubsystem.ClimbPosition();
 	}
 

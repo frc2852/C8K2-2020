@@ -5,20 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.pivot;
+package frc.robot.commands.intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.intake.IntakePivotSubsystem;
-import frc.robot.subsystems.pivot.PivotSubsystem;
 
-public class PivotTrenchCommand extends CommandBase {
-	private PivotSubsystem pivotSubsystem;
-	private IntakePivotSubsystem intakePivotSubsystem;
+public class IntakePivotUpCommand extends CommandBase {
 
-	public PivotTrenchCommand(PivotSubsystem _pivotSubsystem, IntakePivotSubsystem _intakePivotSubsystem) {
-		pivotSubsystem = _pivotSubsystem;
+	private final IntakePivotSubsystem intakePivotSubsystem;
+	/**
+	 * Creates a new IntakePivotUpCommand.
+	 */
+	public IntakePivotUpCommand(IntakePivotSubsystem _intakePivotSubsystem) {
 		intakePivotSubsystem = _intakePivotSubsystem;
-		addRequirements(pivotSubsystem, intakePivotSubsystem);
+		addRequirements(intakePivotSubsystem);
 	}
 
 	// Called when the command is initially scheduled.
@@ -30,7 +30,6 @@ public class PivotTrenchCommand extends CommandBase {
 	@Override
 	public void execute() {
 		intakePivotSubsystem.IntakeUp();
-		pivotSubsystem.PivotTrench();
 	}
 
 	// Called once the command ends or is interrupted.
