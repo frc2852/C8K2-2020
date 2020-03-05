@@ -183,9 +183,12 @@ public class RobotContainer {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
 				() -> -DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
 		DriveButtonLeftJoystick.toggleWhenPressed(driveHighGearboxCommand);
-		DriveButtonLeftTrigger.whenHeld(ShootFromColourWheel);
-		DriveButtonRightTrigger.whenHeld(ShootFromTrenchCommand);
 
+		DriveButtonLeftTrigger.whenPressed(ShootFromColourWheel);
+		DriveButtonRightTrigger.whenPressed(ShootFromTrenchCommand);
+		DriveButtonLeftTrigger.whenReleased(shooterStopped);
+		DriveButtonRightTrigger.whenReleased(shooterStopped);
+		
 		// Operator
 		elevatorSubsystem.setDefaultCommand(
 				new ElevatorMovementCommand(elevatorSubsystem, () -> -OperatorController.getRawAxis(1)));
