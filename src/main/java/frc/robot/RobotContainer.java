@@ -10,20 +10,21 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Button;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
 import frc.robot.commands.drive.DrivetrainCommand;
 import frc.robot.commands.elevator.ElevatorMovementCommand;
+import frc.robot.commands.groups.IntakeMagIntakeGroup;
+import frc.robot.commands.groups.IntakeMagReverse;
 import frc.robot.commands.intake.IntakeForwardCommand;
 import frc.robot.commands.intake.IntakePivotDownCommand;
 import frc.robot.commands.intake.IntakePivotUpCommand;
 import frc.robot.commands.intake.IntakeReverseCommand;
 import frc.robot.commands.intake.IntakeStopCommand;
+import frc.robot.commands.magazine.ManualLoadCommand;
+import frc.robot.commands.magazine.ManualReverseLoadCommand;
 import frc.robot.commands.magazine.StopMagazineCommand;
 import frc.robot.commands.pivot.PivotBrakeDisenageCommand;
 import frc.robot.commands.pivot.PivotBrakeEnageCommand;
@@ -32,9 +33,13 @@ import frc.robot.commands.pivot.PivotColourWheelCommand;
 import frc.robot.commands.pivot.PivotPickUpCommand;
 import frc.robot.commands.pivot.PivotTrenchCommand;
 import frc.robot.commands.pivot.RaiseThatPosteriorCommand;
+import frc.robot.commands.shooter.ShootFromColourWheelCommand;
+import frc.robot.commands.shooter.ShootFromTrenchCommand;
+import frc.robot.commands.shooter.ShooterStopped;
 import frc.robot.subsystems.intake.IntakePivotSubsystem;
 import frc.robot.subsystems.intake.IntakeSubsystem;
 import frc.robot.subsystems.MagazineSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.pivot.PivotSubsystem;
 import frc.robot.subsystems.drive.DrivetrainSubsystem;
 import frc.robot.subsystems.drive.GearboxSubsystem;
@@ -67,15 +72,19 @@ public class RobotContainer {
 	private Button DriveButtonRightJoystick = new JoystickButton(DriverController, Constants.RIGHT_JOYSTICK_BUTTON);
 	private Button DriveButtonLeftJoystick = new JoystickButton(DriverController, Constants.LEFT_JOYSTICK_BUTTON);
 
-	// Driver D-Pad
-	// private POVButton DriveDpadUp = new POVButton(DriverController, Constants.PovUp);
-	// private POVButton DriveDpadRight = new POVButton(DriverController, Constants.PovRight);
-	// private POVButton DriveDpadDown = new POVButton(DriverController, Constants.PovDown);
-	// private POVButton DriveDpadLeft = new POVButton(DriverController, Constants.PovLeft);
-
 	// Driver Triggers
-	// private Trigger DriveButtonLeftTrigger = new JoystickButton(DriverController, Constants.LEFT_TRIGGER);
-	// private Trigger DriveButtonRightTrigger = new JoystickButton(DriverController, Constants.RIGHT_TRIGGER);
+	private Button DriveButtonLeftTrigger = new Button(() -> DriverController.getTriggerAxis(Hand.kLeft) >= 0.5);
+	private Button DriveButtonRightTrigger = new Button(() -> DriverController.getTriggerAxis(Hand.kRight) >= 0.5);
+
+	// Driver D-Pad
+	// private POVButton DriveDpadUp = new POVButton(DriverController,
+	// Constants.PovUp);
+	// private POVButton DriveDpadRight = new POVButton(DriverController,
+	// Constants.PovRight);
+	// private POVButton DriveDpadDown = new POVButton(DriverController,
+	// Constants.PovDown);
+	// private POVButton DriveDpadLeft = new POVButton(DriverController,
+	// Constants.PovLeft);
 
 	// Operator Buttons
 	private Button OperatorButtonX = new JoystickButton(OperatorController, Constants.X_BUTTON);
@@ -84,32 +93,41 @@ public class RobotContainer {
 	private Button OperatorButtonY = new JoystickButton(OperatorController, Constants.Y_BUTTON);
 	private Button OperatorButtonLeftBumper = new JoystickButton(OperatorController, Constants.LEFT_BUMPER);
 	private Button OperatorButtonRightBumper = new JoystickButton(OperatorController, Constants.RIGHT_BUMPER);
-	// private Button OperatorButtonBack = new JoystickButton(OperatorController, Constants.BACK_BUTTON);
-	// private Button OperatorButtonStart = new JoystickButton(OperatorController, Constants.START_BUTTON);
+	// private Button OperatorButtonBack = new JoystickButton(OperatorController,
+	// Constants.BACK_BUTTON);
+	// private Button OperatorButtonStart = new JoystickButton(OperatorController,
+	// Constants.START_BUTTON);
 
 	private Button OperatorButtonLeftTrigger = new Button(() -> OperatorController.getTriggerAxis(Hand.kLeft) >= 0.5);
 	private Button OperatorButtonRightTrigger = new Button(() -> OperatorController.getTriggerAxis(Hand.kRight) >= 0.5);
 
 	// Operator D-Pad
-	// private POVButton OperatorDpadUp = new POVButton(OperatorController, Constants.PovUp);
-	// private POVButton OperatorDpadRight = new POVButton(OperatorController, Constants.PovRight);
-	// private POVButton OperatorDpadDown = new POVButton(OperatorController, Constants.PovDown);
-	// private POVButton OperatorDpadLeft = new POVButton(OperatorController, Constants.PovLeft);
+	// private POVButton OperatorDpadUp = new POVButton(OperatorController,
+	// Constants.PovUp);
+	// private POVButton OperatorDpadRight = new POVButton(OperatorController,
+	// Constants.PovRight);
+	// private POVButton OperatorDpadDown = new POVButton(OperatorController,
+	// Constants.PovDown);
+	// private POVButton OperatorDpadLeft = new POVButton(OperatorController,
+	// Constants.PovLeft);
 
-	//Subsystems & Commands
+	// Subsystems & Commands
 	private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
 
+	// Drive
 	private final GearboxSubsystem gearboxSubsystem = new GearboxSubsystem();
 	private final DriveHighGearboxCommand driveHighGearboxCommand = new DriveHighGearboxCommand(gearboxSubsystem);
 	private final DriveLowGearboxCommand driveLowGearboxCommand = new DriveLowGearboxCommand(gearboxSubsystem);
 
-	private final IntakePivotSubsystem intakePivotSubsystem = new IntakePivotSubsystem(); 
-	private final IntakePivotDownCommand intakePivotDownCommand = new IntakePivotDownCommand(intakePivotSubsystem);
+	// Intake
+	private final IntakePivotSubsystem intakePivotSubsystem = new IntakePivotSubsystem();
 	private final IntakePivotUpCommand intakePivotUpCommand = new IntakePivotUpCommand(intakePivotSubsystem);
 
+	// Pivot
 	private final PivotSubsystem pivotSubsystem = new PivotSubsystem();
 	private final PivotClimbCommand pivotClimbCommand = new PivotClimbCommand(pivotSubsystem, intakePivotSubsystem);
-	private final PivotColourWheelCommand pivotColourWheelCommand = new PivotColourWheelCommand(pivotSubsystem, intakePivotSubsystem);
+	private final PivotColourWheelCommand pivotColourWheelCommand = new PivotColourWheelCommand(pivotSubsystem,
+			intakePivotSubsystem);
 	private final PivotPickUpCommand pivotPickUpCommand = new PivotPickUpCommand(pivotSubsystem, intakePivotSubsystem);
 	private final PivotTrenchCommand pivotTrenchCommand = new PivotTrenchCommand(pivotSubsystem, intakePivotSubsystem);
 
@@ -117,20 +135,28 @@ public class RobotContainer {
 	private final PivotBrakeDisenageCommand pivotBrakeDisenageCommand = new PivotBrakeDisenageCommand(
 			pivotBrakeSubsystem);
 	private final PivotBrakeEnageCommand pivotBrakeEnageCommand = new PivotBrakeEnageCommand(pivotBrakeSubsystem);
-	private final RaiseThatPosteriorCommand raiseThatPosteriorCommand = new RaiseThatPosteriorCommand(pivotSubsystem, pivotBrakeSubsystem);
+	private final RaiseThatPosteriorCommand raiseThatPosteriorCommand = new RaiseThatPosteriorCommand(pivotSubsystem,
+			pivotBrakeSubsystem);
 
-	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-	private final IntakeForwardCommand intakeForwardCommand = new IntakeForwardCommand(intakeSubsystem);
-	private final IntakeReverseCommand intakeReverseCommand = new IntakeReverseCommand(intakeSubsystem);
-	private final IntakeStopCommand intakeStopCommand = new IntakeStopCommand(intakeSubsystem);
-
-	private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-
+	// Mag
 	private final MagazineSubsystem magazineSubsystem = new MagazineSubsystem();
-	// private final ManualLoadCommand manualLoadCommand = new ManualLoadCommand(magazineSubsystem);
-	// private final ManualReverseLoadCommand manualReverseLoadCommand = new ManualReverseLoadCommand(magazineSubsystem);
 	private final StopMagazineCommand stopMagazineCommand = new StopMagazineCommand(magazineSubsystem);
 
+	// Intake
+	private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+	private final IntakeStopCommand intakeStopCommand = new IntakeStopCommand(intakeSubsystem);
+	private final IntakeMagIntakeGroup intakeMagIntakeGroup = new IntakeMagIntakeGroup(magazineSubsystem,
+			intakeSubsystem);
+	private final IntakeMagReverse intakeMagReverse = new IntakeMagReverse(magazineSubsystem, intakeSubsystem);
+
+	// Elevator
+	private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+
+	// Shooter
+	private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+	private final ShootFromColourWheelCommand ShootFromColourWheel = new ShootFromColourWheelCommand(shooterSubsystem);
+	private final ShootFromTrenchCommand ShootFromTrenchCommand = new ShootFromTrenchCommand(shooterSubsystem);
+	private final ShooterStopped shooterStopped = new ShooterStopped(shooterSubsystem);
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
@@ -142,6 +168,7 @@ public class RobotContainer {
 		pivotBrakeSubsystem.setDefaultCommand(pivotBrakeDisenageCommand);
 		intakeSubsystem.setDefaultCommand(intakeStopCommand);
 		intakePivotSubsystem.setDefaultCommand(intakePivotUpCommand);
+		shooterSubsystem.setDefaultCommand(shooterStopped);
 	}
 
 	/**
@@ -156,9 +183,8 @@ public class RobotContainer {
 		drivetrainSubsystem.setDefaultCommand(new DrivetrainCommand(drivetrainSubsystem,
 				() -> -DriverController.getRawAxis(1), () -> DriverController.getRawAxis(4)));
 		DriveButtonLeftJoystick.toggleWhenPressed(driveHighGearboxCommand);
-
-		// DriveButtonRightBumper.toggleWhenPressed(shootFromTrenchCommand);
-		// DriveButtonLeftBumper.toggleWhenPressed(shootFromColourWheelCommand);
+		DriveButtonLeftTrigger.whenHeld(ShootFromColourWheel);
+		DriveButtonRightTrigger.whenHeld(ShootFromTrenchCommand);
 
 		// Operator
 		elevatorSubsystem.setDefaultCommand(
@@ -167,15 +193,12 @@ public class RobotContainer {
 		OperatorButtonRightBumper.whenPressed(pivotBrakeEnageCommand);
 		// OperatorButtonRightBumper.whenPressed(raiseThatPosteriorCommand);
 
-		// DriveButtonB.toggleWhenPressed(manualLoadCommand);
-		// DriveButtonY.toggleWhenPressed(manualReverseLoadCommand);
-
 		OperatorButtonA.whenPressed(pivotPickUpCommand);
 		OperatorButtonB.whenPressed(pivotColourWheelCommand);
 		OperatorButtonX.whenPressed(pivotTrenchCommand);
 		OperatorButtonY.whenPressed(pivotClimbCommand);
 
-		OperatorButtonLeftTrigger.whenHeld(intakeForwardCommand);
-		OperatorButtonRightTrigger.whenHeld(intakeReverseCommand);
+		OperatorButtonLeftTrigger.whenHeld(intakeMagIntakeGroup);
+		OperatorButtonRightTrigger.whenHeld(intakeMagReverse);
 	}
 }

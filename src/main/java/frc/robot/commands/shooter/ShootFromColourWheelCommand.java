@@ -5,21 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.intake.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class IntakeForwardCommand extends CommandBase {
+public class ShootFromColourWheelCommand extends CommandBase {
 
-	private IntakeSubsystem intakeSubsystem;
+	private ShooterSubsystem shooterSubsystem;
 
 	/**
-	 * Creates a new IntakeForwardCommand.
+	 * Creates a new shootFromColourWheelCommand.
 	 */
-	public IntakeForwardCommand(IntakeSubsystem _intakeSubsystem) {
-		intakeSubsystem = _intakeSubsystem;
-		addRequirements(intakeSubsystem);
+	public ShootFromColourWheelCommand(ShooterSubsystem _shooterSubsystem) {
+		shooterSubsystem = _shooterSubsystem;
+		addRequirements(shooterSubsystem);
 	}
 
 	// Called when the command is initially scheduled.
@@ -30,7 +30,7 @@ public class IntakeForwardCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		intakeSubsystem.intakeForward();
+		shooterSubsystem.shootFromColourWheel();
 	}
 
 	// Called once the command ends or is interrupted.
