@@ -11,6 +11,11 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.drive.DriveHighGearboxCommand;
 import frc.robot.commands.drive.DriveLowGearboxCommand;
@@ -132,9 +137,10 @@ public class RobotContainer {
 			intakePivotSubsystem);
 	private final PivotPickUpCommand pivotPickUpCommand = new PivotPickUpCommand(pivotSubsystem, intakePivotSubsystem);
 	private final PivotTrenchCommand pivotTrenchCommand = new PivotTrenchCommand(pivotSubsystem, intakePivotSubsystem);
-	private final PivotLowGoalCommand pivotLowGoalCommand = new PivotLowGoalCommand(pivotSubsystem, intakePivotSubsystem);
+	private final PivotLowGoalCommand pivotLowGoalCommand = new PivotLowGoalCommand(pivotSubsystem,
+			intakePivotSubsystem);
 
-	//Pivot Brake
+	// Pivot Brake
 	private final PivotBrakeSubsystem pivotBrakeSubsystem = new PivotBrakeSubsystem();
 	private final PivotBrakeDisenageCommand pivotBrakeDisenageCommand = new PivotBrakeDisenageCommand(
 			pivotBrakeSubsystem);
@@ -162,6 +168,56 @@ public class RobotContainer {
 	private final ShootFromTrenchCommand ShootFromTrenchCommand = new ShootFromTrenchCommand(shooterSubsystem);
 	private final ShooterStopped shooterStopped = new ShooterStopped(shooterSubsystem);
 	private final ShootFromLineCommand shootFromLine = new ShootFromLineCommand(shooterSubsystem);
+
+	// Auto
+	private final Command goalInline =
+			// Start the command by spinning up the shooter...
+			new InstantCommand(shooterSubsystem::shootFromLineCenteredAuto, shooterSubsystem).andThen(
+					// Wait until the shooter is at speed before balls
+					new WaitCommand(Constants.kFlyWheelSpeedDelay),
+					// Start running the mag
+					new InstantCommand(magazineSubsystem::manualReverseLoad, magazineSubsystem),
+					// Shoot for the specified time
+					new WaitCommand(Constants.kAutoShootTimeSeconds),
+					// Drive backwards
+					new RunCommand(drivetrainSubsystem::driveBackwards, drivetrainSubsystem))
+					.withTimeout(Constants.kDriveBackwards).andThen(() -> {
+						shooterSubsystem.stop();
+						magazineSubsystem.stopMagazine();
+					});
+
+	private final Command middleOfField =
+			// Start the command by spinning up the shooter...
+			new InstantCommand(shooterSubsystem::shootFromLineMiddleField, shooterSubsystem).andThen(
+					// Wait until the shooter is at speed before balls
+					new WaitCommand(Constants.kFlyWheelSpeedDelay),
+					// Start running the mag
+					new InstantCommand(magazineSubsystem::manualReverseLoad, magazineSubsystem),
+					// Shoot for the specified time
+					new WaitCommand(Constants.kAutoShootTimeSeconds),
+					// Drive backwards
+					new RunCommand(drivetrainSubsystem::driveBackwards, drivetrainSubsystem))
+					.withTimeout(Constants.kDriveBackwards).andThen(() -> {
+						shooterSubsystem.stop();
+						magazineSubsystem.stopMagazine();
+					});
+
+	private final Command farLeftField =
+			// Start the command by spinning up the shooter...
+			new InstantCommand(shooterSubsystem::shootFromLineLeftField, shooterSubsystem).andThen(
+					// Wait until the shooter is at speed before balls
+					new WaitCommand(Constants.kFlyWheelSpeedDelay),
+					// Start running the mag
+					new InstantCommand(magazineSubsystem::manualReverseLoad, magazineSubsystem),
+					// Shoot for the specified time
+					new WaitCommand(Constants.kAutoShootTimeSeconds),
+					// Drive backwards
+					new RunCommand(drivetrainSubsystem::driveBackwards, drivetrainSubsystem))
+					.withTimeout(Constants.kDriveBackwards).andThen(() -> {
+						shooterSubsystem.stop();
+						magazineSubsystem.stopMagazine();
+					});
+
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
@@ -195,7 +251,7 @@ public class RobotContainer {
 		DriveButtonLeftTrigger.whenReleased(shooterStopped);
 		DriveButtonRightTrigger.whenReleased(shooterStopped);
 		DriveButtonLeftBumper.whenReleased(shooterStopped);
-		
+
 		// Operator
 		elevatorSubsystem.setDefaultCommand(
 				new ElevatorMovementCommand(elevatorSubsystem, () -> -OperatorController.getRawAxis(1)));
@@ -210,5 +266,11 @@ public class RobotContainer {
 
 		OperatorButtonLeftTrigger.whenHeld(intakeMagIntakeGroup);
 		OperatorButtonRightTrigger.whenHeld(intakeMagReverse);
+	}
+
+	public Command getAutonomousCommand() {
+		// return goalInline;
+		// return middleOfField;
+		return farLeftField;
 	}
 }

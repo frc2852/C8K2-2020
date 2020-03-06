@@ -7,7 +7,6 @@
 
 package frc.robot.commands.pivot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.pivot.PivotBrakeSubsystem;
 import frc.robot.subsystems.pivot.PivotSubsystem;

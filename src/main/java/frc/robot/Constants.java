@@ -85,4 +85,9 @@ public final class Constants {
     public static final int INTAKE_PIVOT_REVERSE = 3;
     public static final int PIVOT_BRAKE_ENGAGE = 4;
     public static final int PIVOT_BRAKE_DISENGAGE = 5;
+
+    //Auto
+    public static final double kFlyWheelSpeedDelay = 3;
+    public static final double kAutoShootTimeSeconds = 3;
+    public static final double kDriveBackwards = 7.5;
 }

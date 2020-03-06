@@ -53,7 +53,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		kMinOutput = -1;
 		maxRPM = 5700;
 
-		SmartDashboard.putNumber("kP", kP);
+		// SmartDashboard.putNumber("kP", kP);
 		// set PID coefficients
 		leftPidController.setP(kP);
 		leftPidController.setI(kI);
@@ -102,6 +102,16 @@ public class ShooterSubsystem extends SubsystemBase {
 		righPidController.setReference(1470*2, ControlType.kVelocity);
 	}
 
+	public void shootFromLineCenteredAuto(){
+		leftPidController.setReference(1570*2, ControlType.kVelocity);
+		righPidController.setReference(1570*2, ControlType.kVelocity);
+	}
+
+	public void shootFromLineMiddleField(){
+		leftPidController.setReference(1570*2, ControlType.kVelocity);
+		righPidController.setReference(1570*2, ControlType.kVelocity);
+	}
+
 	public void shootFromLineLeftField(){
 		leftPidController.setReference(1720*2, ControlType.kVelocity);
 		righPidController.setReference(1720*2, ControlType.kVelocity);
@@ -110,8 +120,15 @@ public class ShooterSubsystem extends SubsystemBase {
 	public void stop() {
 		leftPidController.setReference(0, ControlType.kVelocity);
 		righPidController.setReference(0, ControlType.kVelocity);
-
-		// shooterLeft.set(0);
-		// shooterRight.set(0);
 	}
+
+	public boolean atSetpoint() {
+		double kVelocity = leftEncoder.getVelocity();
+		if(kVelocity > 2100){
+			return true;
+		} else {
+			return false;
+		}
+	  }
+	
 }

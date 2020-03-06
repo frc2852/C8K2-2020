@@ -7,11 +7,13 @@
 
 package frc.robot.subsystems.drive;
 
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -49,7 +51,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
 		rightMaster.burnFlash();
 		rightSlave.burnFlash();
 		differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
-
 	}
 
 	@Override
@@ -58,8 +59,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 	}
 
 	public void arcadeDrive(double xSpeed, double zRotation) {
-		SmartDashboard.putNumber("xSpeed: ", xSpeed);
-		SmartDashboard.putNumber("zRotation: ", zRotation);
 		differentialDrive.arcadeDrive(xSpeed, zRotation);
+	}
+
+	public void driveBackwards() {
+		differentialDrive.arcadeDrive(-0.3, 0);
 	}
 }
