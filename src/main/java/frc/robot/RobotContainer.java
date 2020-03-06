@@ -83,16 +83,6 @@ public class RobotContainer {
 	private Button DriveButtonLeftTrigger = new Button(() -> DriverController.getTriggerAxis(Hand.kLeft) >= 0.5);
 	private Button DriveButtonRightTrigger = new Button(() -> DriverController.getTriggerAxis(Hand.kRight) >= 0.5);
 
-	// Driver D-Pad
-	// private POVButton DriveDpadUp = new POVButton(DriverController,
-	// Constants.PovUp);
-	// private POVButton DriveDpadRight = new POVButton(DriverController,
-	// Constants.PovRight);
-	// private POVButton DriveDpadDown = new POVButton(DriverController,
-	// Constants.PovDown);
-	// private POVButton DriveDpadLeft = new POVButton(DriverController,
-	// Constants.PovLeft);
-
 	// Operator Buttons
 	private Button OperatorButtonX = new JoystickButton(OperatorController, Constants.X_BUTTON);
 	private Button OperatorButtonA = new JoystickButton(OperatorController, Constants.A_BUTTON);
@@ -255,8 +245,7 @@ public class RobotContainer {
 		// Operator
 		elevatorSubsystem.setDefaultCommand(
 				new ElevatorMovementCommand(elevatorSubsystem, () -> -OperatorController.getRawAxis(1)));
-		OperatorButtonRightBumper.whenPressed(pivotBrakeEnageCommand);
-		// OperatorButtonRightBumper.whenPressed(raiseThatPosteriorCommand);
+		OperatorButtonRightBumper.whenPressed(raiseThatPosteriorCommand);
 
 		OperatorButtonA.whenPressed(pivotPickUpCommand);
 		OperatorButtonB.whenPressed(pivotColourWheelCommand);

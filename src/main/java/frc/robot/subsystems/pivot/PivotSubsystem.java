@@ -69,73 +69,11 @@ public class PivotSubsystem extends SubsystemBase {
 		pivotMotorSlave.burnFlash();
 
 		m_pidController.setReference(0, ControlType.kPosition);
-
-		// display PID coefficients on SmartDashboard
-		// SmartDashboard.putNumber("P Gain", kP);
-		// SmartDashboard.putNumber("I Gain", kI);
-		// SmartDashboard.putNumber("D Gain", kD);
-		// SmartDashboard.putNumber("I Zone", kIz);
-		// SmartDashboard.putNumber("Feed Forward", kFF);
-		// SmartDashboard.putNumber("Max Output", kMaxOutput);
-		// SmartDashboard.putNumber("Min Output", kMinOutput);
-		// SmartDashboard.putNumber("Set Rotations", 0);
 	}
 
 	@Override
 	public void periodic() {
-		// read PID coefficients from SmartDashboard
-		// double p = SmartDashboard.getNumber("P Gain", 0);
-		// double i = SmartDashboard.getNumber("I Gain", 0);
-		// double d = SmartDashboard.getNumber("D Gain", 0);
-		// double iz = SmartDashboard.getNumber("I Zone", 0);
-		// double ff = SmartDashboard.getNumber("Feed Forward", 0);
-		// double max = SmartDashboard.getNumber("Max Output", 0);
-		// double min = SmartDashboard.getNumber("Min Output", 0);
-		// double rotations = SmartDashboard.getNumber("Set Rotations", 0);
-
-		// if PID coefficients on SmartDashboard have changed, write new values to
-		// controller
-		// if ((p != kP)) {
-		// 	m_pidController.setP(p);
-		// 	kP = p;
-		// }
-		// if ((i != kI)) {
-		// 	m_pidController.setI(i);
-		// 	kI = i;
-		// }
-		// if ((d != kD)) {
-		// 	m_pidController.setD(d);
-		// 	kD = d;
-		// }
-		// if ((iz != kIz)) {
-		// 	m_pidController.setIZone(iz);
-		// 	kIz = iz;
-		// }
-		// if ((ff != kFF)) {
-		// 	m_pidController.setFF(ff);
-		// 	kFF = ff;
-		// }
-		// if ((max != kMaxOutput) || (min != kMinOutput)) {
-		// 	m_pidController.setOutputRange(min, max);
-		// 	kMinOutput = min;
-		// 	kMaxOutput = max;
-		// }
-
-		/**
-		 * PIDController objects are commanded to a set point using the SetReference()
-		 * method.
-		 * 
-		 * The first parameter is the value of the set point, whose units vary depending
-		 * on the control type set in the second parameter.
-		 * 
-		 * The second parameter is the control type can be set to one of four
-		 * parameters: com.revrobotics.ControlType.kDutyCycle
-		 * com.revrobotics.ControlType.kPosition com.revrobotics.ControlType.kVelocity
-		 * com.revrobotics.ControlType.kVoltage
-		 */
-		// m_pidController.setReference(rotations, ControlType.kPosition);
-		// SmartDashboard.putNumber("SetPoint", rotations);
-		// SmartDashboard.putNumber("ProcessVariable", m_encoder.getPosition());
+		SmartDashboard.putNumber("BOOOO", m_encoder.getPosition());
 	}
 
 	public void PickUpPosition() {
@@ -143,17 +81,17 @@ public class PivotSubsystem extends SubsystemBase {
 	}
 
 	public void ClimbPosition() {
-		m_pidController.setReference(-18, ControlType.kPosition);
+		m_pidController.setReference(-15, ControlType.kPosition);
 	}
 
 	public void RaiseThatPosterior() {
-		m_pidController.setReference(-10, ControlType.kPosition);
+		m_pidController.setReference(-5, ControlType.kPosition);
 	}
 
 	public boolean RaiseThatPosteriorFinished() {
 		double currentPosition = m_encoder.getPosition();
 		currentPosition = Math.abs(currentPosition);
-		return (currentPosition < 11 && currentPosition > 9);
+		return (currentPosition < 6 && currentPosition > 4);
 	}
 
 	public void PivotTrench() {
