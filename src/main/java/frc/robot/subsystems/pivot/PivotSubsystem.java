@@ -143,7 +143,7 @@ public class PivotSubsystem extends SubsystemBase {
 	}
 
 	public void ClimbPosition() {
-		m_pidController.setReference(-20, ControlType.kPosition);
+		m_pidController.setReference(-18, ControlType.kPosition);
 	}
 
 	public void RaiseThatPosterior() {
@@ -157,10 +157,14 @@ public class PivotSubsystem extends SubsystemBase {
 	}
 
 	public void PivotTrench() {
-		m_pidController.setReference(0, ControlType.kPosition);
+		m_pidController.setReference(-2, ControlType.kPosition);
 	}
 
 	public void PivotColourWheel() {
 		m_pidController.setReference(0, ControlType.kPosition);
+	}
+
+	public void PivotLowGoal(){
+		m_pidController.setReference(10, ControlType.kPosition);
 	}
 }

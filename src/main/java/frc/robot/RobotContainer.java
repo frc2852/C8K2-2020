@@ -30,10 +30,12 @@ import frc.robot.commands.pivot.PivotBrakeDisenageCommand;
 import frc.robot.commands.pivot.PivotBrakeEnageCommand;
 import frc.robot.commands.pivot.PivotClimbCommand;
 import frc.robot.commands.pivot.PivotColourWheelCommand;
+import frc.robot.commands.pivot.PivotLowGoalCommand;
 import frc.robot.commands.pivot.PivotPickUpCommand;
 import frc.robot.commands.pivot.PivotTrenchCommand;
 import frc.robot.commands.pivot.RaiseThatPosteriorCommand;
 import frc.robot.commands.shooter.ShootFromColourWheelCommand;
+import frc.robot.commands.shooter.ShootFromLineCommand;
 import frc.robot.commands.shooter.ShootFromTrenchCommand;
 import frc.robot.commands.shooter.ShooterStopped;
 import frc.robot.subsystems.intake.IntakePivotSubsystem;
@@ -130,7 +132,9 @@ public class RobotContainer {
 			intakePivotSubsystem);
 	private final PivotPickUpCommand pivotPickUpCommand = new PivotPickUpCommand(pivotSubsystem, intakePivotSubsystem);
 	private final PivotTrenchCommand pivotTrenchCommand = new PivotTrenchCommand(pivotSubsystem, intakePivotSubsystem);
+	private final PivotLowGoalCommand pivotLowGoalCommand = new PivotLowGoalCommand(pivotSubsystem, intakePivotSubsystem);
 
+	//Pivot Brake
 	private final PivotBrakeSubsystem pivotBrakeSubsystem = new PivotBrakeSubsystem();
 	private final PivotBrakeDisenageCommand pivotBrakeDisenageCommand = new PivotBrakeDisenageCommand(
 			pivotBrakeSubsystem);
@@ -157,6 +161,7 @@ public class RobotContainer {
 	private final ShootFromColourWheelCommand ShootFromColourWheel = new ShootFromColourWheelCommand(shooterSubsystem);
 	private final ShootFromTrenchCommand ShootFromTrenchCommand = new ShootFromTrenchCommand(shooterSubsystem);
 	private final ShooterStopped shooterStopped = new ShooterStopped(shooterSubsystem);
+	private final ShootFromLineCommand shootFromLine = new ShootFromLineCommand(shooterSubsystem);
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
@@ -186,13 +191,14 @@ public class RobotContainer {
 
 		DriveButtonLeftTrigger.whenPressed(ShootFromColourWheel);
 		DriveButtonRightTrigger.whenPressed(ShootFromTrenchCommand);
+		DriveButtonLeftBumper.whenPressed(shootFromLine);
 		DriveButtonLeftTrigger.whenReleased(shooterStopped);
 		DriveButtonRightTrigger.whenReleased(shooterStopped);
+		DriveButtonLeftBumper.whenReleased(shooterStopped);
 		
 		// Operator
 		elevatorSubsystem.setDefaultCommand(
 				new ElevatorMovementCommand(elevatorSubsystem, () -> -OperatorController.getRawAxis(1)));
-		OperatorButtonLeftBumper.whenPressed(pivotBrakeDisenageCommand);
 		OperatorButtonRightBumper.whenPressed(pivotBrakeEnageCommand);
 		// OperatorButtonRightBumper.whenPressed(raiseThatPosteriorCommand);
 
@@ -200,6 +206,7 @@ public class RobotContainer {
 		OperatorButtonB.whenPressed(pivotColourWheelCommand);
 		OperatorButtonX.whenPressed(pivotTrenchCommand);
 		OperatorButtonY.whenPressed(pivotClimbCommand);
+		OperatorButtonLeftBumper.whenPressed(pivotLowGoalCommand);
 
 		OperatorButtonLeftTrigger.whenHeld(intakeMagIntakeGroup);
 		OperatorButtonRightTrigger.whenHeld(intakeMagReverse);

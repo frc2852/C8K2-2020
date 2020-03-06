@@ -44,15 +44,16 @@ public class ShooterSubsystem extends SubsystemBase {
 		rightEncoder = shooterRight.getEncoder();
 
 		// PID coefficients
-		kP = 6e-5;
-		kI = 0;
-		kD = 0;
+		kP = 0.000300;
+		kI = 0.000000;
+		kD = 0.000010;
 		kIz = 0;
 		kFF = 0.000015;
 		kMaxOutput = 1;
 		kMinOutput = -1;
 		maxRPM = 5700;
 
+		SmartDashboard.putNumber("kP", kP);
 		// set PID coefficients
 		leftPidController.setP(kP);
 		leftPidController.setI(kI);
@@ -83,17 +84,27 @@ public class ShooterSubsystem extends SubsystemBase {
 	}
 
 	public void shootFromTrench() {
-		leftPidController.setReference(5700*4, ControlType.kVelocity);
-		righPidController.setReference(5700*4, ControlType.kVelocity);
-		// shooterLeft.set(-1);
-		// shooterRight.set(-1);
+		leftPidController.setReference(2525*2, ControlType.kVelocity);
+		righPidController.setReference(2525*2, ControlType.kVelocity);
 	}
 
 	public void shootFromColourWheel() {
-		leftPidController.setReference(3000*4, ControlType.kVelocity);
-		righPidController.setReference(3000*4, ControlType.kVelocity);
-		// shooterLeft.set(-0.8);
-		// shooterRight.set(-0.8);
+		leftPidController.setReference(1880*2, ControlType.kVelocity);
+		righPidController.setReference(1880*2, ControlType.kVelocity);
+	}
+
+	//Sooting from line
+	//Shooting from under the goal
+	//Shooting for auto 1
+	//Shooting for auto 2
+	public void shootFromLineCenteredOnGoal(){
+		leftPidController.setReference(1470*2, ControlType.kVelocity);
+		righPidController.setReference(1470*2, ControlType.kVelocity);
+	}
+
+	public void shootFromLineLeftField(){
+		leftPidController.setReference(1720*2, ControlType.kVelocity);
+		righPidController.setReference(1720*2, ControlType.kVelocity);
 	}
 
 	public void stop() {
