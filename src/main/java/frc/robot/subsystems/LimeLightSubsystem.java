@@ -20,8 +20,10 @@ public class LimeLightSubsystem extends SubsystemBase {
 	NetworkTableEntry ty = table.getEntry("ty"); 
 	NetworkTableEntry ta = table.getEntry("ta"); 
 	NetworkTableEntry tv = table.getEntry("tv");
-	NetworkTableEntry test = table.getEntry("ledMode");
-	// NetworkTableEntry test = table.getEntry("ledMode").setNumber(1);
+	NetworkTableEntry ledMode = table.getEntry("ledMode");
+	
+    NetworkTableEntry camMode = table.getEntry("camMode");
+    NetworkTableEntry pipeline = table.getEntry("pipeline");
 	
 	// read values periodically
 	double horizontalOffset = tx.getDouble(0.0);  // horizontal offset from target
